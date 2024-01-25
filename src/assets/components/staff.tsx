@@ -1,4 +1,4 @@
-import { removeUnusedDataFromUrl } from "../../utils";
+// import { removeUnusedDataFromUrl } from "../../utils";
 // const imageRadius = "120px";
 type staffType = { name: string; image: string };
 export function Staff({ staffData }: { staffData: staffType[] }) {
@@ -13,7 +13,8 @@ export function Staff({ staffData }: { staffData: staffType[] }) {
               key={index}
               className="flex flex-column align-items-center gap-3 w-10rem"
             >
-              <figure className="c4-izmir c4-border-corners-2 c4-gradient-top">
+        {staffer.name}
+              {/* <figure className="c4-izmir c4-border-corners-2 c4-gradient-top">
                 <img
                   src={removeUnusedDataFromUrl(staffer.image)}
                   alt="תמונת צוות"
@@ -23,7 +24,7 @@ export function Staff({ staffData }: { staffData: staffType[] }) {
                       <h3>{staffer.name}</h3>
                   </div>
                 </figcaption>
-              </figure>
+              </figure> */}
             </div>
           ))}
       </div>
