@@ -1,5 +1,5 @@
-import { removeUnusedDataFromUrl } from "../../App";
-const imageRadius = "120px";
+import { removeUnusedDataFromUrl } from "../../utils";
+// const imageRadius = "120px";
 type staffType = { name: string; image: string };
 export function Staff({ staffData }: { staffData: staffType[] }) {
   return (
@@ -16,8 +16,7 @@ export function Staff({ staffData }: { staffData: staffType[] }) {
               <figure className="c4-izmir c4-border-corners-2 c4-gradient-top">
                 <img
                   src={removeUnusedDataFromUrl(staffer.image)}
-                  style={{boxShadow:`inset 0 0 0 2000px rgba(255, 0, 150, 0.8)`}}
-                  alt="Sample Image"
+                  alt="תמונת צוות"
                 />
                 <figcaption>
                   <div className="c4-fade-up">
