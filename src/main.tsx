@@ -16,21 +16,16 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     loader: rootLoader,
     children: [
+      { index: true, element: <Landing />, loader: rootLoader },
       {
-        errorElement: <ErrorPage />,
-        children: [
-          { index: true, element: <Landing />, loader: rootLoader },
-          {
-            path: 'allFallen/',
-            element: <AllFallen />,
-            loader: allFallenLoader,
-          },
-          {
-            path: 'fallenCard/:contactId',
-            element: <FallenPage />,
-            loader: fallenContactLoader,
-          },
-        ],
+        path: 'allFallen/',
+        element: <AllFallen />,
+        loader: allFallenLoader,
+      },
+      {
+        path: 'fallenCard/:contactId',
+        element: <FallenPage />,
+        loader: fallenContactLoader,
       },
     ],
   },
