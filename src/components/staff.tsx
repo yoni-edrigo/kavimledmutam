@@ -1,7 +1,6 @@
-// import { removeUnusedDataFromUrl } from "../../utils";
-// const imageRadius = "120px";
-type staffType = { name: string; image: string };
-export function Staff({ staffData }: { staffData: staffType[] }) {
+import { Contact } from '../routes/root';
+
+export function Staff({ staffData }: { staffData: Contact[] }) {
   return (
     <div className="w-full">
       <h1 className="rubik-dirt">צוות המתנדבים</h1>
@@ -13,7 +12,7 @@ export function Staff({ staffData }: { staffData: staffType[] }) {
               key={index}
               className="flex flex-column align-items-center gap-3 w-10rem"
             >
-        {staffer.name}
+              {staffer.name}
               {/* <figure className="c4-izmir c4-border-corners-2 c4-gradient-top">
                 <img
                   src={removeUnusedDataFromUrl(staffer.image)}

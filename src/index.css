@@ -1,8 +1,13 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+@import '../node_modules/primeflex/primeflex.css';
+@import './reset.css';
+@import '../node_modules/@ciar4n/izmir/izmir.css';
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Dirt&family=Suez+One&display=swap');
+body{
+  direction: rtl;
+}
+#root {
   line-height: 1.5;
   font-weight: 400;
-
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
@@ -11,4 +16,59 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* max-width: 1280px !important; */
+  /* margin: 0 auto; */
+  min-height: 100svh;
+  font-family: 'Suez One', serif;
+}
+.rubik-dirt{
+  font-family: 'Rubik Dirt', sans-serif;
+}
+
+/* ===== Scrollbar CSS ===== */
+
+/* Apply styles only to screens with a minimum width of 768 pixels (adjust as needed) */
+@media (min-width: 768px) {
+  /* Firefox */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #ffffff #39384c;
+  }
+
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: #39384c;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #ffffff;
+    border-radius: 8px;
+    border: 3px solid #39384c;
+  }
+}
+
+
+
+.c4-izmir {
+  --primary-color: #rgba(255, 255, 255, 0.87);
+  --secondary-color: #D0206E;
+  --transition-duration: 500ms;
+  --border-width: 1px;
+  --overlay-opacity: .5;
+}
+
+a {
+  color: rgba(255, 255, 255, 0.87);
+  text-decoration: none;
+}
+
+a:hover {
+  color:#00A0C6; 
+  text-decoration:none; 
+  cursor:pointer;  
 }

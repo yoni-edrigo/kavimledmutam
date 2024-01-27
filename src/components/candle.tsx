@@ -1,3 +1,4 @@
+import './candle.css';
 export function Candle({ isLit }: { isLit: boolean }) {
   return (
     <div className="holder">
