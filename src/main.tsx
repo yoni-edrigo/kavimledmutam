@@ -2,14 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Root } from './routes/root';
 import { ErrorPage } from './error-page';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { RouterProvider, createHashRouter } from 'react-router-dom';
 import './index.css';
 import AllFallen from './routes/allFallen';
 import Landing from './routes/landing';
 import { allFallenLoader, fallenContactLoader, rootLoader } from './loaders';
 import FallenPage from './routes/fallenPage';
 import { HelmetProvider } from 'react-helmet-async';
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: '/',
     element: <Root />,
