@@ -31,7 +31,7 @@ export function Root() {
               isActive ? 'activeLink' : isPending ? 'pendingLink' : ''
             }
           >
-            <h3 className="m-0">קווים לדמותם</h3>
+            קווים לדמותם
           </NavLink>
           <NavLink
             to={`allFallen`}
@@ -42,7 +42,7 @@ export function Root() {
             כל הנופלים
           </NavLink>
         </span>
-        <span>search</span>
+        {/* <span>search</span> */}
       </div>
       <div className="page-content px-3">
         <Outlet />

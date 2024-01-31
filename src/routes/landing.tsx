@@ -61,7 +61,7 @@ export default function Landing() {
         <meta property="twitter:image" content="/kavimledmutam_logo.jpeg" />
       </Helmet>
       <Hero />
-      {wixData && <Staff staffData={wixData[2]} />}
+      {wixData && <Staff staffData={wixData[1]} />}
       <h3 className="fixed bottom-0 mr-7">האתר בבנייה, תודה על הסבלנות!</h3>
     </div>
   );
