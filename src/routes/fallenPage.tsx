@@ -23,21 +23,24 @@ export default function FallenPage() {
   ) : (
     <>
       {fallenData && getMetaTags(fallenData)}
-      <div className="mt-3 flex flex-column pb-3">
-        <div className="flex flex-wrap gap-4">
+      <div className="mt-3 flex flex-column pb-3 px-3 md:px-8 pt-5 mb-8">
+        <div className="flex flex-column-reverse md:flex-row gap-4 justify-content-between">
+          <div>
+            <h2 className="mt-0">
+              {fallenData.name}
+              {' - קווים לדמותו'}
+            </h2>
+            <p className="text-justify" style={{ maxWidth: '50ch' }}>
+              {fallenData.story}
+            </p>
+          </div>{' '}
           {fallenData.mediagallery && (
             <img
               alt={`התמונה של: ${fallenData.name}`}
               src={`${prefix + fallenData.mediagallery[0].slug}`}
-              className="h-30rem"
+              style={{ maxHeight: '725px' }}
             />
           )}
-          <div>
-            <h2 className="mt-0">{fallenData.name}</h2>
-            <p className="text-justify" style={{ maxWidth: '50ch' }}>
-              {fallenData.story}
-            </p>
-          </div>
         </div>
         <Button
           className="w-fit"

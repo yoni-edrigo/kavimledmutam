@@ -1,37 +1,24 @@
 import { Link, useLoaderData } from 'react-router-dom';
 import { Contact } from './root';
 import { Helmet } from 'react-helmet-async';
-import { Card } from 'primereact/card';
 import { prefix } from '../utils';
+import { InputText } from 'primereact/inputtext';
+import { Paginator, PaginatorPageChangeEvent } from 'primereact/paginator';
+import { useState } from 'react';
 export default function AllFallen() {
   //@ts-expect-error wixdata isnt known
   const wixData: Contact[] = useLoaderData();
   console.log(wixData);
-  const FallenBox = ({ fallenData }: { fallenData: Contact }) => {
-    return (
-      <Link
-        to={`/fallenCard/${fallenData._id}`}
-        className="bg-white min-h-10rem border-round-xl p-3"
-      >
-        <Card
-          header={
-            fallenData.mediagallery && (
-              <img
-                alt="fallen iamge"
-                src={`${prefix + fallenData.mediagallery[0].slug}`}
-              />
-            )
-          }
-          // title={fallenData && fallenData.name}
-          subTitle={
-            <button className="cursor-pointer">{fallenData.name}</button>
-          }
-        ></Card>
-      </Link>
-    );
+  const [filterText, setFilterText] = useState<string | undefined>();
+  const [first, setFirst] = useState<number>(0);
+  const [rows, setRows] = useState<number>(10);
+
+  const onPageChange = (event: PaginatorPageChangeEvent) => {
+    setFirst(event.first);
+    setRows(event.rows);
   };
   return (
-    <div>
+    <div className="max-w-screen overflow-x-hidden px-8 py-5 mb-8">
       <Helmet>
         <title>קווים לדמותם | רשימת הנופלים</title>
         <meta
@@ -39,11 +26,52 @@ export default function AllFallen() {
           content="קווים לדמותם״ הינו מיזם הנצחה התנדבותי אשר קם במטרה לספר את סיפוריהם של נופלי מלחמת חרבות ברזל, אזרחים וחיילים כאחד, דרך איורים ומילים. כל האיורים נעשים בעבודת יד ונשלחים כתרומה למשפחות וכן המילים נכתבות בשיתוף המשפחה. האתר הוקם כמקום בו תוכלו להכיר, ללמוד ולשאוב השראה, מהגיבורים הראשיים שכבר אינם אך סיפורם יחיה לעד. אנו מזמינים אתכם ללמוד ולהכיר את טובי בנינו ובנותינו, קצת על מי שהיו וקצת על מה שהשאירו אחריהם - דרך דמותם היפה בקווים ודרך הסיפורים."
         />
       </Helmet>
-      <div className="fallen-grid">
+      <div className="py-1">
+        <h3>הגיבורים שלנו</h3>
+        <InputText
+          value={filterText}
+          onChange={(e) => setFilterText(e.target.value)}
+          className="fallen-search-box"
+          type="text"
+          name="search"
+          placeholder="חיפוש על פי שם / יחידה"
+        />
+      </div>
+      <div
+        className="grid grid-nogutter  gap-5 mt-3"
+        style={{ minHeight: '300px' }}
+      >
         {wixData &&
-          wixData.map((fallenContact, index) => (
-            <FallenBox key={index} fallenData={fallenContact} />
-          ))}
+          wixData
+            .filter((f) => (filterText ? f.name.includes(filterText) : true))
+            .slice(first, first + rows)
+            .map((fallenContact, index) => (
+              <Link
+                key={index}
+                to={`/fallenCard/${fallenContact._id}`}
+                className="fallen-card min-h-10rem flex flex-column align-items-center"
+              >
+                <h3 className="mb-0 ">{fallenContact.name}</h3>
+                {fallenContact.mediagallery && (
+                  <img
+                    alt={`קווים לדמותו של ${fallenContact.name}`}
+                    src={`${prefix + fallenContact.mediagallery[0].slug}`}
+                    style={{ minWidth: '200px', maxHeight: '300px' }}
+                  />
+                )}
+              </Link>
+            ))}
+      </div>
+      <div className="w-full">
+        <Paginator
+          first={first}
+          rows={rows}
+          totalRecords={wixData.length}
+          rowsPerPageOptions={[10, 20, 30]}
+          onPageChange={onPageChange}
+          template="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
+          pt={{ root: { className: 'text-primary', dir: 'ltr' } }}
+        />
       </div>
     </div>
   );

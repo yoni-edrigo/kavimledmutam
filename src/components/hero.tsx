@@ -1,65 +1,25 @@
-import { Link } from 'react-router-dom';
+import logo from '../assets/logo.png';
 
-const heroText = `‘קווים לדמותם׳ הינו מיזם הנצחה  התנדבותי 
+const heroText1 = `‘קווים לדמותם׳ הינו מיזם הנצחה  התנדבותי 
 אשר קם במטרה לספר את סיפוריהם של נופלי מלחמת חרבות ברזל, אזרחים וחיילים כאחד, דרך איורים וסיפורים אישיים.
-כל האיורים נעשים בעבודת יד ונשלחים כתרומה למשפחות וכן הסיפורים נכתבים ע״י המשפחות והחברים.
-
+כל האיורים נעשים בעבודת יד ונשלחים כתרומה למשפחות וכן הסיפורים נכתבים ע״י המשפחות והחברים.`;
+const heroText2 = `
 האתר הוקם כמקום בו תוכלו לשתף, להעלות זכרונות ולספר קצת על מי שהיו, וקצת על מה שהשאירו אחריהם. 
 ובשביל שכמה שיותר יוכלו להכיר, לשאוב השראה, וללמוד,
  על הגיבורים הראשיים שכבר אינם, אך סיפורם יחיה לעד.
 דרך דמותם היפה בקווים ודרך הסיפורים.`;
 
 export function Hero() {
-  const scrollToParagraph = () => {
-    const paragraphElement = document.getElementById('long-paragraph');
-
-    if (paragraphElement) {
-      paragraphElement.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
-      });
-    }
-  };
   return (
-    <>
-      <div className="relative flex flex-column justify-content-center align-items-center md:px-7">
-        <div className={`square `}>
-          <span></span>
-          <span></span>
-          <span></span>
-          <div className="content flex flex-column align-items-center h-full">
-            <h1
-              className="md:text-6xl rubik-dirt white-space-nowrap"
-              style={{ maxWidth: '10ch' }}
-            >
-              קווים לדמותם
-            </h1>
-            {window.innerWidth > 768 && (
-              <p
-                className="font-light md:text-lg text-justify"
-                style={{ maxWidth: '500px' }}
-              >
-                {
-                  '‘קווים לדמותם׳ הינו מיזם הנצחה התנדבותי אשר קם במטרה לספר את סיפוריהם של נופלי מלחמת חרבות ברזל, אזרחים וחיילים כאחד, דרך איורים וסיפורים אישיים.'
-                }
-              </p>
-            )}
-            <div className="flex flex-wrap md:gap-3 justify-content-center">
-              <button className="cursor-pointer" onClick={scrollToParagraph}>
-                {'קראו עוד'}
-              </button>
-              <Link to={'/allFallen'}>{'עמוד הנופלים'}</Link>
-            </div>
-          </div>
-        </div>
+    <div className="flex px-5 pt-8 align-items-start justify-content-between">
+      <div className="flex flex-column gap-3" style={{ maxWidth: '50ch' }}>
+        <h3 style={{ color: 'var(--kavim-darkblue)' }}>מי אנחנו?</h3>
+        <span>{heroText1}</span>
+        <span>{heroText2}</span>
       </div>
-      <p
-        id="long-paragraph"
-        className="font-light md:text-lg text-justify mt-7 px-3 md:px-0"
-        style={{ maxWidth: '500px' }}
-      >
-        {heroText}
-      </p>
-    </>
+      {window.innerWidth > 768 && (
+        <img src={logo} alt="kavim ledmutam logo" className="w-4" />
+      )}
+    </div>
   );
 }

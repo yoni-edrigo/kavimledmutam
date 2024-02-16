@@ -1,20 +1,23 @@
 @import '../node_modules/primeflex/primeflex.css';
+@import '../node_modules/primereact/resources/themes/lara-light-blue/theme.css';
 @import './reset.css';
 @import '../node_modules/@ciar4n/izmir/izmir.css';
-@import url('https://fonts.googleapis.com/css2?family=Rubik+Dirt&family=Suez+One&display=swap');
-body{
+@import url('https://fonts.googleapis.com/css2?family=Rubik&family=Suez+One&display=swap');
+body {
   direction: rtl;
 }
 #root {
-    --kavim-blue: #c6defd;
-  --kavim-lightblue:#e6f1fc;
-  --kavim-grey:#f4f4f4;
-  --kavim-darkgrey:#242424;
+  --kavim-darkblue: #59a3ff;
+  --kavim-blue: #c5dfff;
+  --kavim-lightblue: #e7f1fb;
+  --kavim-grey: #f4f4f4;
+  --kavim-darkgrey: #242424;
+  --kavim-text: #292929;
   line-height: 1.5;
   font-weight: 400;
   color-scheme: light dark;
-  color: var(--kavim-darkgrey);
-  background-color: var(--kavim-grey);
+  color: var(--kavim-text);
+  background-color: white;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -23,14 +26,28 @@ body{
   /* max-width: 1280px !important; */
   /* margin: 0 auto; */
   min-height: 100svh;
+  font-family: 'Rubik', serif;
+}
+h1,
+h2,
+h3,
+button {
   font-family: 'Suez One', serif;
-
-
 }
-.rubik-dirt{
-  font-family: 'Rubik Dirt', sans-serif;
+h1 {
+  font-size: 24pt;
 }
-
+h2 {
+  font-size: 20pt;
+}
+button {
+  font-size: 18pt;
+}
+a {
+  font-family: 'Suez One', serif;
+  text-decoration: none !important;
+  color: var(--kavim-text);
+}
 /* ===== Scrollbar CSS ===== */
 
 /* Apply styles only to screens with a minimum width of 768 pixels (adjust as needed) */
@@ -58,161 +75,99 @@ body{
   }
 }
 
-
-
-.c4-izmir {
-  --primary-color: #rgba(255, 255, 255, 0.87);
-  --secondary-color: #D0206E;
-  --transition-duration: 500ms;
-  --border-width: 1px;
-  --overlay-opacity: .5;
+.nav-bar,
+footer {
+  background-color: var(--kavim-blue);
+  min-height: 80px;
 }
 
-a {
-  color:var(--kavim-darkgrey);
-  text-decoration: none;
+.contact-form-wrapper {
+  background-color: var(--kavim-blue);
+  place-content: center;
 }
-
-a:hover {
-  color:#00A0C6; 
-  text-decoration:none; 
-  cursor:pointer;  
+.contact-form {
+  display: grid;
+  grid-template-areas:
+    'fName lName phone email'
+    'hero image citation citation'
+    'sendButton sendButton sendButton sendButton';
 }
-.fallen-grid{
-  display: grid !important;
-  gap: 0.75rem;
-  padding-bottom: 1rem;
-  grid-template-columns: repeat(5,1fr);
-  @media (max-width:1000px) {
-    grid-template-columns: repeat(3,1fr);
-
-  }
-  @media (max-width:768px) {
-    grid-template-columns: repeat(1,1fr);
-
+@media (max-width: 1200px) and (min-width: 950px) {
+  .contact-form {
+    grid-template-areas:
+      'fName lName phone'
+      'email hero image'
+      'citation citation citation'
+      'sendButton sendButton sendButton';
   }
 }
-
-.square {
-  position: relative;
-  width: 60vw;
-  height: 60vw;
-  @media (max-width:768px) {
-    width: 250px;
-  height: 300px;
+@media (max-width: 950px) and (min-width: 768px) {
+  .contact-form {
+    grid-template-areas:
+      'fName lName'
+      'phone email' 'hero image'
+      'citation citation '
+      'sendButton sendButton ';
   }
 }
+@media (max-width: 768px) {
+  .contact-form {
+    grid-template-areas: 'fName' 'lName' 'phone' 'email' 'hero' 'image' 'citation' 'sendButton';
+  }
+}
+.form-input,
+.form-button {
+  box-sizing: border-box;
 
-.square span:nth-child(1) {
+  background: #ffffff;
+  color: var(--kavim-text);
+  border: 1px solid #59a3ff;
+  border-radius: 6px;
+  height: 1.5em;
+}
+.form-button {
+  width: 200px;
+  height: 40px;
+  border-radius: 28px;
+}
+.thanks-section {
+  min-height: 80svh;
+
+  /* linear */
+  background: linear-gradient(
+    180deg,
+    var(--kavim-lightblue) 100%,
+    var(--kavim-lightblue) 0%
+  );
+}
+.landing-element {
+  /* forma */
+
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: 2px solid var(--kavim-darkgrey);
-  border-radius: 32% 58% 69% 43% / 48% 32% 59% 55%;
-  transition: 0.5s;
-  animation: animate 8s linear infinite;
-  @media (max-width:768px) {
-    animation: none;
-    }
+  width: 718.66px;
+  height: 686.59px;
+  left: -263px;
+  bottom: -140px;
+  /* top: 2752.78px; */
+  mix-blend-mode: soft-light;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  transform: matrix(0.91, 0.41, 0.41, -0.91, 0, 0);
+}
+.fallen-search-box {
+  background: #e7f1fb;
+  color: var(--kavim-text);
+  border-radius: 50px;
+  border-width: 0;
+  height: 30px;
+  background-image: url('./assets/searchIcon.svg');
+  background-size: 5%;
+  background-position: 20px 10px;
+  background-repeat: no-repeat;
+  padding: 8px 20px 8px 40px;
 }
 
-.square:hover span:nth-child(1) {
-  border: none;
-  background: var(--kavim-blue);
-}
+.fallen-card:hover {
+  border-color: var(--kavim-darkblue) !important;
 
-.square span:nth-child(2) {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: 2px solid var(--kavim-darkgrey);
-  border-radius: 38% 62% 63% 37% / 41% 44% 56% 59%;
-  transition: 0.5s;
-  animation: animate 10s linear infinite;
-  @media (max-width:768px) {
-    animation: none;
-    }
-}
-
-.square:hover span:nth-child(2) {
-  border: none;
-  background: var(--kavim-blue);
-}
-
-
-.square span:nth-child(3) {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: 2px solid var(--kavim-darkgrey);
-  border-radius: 31% 45% 74% 35% / 38% 56% 51% 87%;
-  transition: 0.5s;
-  animation: animate2 25s linear infinite;
-  @media (max-width:768px) {
-  animation: none;
-  }
-}
-
-.square:hover span:nth-child(3) {
-  border: none;
-  background: var(--kavim-blue);
-}
-
-
-.content {
-  position: relative;
-  padding: 20px 60px;
-  color: #242424;
-  text-align: center;
-  transition: 0.5s;
-  z-index: 1000;
-  margin-top: 20%;
-  @media (max-width:768px) {
-    padding: 50px 60px;
-    margin-top: 0%;
-
-  }
-}
-
- a, button {
-  position: relative;
-  display: inline-block;
-  margin-top: 10px;
-  border: 1px solid #242424;
-  padding: 6px 18px;
-  text-decoration: none;
-  color: #242424;
-  font-weight: 600;
-  border-radius: 73% 27% 44% 56% / 49% 44% 56% 51%;
-}
-button{
-  background-color: var(--kavim-lightblue);
-}
- a,button:hover  {
-  background: var(--kavim-lightblue);
-  color: var(--kavim-darkgrey);
-}
-
-@keyframes animate {
-  0% {
-      transform: rotate(0deg);
-  }
-  100% {
-      transform: rotate(360deg);
-  }
-}
-
-@keyframes animate2 {
-  0% {
-      transform: rotate(360deg);
-  }
-  100% {
-      transform: rotate(0deg);
-  }
+  border-width: 50px !important;
 }

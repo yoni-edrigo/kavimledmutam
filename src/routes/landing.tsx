@@ -1,8 +1,10 @@
 import { useLoaderData } from 'react-router-dom';
 import { Hero } from '../components/hero';
-import { Staff } from '../components/staff';
+import { OurActivity } from '../components/ourActivity';
 import { Contact } from './root';
 import { Helmet } from 'react-helmet-async';
+import { ContactForm } from '../components/contactForm';
+import { ThanksSection } from '../components/thanksSection';
 
 export default function Landing() {
   //@ts-expect-error wixdata isnt known
@@ -10,10 +12,11 @@ export default function Landing() {
   console.log(wixData);
   return (
     <div
-      className="min-h-screen"
+      className="min-h-screen max-w-screen"
       style={{
         display: 'grid',
-        gridTemplateRows: 'repeat(2,minmax(100svh,min-content))',
+        gridTemplateRows: 'repeat(3,minmax(100svh,min-content))',
+        fontSize: '16pt',
       }}
     >
       <Helmet>
@@ -61,7 +64,9 @@ export default function Landing() {
         <meta property="twitter:image" content="/kavimledmutam_logo.jpeg" />
       </Helmet>
       <Hero />
-      {wixData && <Staff staffData={wixData[1]} />}
+      <OurActivity />
+      <ContactForm />
+      <ThanksSection />
       <h3 className="fixed bottom-0 mr-7">האתר בבנייה, תודה על הסבלנות!</h3>
     </div>
   );

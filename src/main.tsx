@@ -9,6 +9,11 @@ import Landing from './routes/landing';
 import { allFallenLoader, fallenContactLoader, rootLoader } from './loaders';
 import FallenPage from './routes/fallenPage';
 import { HelmetProvider } from 'react-helmet-async';
+import { addLocale, locale } from 'primereact/api';
+import { he } from './he.json';
+addLocale('he', he);
+locale('he');
+
 const router = createHashRouter([
   {
     path: '/',
