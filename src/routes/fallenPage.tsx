@@ -40,7 +40,7 @@ export default function FallenPage() {
         throw new Error('Web Share API not supported in this browser.');
       }
     } catch (error) {
-      console.error('Error sharing:', error.message);
+      console.error('Error sharing:', error);
       // Handle the error, e.g., show a fallback UI for sharing
     }
   };
