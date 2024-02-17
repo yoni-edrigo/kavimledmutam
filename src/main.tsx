@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Root } from './routes/root';
 import { ErrorPage } from './error-page';
-import { RouterProvider, createHashRouter } from 'react-router-dom';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import './index.css';
 import AllFallen from './routes/allFallen';
 import Landing from './routes/landing';
@@ -14,7 +14,7 @@ import { he } from './he.json';
 addLocale('he', he);
 locale('he');
 
-const router = createHashRouter([
+const router = createBrowserRouter([
   {
     path: '/',
     element: <Root />,
