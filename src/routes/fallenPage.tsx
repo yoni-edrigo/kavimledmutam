@@ -41,17 +41,20 @@ export default function FallenPage() {
         className="mt-3 flex flex-column pb-3 px-3 md:px-8 pt-5 mb-8 gap-8"
         ref={parent}
       >
-        <div className="flex flex-column-reverse md:flex-row gap-4 justify-content-between">
-          <div style={{ display: 'grid', gridTemplateRows: 'min-content' }}>
+        <div className="flex flex-column-reverse md:flex-row gap-4 justify-content-between mt-5">
+          <div
+            className="gap-4"
+            style={{ display: 'grid', gridTemplateRows: 'min-content' }}
+          >
             <h2 className="my-0">
               {fallenData.name}
               {' - קווים לדמותו'}
             </h2>
-            <p className="text-justify" style={{ maxWidth: '50ch' }}>
+            <p className="text-justify z-1" style={{ maxWidth: '50ch' }}>
               {fallenData.story}
             </p>{' '}
             <Button
-              className="write-more-btn w-fit flex flex-row-reverse gap-2 relative"
+              className="write-more-btn w-fit flex flex-row-reverse gap-2 relative z-0"
               size="small"
               label="לכתיבה נוספת"
               onClick={reveal}
@@ -66,7 +69,7 @@ export default function FallenPage() {
               />
             </Button>
           </div>
-          <div className="relative" style={{ maxWidth: '450px' }}>
+          <div className="relative mt-5" style={{ maxWidth: '450px' }}>
             <Swiper
               pagination={{
                 type: 'fraction',

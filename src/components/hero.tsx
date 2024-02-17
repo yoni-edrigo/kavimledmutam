@@ -11,14 +11,20 @@ const heroText2 = `
 
 export function Hero() {
   return (
-    <div className="flex px-5 pt-8 align-items-start justify-content-between">
+    <div className="flex py-8 align-items-start justify-content-between gap-3">
       <div className="flex flex-column gap-3" style={{ maxWidth: '50ch' }}>
-        <h2 style={{ color: 'var(--kavim-darkblue)' }}>מי אנחנו?</h2>
-        <p>{heroText1}</p>
-        <p>{heroText2}</p>
+        <h2 className="mr-5" style={{ color: 'var(--kavim-darkblue)' }}>
+          מי אנחנו?
+        </h2>
+        <p className="mr-7">{heroText1}</p>
+        <p className="mr-7">{heroText2}</p>
       </div>
       {window.innerWidth > 768 && (
-        <img src={logo} alt="kavim ledmutam logo" className="w-4" />
+        <img
+          src={logo}
+          alt="kavim ledmutam logo"
+          className="max-w-15rem ml-5"
+        />
       )}
     </div>
   );

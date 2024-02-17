@@ -22,7 +22,7 @@ export default function Landing() {
   console.log(wixData);
   return (
     <div
-      className="min-h-screen max-w-screen"
+      className="min-h-screen"
       style={{
         display: 'grid',
         gridTemplateRows: 'repeat(3,minmax(1svh,min-content))',

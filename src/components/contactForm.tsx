@@ -6,7 +6,7 @@ type Inputs = {
   phone: string;
   email: string;
   hero: string;
-  image: string;
+  address: string;
   citation: string;
 };
 const postRequest = async (requestData: Inputs): Promise<void> => {
@@ -54,7 +54,7 @@ export function ContactForm() {
       <div className="contact-form-wrapper flex p-3 border-round-lg relative">
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="contact-form gap-4 border-1 border-white border-round-lg p-5 w-full"
+          className="contact-form gap-4 border-1 border-white border-round-lg p-5 w-full z-1"
         >
           <span className="flex flex-column " style={{ gridArea: 'fName' }}>
             <label>שם פרטי</label>
@@ -106,24 +106,26 @@ export function ContactForm() {
               <label className="text-red-500">זהו שדה חובה</label>
             )}
           </span>
-          <span className="flex flex-column" style={{ gridArea: 'image' }}>
-            <label>קישור לתמונה (אופציונלי)</label>
-            <input className="form-input" {...register('image')} />
+          <span className="flex flex-column" style={{ gridArea: 'address' }}>
+            <label>כתובת למשלוח</label>
+            <input className="form-input" {...register('address')} />
           </span>
           <span className="flex flex-column" style={{ gridArea: 'citation' }}>
             <label>כותרת/ציטוט (אופציונלי)</label>
             <input className="form-input" {...register('citation')} />
           </span>
-          <button
-            className="form-button mt-8 cursor-pointer"
-            type="submit"
+          <span
             style={{ gridArea: 'sendButton', justifySelf: 'center' }}
+            className="flex flex-column align-items-center gap-2"
           >
-            סיום הזמנה
-          </button>
+            <button className="form-button mt-8 cursor-pointer" type="submit">
+              סיום הזמנה
+            </button>
+            <small>*בסיום ההזמנה צוות המיזם יצור קשר עמכם בהקדם</small>
+          </span>
         </form>
       </div>
-      <img src={landingElement} className="landing-element" />
+      <img src={landingElement} className="landing-element z-0" />
     </div>
   );
 }

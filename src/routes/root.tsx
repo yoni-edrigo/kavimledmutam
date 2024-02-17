@@ -20,7 +20,35 @@ export type Contact = {
   }[];
   story?: string;
 };
-const dialogContent = ['יצירת קשר', 'תנאי שימוש', 'נגישות'];
+const contactDetails = (
+  <div className="gap-5 align-items-center flex flex-column">
+    <h3>ניתן ליצור איתנו קשר בדרכים הבאות:</h3>
+    <div className="flex gap-3 justify-content-evenly" dir="ltr">
+      <span className="flex flex-column align-items-center gap-1">
+        <a
+          href="https://www.facebook.com/profile.php?id=61555637412000"
+          target="_blank"
+        >
+          <i className="pi pi-facebook text-4xl" />
+        </a>
+        "קווים לדמותם"
+      </span>
+      <span className="flex flex-column align-items-center mt-5 gap-1">
+        <a href="https://www.instagram.com/kavim.ledmutam/" target="_blank">
+          <i className="pi pi-instagram text-4xl" />
+        </a>
+        @kavimledmutam
+      </span>
+      <span className="flex flex-column align-items-center gap-1">
+        <a href="https://wa.me/+972543911192" target="_blank">
+          <i className="pi pi-whatsapp text-4xl" />
+        </a>
+        מעיין -מנהלת
+      </span>
+    </div>
+  </div>
+);
+const dialogContent = [contactDetails, 'תנאי שימוש', 'נגישות'];
 export function Root() {
   //   const wixData: Contact[][] = useLoaderData();
   const [dialogVisible, setDialogVisible] = useState(false);
@@ -28,7 +56,7 @@ export function Root() {
   return (
     <div className="relative">
       <header className="nav-bar flex justify-content-between gap-3 p-3 relative h-3rem">
-        <div className="flex">
+        <div className="flex gap-3">
           <NavLink to={'/'}>
             <img
               src={logoWithTitle}
@@ -48,18 +76,15 @@ export function Root() {
             >
               הגיבורים שלנו
             </NavLink>
-            <NavLink
-              to={`/`}
-              className={({ isActive, isPending }) =>
-                isActive ? 'activeLink' : isPending ? 'pendingLink' : ''
-              }
+            <h3
+              className="cursor-pointer"
               onClick={() => {
                 setSelectedDialogContent(0);
                 setDialogVisible(true);
               }}
             >
               צור קשר
-            </NavLink>
+            </h3>
           </span>
         </div>
         <div className="align-self-center flex gap-3">
@@ -68,7 +93,7 @@ export function Root() {
       </header>
       <div className="page-content">
         <Dialog visible={dialogVisible} onHide={() => setDialogVisible(false)}>
-          <p>{dialogContent[selectedDialogContent]}</p>
+          {dialogContent[selectedDialogContent]}
         </Dialog>
         <Outlet />
       </div>
