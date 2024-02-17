@@ -229,10 +229,19 @@ footer {
 }
 .write-more-btn {
   display: flex;
-  background: #c5defd;
+  background: var(--kavim-blue);
   border: 1px solid #59a3ff;
   border-radius: 50px;
   color: var(--kavim-text);
+  font-size: 0.8rem;
+}
+.send-page-btn {
+  display: flex;
+  background: var(--kavim-lightblue);
+  border: 1px solid #59a3ff;
+  border-radius: 50px;
+  color: var(--kavim-text);
+  font-size: 0.8rem;
 }
 .comments-section {
   width: 100% !important;

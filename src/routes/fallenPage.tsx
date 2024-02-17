@@ -15,6 +15,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { Navigation, Pagination } from 'swiper/modules';
 import fallenPageTopElement from '../assets/fallenPageTopElement.svg';
+
 export default function FallenPage() {
   //@ts-expect-error wixdata isnt known
   const fallenData: Contact = useLoaderData();
@@ -27,6 +28,22 @@ export default function FallenPage() {
     parent.current && autoAnimate(parent.current);
   }, [parent]);
   const reveal = () => setShow(!show);
+  const handleShare = async () => {
+    try {
+      if (navigator.share) {
+        await navigator.share({
+          title: document.title,
+          text: 'Check out this page!',
+          url: window.location.href,
+        });
+      } else {
+        throw new Error('Web Share API not supported in this browser.');
+      }
+    } catch (error) {
+      console.error('Error sharing:', error.message);
+      // Handle the error, e.g., show a fallback UI for sharing
+    }
+  };
   return !fallenData ? (
     <>
       {'קישור לא תקין -> לחצו לחזרה לעמוד כל הנופלים'}
@@ -53,21 +70,34 @@ export default function FallenPage() {
             <p className="text-justify z-1" style={{ maxWidth: '50ch' }}>
               {fallenData.story}
             </p>{' '}
-            <Button
-              className="write-more-btn w-fit flex flex-row-reverse gap-2 relative z-0"
-              size="small"
-              label="לכתיבה נוספת"
-              onClick={reveal}
-              icon={() => <img src={plusIcon} />}
-              pt={{ icon: { style: { color: 'var(--kavim-text)' } } }}
-              style={{ justifySelf: 'start', alignSelf: 'start' }}
-            >
-              <img
-                src={fallenPageTopElement}
-                className="absolute"
-                style={{ top: '-470px', left: '-1120px', scale: '0.9' }}
-              />
-            </Button>
+            <div className="flex gap-3 align-items-center">
+              <Button
+                className="write-more-btn w-fit flex flex-row-reverse gap-2 relative z-0"
+                // size="small"
+                label="לכתיבה נוספת"
+                onClick={reveal}
+                icon={() => <img src={plusIcon} />}
+                pt={{ icon: { style: { color: 'var(--kavim-text)' } } }}
+                style={{ justifySelf: 'start', alignSelf: 'start' }}
+              >
+                <img
+                  src={fallenPageTopElement}
+                  className="absolute"
+                  style={{ top: '-470px', left: '-1120px', scale: '0.9' }}
+                />
+              </Button>
+              {window.innerWidth < 768 && (
+                <Button
+                  className="send-page-btn w-fit flex flex-row-reverse gap-2 relative z-0 h-full"
+                  // size="small"
+                  label="שיתוף עמוד"
+                  onClick={handleShare}
+                  icon="pi pi-send text-xl"
+                  pt={{ icon: { style: { color: 'var(--kavim-text)' } } }}
+                  style={{ justifySelf: 'start', alignSelf: 'start' }}
+                />
+              )}
+            </div>
           </div>
           <div className="relative mt-5" style={{ maxWidth: '450px' }}>
             <Swiper
