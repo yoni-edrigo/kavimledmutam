@@ -35,7 +35,7 @@ export function ContactForm() {
               className="form-input"
               {...register('fName', { required: true })}
             />
-            {errors.fName && <label>This field is required</label>}
+            {errors.fName && <label>זהו שדה חובה</label>}
           </span>
           <span className="flex flex-column" style={{ gridArea: 'lName' }}>
             <label>שם משפחה</label>
@@ -43,7 +43,7 @@ export function ContactForm() {
               className="form-input"
               {...register('lName', { required: true })}
             />
-            {errors.lName && <label>This field is required</label>}
+            {errors.lName && <label>זהו שדה חובה</label>}
           </span>
           <span className="flex flex-column" style={{ gridArea: 'phone' }}>
             <label>טלפון</label>
@@ -51,7 +51,7 @@ export function ContactForm() {
               className="form-input"
               {...register('phone', { required: true })}
             />
-            {errors.phone && <label>This field is required</label>}
+            {errors.phone && <label>זהו שדה חובה</label>}
           </span>
           <span className="flex flex-column" style={{ gridArea: 'email' }}>
             <label>כתובת מייל</label>
@@ -59,7 +59,7 @@ export function ContactForm() {
               className="form-input"
               {...register('email', { required: true })}
             />
-            {errors.email && <label>This field is required</label>}
+            {errors.email && <label>זהו שדה חובה</label>}
           </span>
           <span className="flex flex-column" style={{ gridArea: 'hero' }}>
             <label>שם הגיבור/ה שלי</label>
@@ -67,7 +67,7 @@ export function ContactForm() {
               className="form-input"
               {...register('hero', { required: true })}
             />
-            {errors.hero && <label>This field is required</label>}
+            {errors.hero && <label>זהו שדה חובה</label>}
           </span>
           <span className="flex flex-column" style={{ gridArea: 'image' }}>
             <label>תמונה</label>
@@ -75,7 +75,7 @@ export function ContactForm() {
               className="form-input"
               {...register('image', { required: true })}
             />
-            {errors.image && <label>This field is required</label>}
+            {errors.image && <label>זהו שדה חובה</label>}
           </span>
           <span className="flex flex-column" style={{ gridArea: 'citation' }}>
             <label>כותרת/ציטוט</label>
@@ -83,7 +83,7 @@ export function ContactForm() {
               className="form-input"
               {...register('citation', { required: true })}
             />
-            {errors.citation && <label>This field is required</label>}
+            {errors.citation && <label>זהו שדה חובה</label>}
           </span>
           <button
             className="form-button mt-8"

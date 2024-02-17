@@ -44,3 +44,24 @@ export async function fallenContactLoader({ params }) {
     data.message[0].find((f: Contact) => f._id === params.contactId) || false
   );
 }
+export async function getCommentsByFallenId(fallenId: string) {
+  try {
+    const response = await fetch(
+      `https://yonivas0.editorx.io/kavimledmutam/_functions/getComments/${fallenId}`
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    // If you expect JSON response, use response.json()
+    // If you expect other response types, adjust accordingly
+    const data = await response.json();
+    console.log(data.message);
+
+    return data.message;
+  } catch (error) {
+    console.error('Error fetching comments:', error);
+    throw error; // Re-throw the error if needed
+  }
+}

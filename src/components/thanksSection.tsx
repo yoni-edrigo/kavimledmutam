@@ -1,6 +1,6 @@
 const tempArr = Array(10)
   .fill(null)
-  .map((m, index) => index);
+  .map((_, index) => index);
 export function ThanksSection() {
   return (
     <div className="thanks-section p-3 flex flex-column">

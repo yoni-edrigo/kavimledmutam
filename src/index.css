@@ -3,6 +3,9 @@
 @import './reset.css';
 @import '../node_modules/@ciar4n/izmir/izmir.css';
 @import url('https://fonts.googleapis.com/css2?family=Rubik&family=Suez+One&display=swap');
+
+@import 'primeicons/primeicons.css';
+
 body {
   direction: rtl;
 }
@@ -33,6 +36,7 @@ h2,
 h3,
 button {
   font-family: 'Suez One', serif;
+  margin: 0px;
 }
 h1 {
   font-size: 24pt;
@@ -40,8 +44,11 @@ h1 {
 h2 {
   font-size: 20pt;
 }
+h3 {
+  font-size: 12pt;
+}
 button {
-  font-size: 18pt;
+  font-size: 14pt;
 }
 a {
   font-family: 'Suez One', serif;
@@ -92,7 +99,18 @@ footer {
     'hero image citation citation'
     'sendButton sendButton sendButton sendButton';
 }
-@media (max-width: 1200px) and (min-width: 950px) {
+.comment-form-wrapper {
+  background-color: var(--kavim-blue);
+  place-content: center;
+}
+.comment-form {
+  display: grid;
+  grid-template-areas:
+    'fName lName phone prefix'
+    'comment comment comment comment'
+    'sendButton sendButton sendButton sendButton';
+}
+@media (max-width: 1200px) and (min-width: 1050px) {
   .contact-form {
     grid-template-areas:
       'fName lName phone'
@@ -101,7 +119,7 @@ footer {
       'sendButton sendButton sendButton';
   }
 }
-@media (max-width: 950px) and (min-width: 768px) {
+@media (max-width: 1050px) and (min-width: 768px) {
   .contact-form {
     grid-template-areas:
       'fName lName'
@@ -109,10 +127,20 @@ footer {
       'citation citation '
       'sendButton sendButton ';
   }
+  .comment-form {
+    grid-template-areas:
+      'fName lName'
+      'phone prefix'
+      'comment comment'
+      'sendButton sendButton';
+  }
 }
 @media (max-width: 768px) {
   .contact-form {
     grid-template-areas: 'fName' 'lName' 'phone' 'email' 'hero' 'image' 'citation' 'sendButton';
+  }
+  .comment-form {
+    grid-template-areas: 'fName' 'lName' 'phone' 'prefix' 'comment' 'sendButton';
   }
 }
 .form-input,
@@ -123,7 +151,7 @@ footer {
   color: var(--kavim-text);
   border: 1px solid #59a3ff;
   border-radius: 6px;
-  height: 1.5em;
+  height: 2em;
 }
 .form-button {
   width: 200px;
@@ -170,4 +198,25 @@ footer {
   border-color: var(--kavim-darkblue) !important;
 
   border-width: 50px !important;
+}
+.write-more-btn {
+  display: flex;
+  background: #c5defd;
+  border: 1px solid #59a3ff;
+  border-radius: 50px;
+  color: var(--kavim-text);
+}
+.comments-section {
+  width: 100% !important;
+  background-color: var(--kavim-lightblue);
+  min-height: 30svh;
+  display: grid;
+  border-radius: 12px;
+}
+.comment {
+  min-height: 200px !important;
+  display: grid;
+  grid-template-areas:
+    'name phone date hr hr hr'
+    'comment comment comment comment comment comment';
 }
