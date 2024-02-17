@@ -30,7 +30,7 @@ export const removeUnusedDataFromUrl = (url: string) => {
 
 export const getMetaTags = (fallenData: Contact) => {
   return (
-    <Helmet>
+    <Helmet prioritizeSeoTags>
       <title>{`קווים לדמותם | ${fallenData.name}`}</title>
       <meta
         name="description"

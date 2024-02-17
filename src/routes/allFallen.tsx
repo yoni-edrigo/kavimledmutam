@@ -19,7 +19,7 @@ export default function AllFallen() {
   };
   return (
     <div className="max-w-screen overflow-x-hidden px-8 py-5 mb-8">
-      <Helmet>
+      <Helmet prioritizeSeoTags>
         <title>קווים לדמותם | רשימת הנופלים</title>
         <meta
           name="description"

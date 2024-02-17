@@ -11,6 +11,7 @@ export type Volunteer = {
   image: string;
   link: string;
   isPainter: boolean;
+  order: number;
 };
 type WixData = {
   ourActivity: string[];
@@ -29,7 +30,7 @@ export default function Landing() {
         fontSize: '16pt',
       }}
     >
-      <Helmet>
+      <Helmet prioritizeSeoTags>
         <title>קווים לדמותם | הנצחת נופלי חרבות ברזל</title>
         <meta
           name="description"

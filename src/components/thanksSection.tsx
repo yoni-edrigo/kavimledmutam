@@ -9,13 +9,9 @@ export function ThanksSection({ volunteerArr }: { volunteerArr: Volunteer[] }) {
         {volunteerArr &&
           volunteerArr
             .sort((a, b) => {
-              if (a.isPainter && !b.isPainter) {
-                return -1; // `a` comes before `b`
-              } else if (!a.isPainter && b.isPainter) {
-                return 1; // `b` comes before `a`
-              } else {
-                return 0; // no change in order
-              }
+              const orderA = a.order || 0; // Use 0 if 'order' is undefined or null
+              const orderB = b.order || 0; // Use 0 if 'order' is undefined or null
+              return orderB - orderA;
             })
             .map((volunteer, index) => (
               <div
@@ -62,7 +58,7 @@ export function ThanksSection({ volunteerArr }: { volunteerArr: Volunteer[] }) {
                   target="_blank"
                 >
                   <span className="flex gap-1 align-items-center">
-                    <i className="pi pi-link" />
+                    {volunteer.link && <i className="pi pi-link" />}
                     {volunteer.role}
                   </span>
                 </a>
