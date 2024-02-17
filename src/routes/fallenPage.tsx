@@ -13,7 +13,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
-import { Pagination } from 'swiper/modules';
+import { Navigation, Pagination } from 'swiper/modules';
+import fallenPageTopElement from '../assets/fallenPageTopElement.svg';
 export default function FallenPage() {
   //@ts-expect-error wixdata isnt known
   const fallenData: Contact = useLoaderData();
@@ -25,7 +26,6 @@ export default function FallenPage() {
   useEffect(() => {
     parent.current && autoAnimate(parent.current);
   }, [parent]);
-
   const reveal = () => setShow(!show);
   return !fallenData ? (
     <>
@@ -38,7 +38,7 @@ export default function FallenPage() {
     <>
       {fallenData && getMetaTags(fallenData)}
       <div
-        className="mt-3 flex flex-column pb-3 px-3 md:px-8 pt-5 mb-8 gap-5"
+        className="mt-3 flex flex-column pb-3 px-3 md:px-8 pt-5 mb-8 gap-8"
         ref={parent}
       >
         <div className="flex flex-column-reverse md:flex-row gap-4 justify-content-between">
@@ -51,25 +51,35 @@ export default function FallenPage() {
               {fallenData.story}
             </p>{' '}
             <Button
-              className="write-more-btn w-fit flex flex-row-reverse gap-2"
+              className="write-more-btn w-fit flex flex-row-reverse gap-2 relative"
               size="small"
               label="לכתיבה נוספת"
               onClick={reveal}
               icon={() => <img src={plusIcon} />}
               pt={{ icon: { style: { color: 'var(--kavim-text)' } } }}
               style={{ justifySelf: 'start', alignSelf: 'start' }}
-            />
+            >
+              <img
+                src={fallenPageTopElement}
+                className="absolute"
+                style={{ top: '-470px', left: '-1120px', scale: '0.9' }}
+              />
+            </Button>
           </div>
-          <div style={{ maxWidth: '450px' }}>
+          <div className="relative" style={{ maxWidth: '450px' }}>
             <Swiper
               pagination={{
                 type: 'fraction',
               }}
-              modules={[Pagination]}
+              navigation={true}
+              modules={[Pagination, Navigation]}
             >
               {fallenData.mediagallery &&
                 fallenData.mediagallery.map((media, index) => (
-                  <SwiperSlide key={index}>
+                  <SwiperSlide
+                    key={index}
+                    style={{ display: 'flex', placeContent: 'center' }}
+                  >
                     <img
                       alt={`התמונה של: ${fallenData.name}`}
                       src={`${prefix + media.slug}`}
@@ -116,10 +126,10 @@ function CommentsSection({ fallenId }: { fallenId: string }) {
   };
   return (
     <>
-      <div className="comments-section">
+      <div className="comments-section z-1">
         {commentsArr && commentsArr.length > 0 ? (
           commentsArr.map((comment, index) => (
-            <div className="comment-wrapper px-2">
+            <div className="comment-wrapper px-2" key={index}>
               <div className="comment pt-5 px-6 pb-7" key={index}>
                 <h3 style={{ gridArea: 'name' }}>
                   {comment.fName}
