@@ -33,7 +33,7 @@ export default function FallenPage() {
       if (navigator.share) {
         await navigator.share({
           title: document.title,
-          text: 'Check out this page!',
+          text: `קווים לדמותו של ${fallenData.name} `,
           url: window.location.href,
         });
       } else {
