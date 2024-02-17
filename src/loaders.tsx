@@ -1,6 +1,6 @@
 export async function rootLoader() {
   const response = await fetch(
-    'https://yonivas0.editorx.io/kavimledmutam/_functions/getData'
+    'https://yonivas0.editorx.io/kavimledmutam/_functions/getLandingPageData'
   );
   if (!response.ok) {
     throw new Error(`HTTP error! Status: ${response.status}`);
@@ -12,23 +12,9 @@ export async function rootLoader() {
   return data.message;
 }
 export async function allFallenLoader() {
-  const response = await fetch(
-    'https://yonivas0.editorx.io/kavimledmutam/_functions/getData'
-  );
-  if (!response.ok) {
-    throw new Error(`HTTP error! Status: ${response.status}`);
-  }
-
-  // If you expect JSON response, use response.json()
-  // If you expect other response types, adjust accordingly
-  const data = await response.json();
-  return data.message[0] || false;
-}
-//@ts-expect-error because
-export async function fallenContactLoader({ params }) {
   try {
     const response = await fetch(
-      `https://yonivas0.editorx.io/kavimledmutam/_functions/getFallenData/${params.contactId}`
+      `https://yonivas0.editorx.io/kavimledmutam/_functions/getAllFallenData`
     );
 
     if (!response.ok) {
@@ -46,10 +32,11 @@ export async function fallenContactLoader({ params }) {
     throw error; // Re-throw the error if needed
   }
 }
-export async function getDataByFallenId(fallenId: string) {
+//@ts-expect-error because
+export async function fallenContactLoader({ params }) {
   try {
     const response = await fetch(
-      `https://yonivas0.editorx.io/kavimledmutam/_functions/getFallenData/${fallenId}`
+      `https://yonivas0.editorx.io/kavimledmutam/_functions/getFallenData/${params.contactId}`
     );
 
     if (!response.ok) {

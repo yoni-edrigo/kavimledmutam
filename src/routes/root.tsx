@@ -37,12 +37,7 @@ export function Root() {
             />
           </NavLink>
           <span className="flex gap-5 align-items-center">
-            <NavLink
-              to={`/`}
-              className={({ isActive, isPending }) =>
-                isActive ? 'activeLink' : isPending ? 'pendingLink' : ''
-              }
-            >
+            <NavLink to={`/`} className="nav-bar-link">
               קווים לדמותם
             </NavLink>
             <NavLink
@@ -127,7 +122,11 @@ export function Root() {
 }
 const SocialBar = () => (
   <div className="flex gap-3">
-    <a href="https://www.instagram.com/kavim.ledmutam/" target="_blank">
+    <a
+      className="social-link"
+      href="https://www.instagram.com/kavim.ledmutam/"
+      target="_blank"
+    >
       <svg
         width="28"
         height="28"
@@ -150,6 +149,7 @@ const SocialBar = () => (
       </svg>
     </a>
     <a
+      className="social-link"
       href="https://www.facebook.com/profile.php?id=61555637412000"
       target="_blank"
     >
@@ -182,7 +182,7 @@ const SocialBar = () => (
       </svg>
     </a>
 
-    <a href="/">
+    <a className="social-link" href="/">
       <svg
         width="28"
         height="28"

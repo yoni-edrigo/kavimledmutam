@@ -13,9 +13,9 @@ export function Hero() {
   return (
     <div className="flex px-5 pt-8 align-items-start justify-content-between">
       <div className="flex flex-column gap-3" style={{ maxWidth: '50ch' }}>
-        <h3 style={{ color: 'var(--kavim-darkblue)' }}>מי אנחנו?</h3>
-        <span>{heroText1}</span>
-        <span>{heroText2}</span>
+        <h2 style={{ color: 'var(--kavim-darkblue)' }}>מי אנחנו?</h2>
+        <p>{heroText1}</p>
+        <p>{heroText2}</p>
       </div>
       {window.innerWidth > 768 && (
         <img src={logo} alt="kavim ledmutam logo" className="w-4" />

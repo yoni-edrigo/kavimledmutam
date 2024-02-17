@@ -1,21 +1,31 @@
 import { useLoaderData } from 'react-router-dom';
 import { Hero } from '../components/hero';
 import { OurActivity } from '../components/ourActivity';
-import { Contact } from './root';
+
 import { Helmet } from 'react-helmet-async';
 import { ContactForm } from '../components/contactForm';
 import { ThanksSection } from '../components/thanksSection';
-
+export type Volunteer = {
+  name: string;
+  role: string;
+  image: string;
+  link: string;
+  isPainter: boolean;
+};
+type WixData = {
+  ourActivity: string[];
+  volunteers: Volunteer[];
+};
 export default function Landing() {
-  //@ts-expect-error wixdata isnt known
-  const wixData: Contact[][] = useLoaderData();
+  //@ts-expect-error because wix data is unknown
+  const wixData: WixData = useLoaderData();
   console.log(wixData);
   return (
     <div
       className="min-h-screen max-w-screen"
       style={{
         display: 'grid',
-        gridTemplateRows: 'repeat(3,minmax(100svh,min-content))',
+        gridTemplateRows: 'repeat(3,minmax(1svh,min-content))',
         fontSize: '16pt',
       }}
     >
@@ -64,9 +74,9 @@ export default function Landing() {
         <meta property="twitter:image" content="/kavimledmutam_logo.jpeg" />
       </Helmet>
       <Hero />
-      <OurActivity />
+      <OurActivity fileNameArr={wixData.ourActivity} />
       <ContactForm />
-      <ThanksSection />
+      <ThanksSection volunteerArr={wixData.volunteers} />
       <h3 className="fixed bottom-0 mr-7">האתר בבנייה, תודה על הסבלנות!</h3>
     </div>
   );
