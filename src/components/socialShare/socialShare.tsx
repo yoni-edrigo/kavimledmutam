@@ -33,7 +33,12 @@ export function SocialShare({
   return (
     <div className="Demo__container">
       <div className="Demo__some-network">
-        <img src={shareIcon} onClick={handleShare} alt="share icon" />
+        <img
+          className="Demo__some-network__share-button"
+          src={shareIcon}
+          onClick={handleShare}
+          alt="share icon"
+        />
       </div>
       <div className="Demo__some-network">
         <FacebookShareButton
