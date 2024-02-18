@@ -32,6 +32,7 @@ export function ThanksSection({ volunteerArr }: { volunteerArr: Volunteer[] }) {
                       backgroundColor: 'var(--kavim-blue)',
                       borderRadius: '50%',
                     }}
+                    alt={`תמונתו של ${volunteer.name}`}
                   />
                 ) : (
                   <span
@@ -48,20 +49,34 @@ export function ThanksSection({ volunteerArr }: { volunteerArr: Volunteer[] }) {
                   ></span>
                 )}
                 <h3>{volunteer.name}</h3>
-                <a
-                  href={volunteer.link}
-                  style={{
-                    color: volunteer.isPainter ? 'var(--kavim-darkblue)' : '',
-                    fontFamily: `'Rubik', serif`,
-                    fontSize: '16px',
-                  }}
-                  target="_blank"
-                >
-                  <span className="flex gap-1 align-items-center">
+                {volunteer.link ? (
+                  <a
+                    href={volunteer.link}
+                    style={{
+                      color: volunteer.isPainter ? 'var(--kavim-darkblue)' : '',
+                      fontFamily: `'Rubik', serif`,
+                      fontSize: '16px',
+                    }}
+                    target="_blank"
+                  >
+                    <span className="flex gap-1 align-items-center">
+                      <i className="pi pi-link" />
+                      {volunteer.role}
+                    </span>
+                  </a>
+                ) : (
+                  <span
+                    className="flex gap-1 align-items-center"
+                    style={{
+                      color: volunteer.isPainter ? 'var(--kavim-darkblue)' : '',
+                      fontFamily: `'Rubik', serif`,
+                      fontSize: '16px',
+                    }}
+                  >
                     {volunteer.link && <i className="pi pi-link" />}
                     {volunteer.role}
                   </span>
-                </a>
+                )}
               </div>
             ))}
       </div>

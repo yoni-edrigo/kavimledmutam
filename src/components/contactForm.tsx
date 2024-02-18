@@ -57,7 +57,7 @@ export function ContactForm() {
           className="contact-form gap-4 border-1 border-white border-round-lg p-5 w-full z-1"
         >
           <span className="flex flex-column " style={{ gridArea: 'fName' }}>
-            <label>שם פרטי</label>
+            <label htmlFor="fName">שם פרטי</label>
             <input
               className="form-input"
               {...register('fName', { required: true })}
@@ -67,7 +67,7 @@ export function ContactForm() {
             )}
           </span>
           <span className="flex flex-column" style={{ gridArea: 'lName' }}>
-            <label>שם משפחה</label>
+            <label htmlFor="lName">שם משפחה</label>
             <input
               className="form-input"
               {...register('lName', { required: true })}
@@ -77,7 +77,7 @@ export function ContactForm() {
             )}
           </span>
           <span className="flex flex-column" style={{ gridArea: 'phone' }}>
-            <label>טלפון</label>
+            <label htmlFor="phone">טלפון</label>
             <input
               className="form-input"
               {...register('phone', { required: true })}
@@ -87,7 +87,7 @@ export function ContactForm() {
             )}
           </span>
           <span className="flex flex-column" style={{ gridArea: 'email' }}>
-            <label>כתובת מייל</label>
+            <label htmlFor="email">כתובת מייל</label>
             <input
               className="form-input"
               {...register('email', { required: true })}
@@ -97,7 +97,7 @@ export function ContactForm() {
             )}
           </span>
           <span className="flex flex-column" style={{ gridArea: 'hero' }}>
-            <label>שם הגיבור/ה שלי</label>
+            <label htmlFor="hero">שם הגיבור/ה שלי</label>
             <input
               className="form-input"
               {...register('hero', { required: true })}
@@ -107,11 +107,11 @@ export function ContactForm() {
             )}
           </span>
           <span className="flex flex-column" style={{ gridArea: 'address' }}>
-            <label>כתובת למשלוח</label>
+            <label htmlFor="address">כתובת למשלוח</label>
             <input className="form-input" {...register('address')} />
           </span>
           <span className="flex flex-column" style={{ gridArea: 'citation' }}>
-            <label>כותרת/ציטוט (אופציונלי)</label>
+            <label htmlFor="citation">כותרת/ציטוט (אופציונלי)</label>
             <input className="form-input" {...register('citation')} />
           </span>
           <span
@@ -125,7 +125,11 @@ export function ContactForm() {
           </span>
         </form>
       </div>
-      <img src={landingElement} className="landing-element z-0" />
+      <img
+        src={landingElement}
+        alt="landing element"
+        className="landing-element z-0"
+      />
     </div>
   );
 }

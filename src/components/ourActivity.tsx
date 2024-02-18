@@ -45,6 +45,7 @@ export function OurActivity({ fileNameArr }: { fileNameArr: string[] }) {
                   width: '200px',
                   objectFit: 'cover',
                 }}
+                alt="תמונה המייצגת את פעילותנו"
               />
             </SwiperSlide>
           ))}

@@ -73,7 +73,7 @@ export function CommentForm({ fallenId }: { fallenId: string }) {
           className="comment-form gap-4 border-1 border-white border-round-lg p-5 w-full z-1"
         >
           <span className="flex flex-column " style={{ gridArea: 'fName' }}>
-            <label>שם פרטי</label>
+            <label htmlFor="fName">שם פרטי</label>
             <InputText
               className="form-input"
               {...register('fName', { required: true })}
@@ -81,7 +81,7 @@ export function CommentForm({ fallenId }: { fallenId: string }) {
             {errors.fName && <label>זהו שדה חובה</label>}
           </span>
           <span className="flex flex-column" style={{ gridArea: 'lName' }}>
-            <label>שם משפחה</label>
+            <label htmlFor="lName">שם משפחה</label>
             <InputText
               className="form-input"
               {...register('lName', { required: true })}
@@ -89,11 +89,11 @@ export function CommentForm({ fallenId }: { fallenId: string }) {
             {errors.lName && <label>זהו שדה חובה</label>}
           </span>
           <span className="flex flex-column" style={{ gridArea: 'phone' }}>
-            <label>טלפון (אופציונלי)</label>
+            <label htmlFor="phone">טלפון (אופציונלי)</label>
             <InputText className="form-input" {...register('phone')} />
           </span>
           <span className="flex flex-column" style={{ gridArea: 'prefix' }}>
-            <label>מה תרצו לשתף?</label>
+            <label htmlFor="prefix">מה תרצו לשתף?</label>
             <Dropdown
               className="form-input"
               options={dropdownOptions}
@@ -101,6 +101,7 @@ export function CommentForm({ fallenId }: { fallenId: string }) {
               onChange={handleDropdownChange}
               pt={{ input: { className: 'p-0 pt-1 px-2' } }}
               optionValue="label"
+              name="prefix"
             />
           </span>
           <span className="flex flex-column" style={{ gridArea: 'comment' }}>
