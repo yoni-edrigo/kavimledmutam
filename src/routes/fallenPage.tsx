@@ -15,6 +15,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { Navigation, Pagination } from 'swiper/modules';
 import fallenPageTopElement from '../assets/fallenPageTopElement.svg';
+import { SocialShare } from '../components/socialShare/socialShare';
 export default function FallenPage() {
   //@ts-expect-error wixdata isnt known
   const fallenData: Contact = useLoaderData();
@@ -27,39 +28,7 @@ export default function FallenPage() {
     parent.current && autoAnimate(parent.current);
   }, [parent]);
   const reveal = () => setShow(!show);
-  const handleShare = async () => {
-    try {
-      if (navigator.share) {
-        await navigator.share({
-          title: document.title,
-          text: `קווים לדמותו של ${fallenData.name} `,
-          url: window.location.href,
-        });
-      } else {
-        throw new Error('Web Share API not supported in this browser.');
-      }
-    } catch (error) {
-      console.error('Error sharing:', error);
-      // Handle the error, e.g., show a fallback UI for sharing
-    }
-  };
-  const handleShareInstagramStory = () => {
-    const imageUrl =
-      fallenData.mediagallery && fallenData.mediagallery.length > 0
-        ? prefix +
-          fallenData.mediagallery[0].src
-            .slice(0, fallenData.mediagallery[0].src.indexOf('mv2') + 7)
-            .replace('wix:image://v1/', '')
-        : ' ';
 
-    // Use the Facebook SDK to trigger the share dialog
-    //@ts-expect-error TS doesnt recognize FB
-    window.FB.ui({
-      method: 'share',
-      href: 'https://mitkaplim.co.il',
-      picture: imageUrl,
-    });
-  };
   return !fallenData ? (
     <>
       {'קישור לא תקין -> לחצו לחזרה לעמוד כל הנופלים'}
@@ -92,9 +61,9 @@ export default function FallenPage() {
                 <CommentsSection fallenId={fallenData._id} />
               </div>
             )}
-            <div className="flex gap-3 align-items-center">
+            <div className="flex flex-row gap-5 align-items-center">
               <Button
-                className="write-more-btn w-fit flex flex-row-reverse gap-2 relative z-0"
+                className="write-more-btn w-fit flex flex-row-reverse gap-2 relative z-0 white-space-nowrap"
                 // size="small"
                 label="לכתיבה נוספת"
                 onClick={reveal}
@@ -108,24 +77,9 @@ export default function FallenPage() {
                   style={{ top: '-470px', left: '-1120px', scale: '0.9' }}
                 />
               </Button>
-              {window.innerWidth < 768 && (
-                <Button
-                  className="send-page-btn w-fit flex flex-row-reverse gap-2 relative z-1 h-full"
-                  // size="small"
-                  label="שיתוף עמוד"
-                  onClick={handleShare}
-                  icon="pi pi-send text-xl"
-                  pt={{ icon: { style: { color: 'var(--kavim-text)' } } }}
-                  style={{ justifySelf: 'start', alignSelf: 'start' }}
-                />
-              )}
-              <Button
-                className="send-page-btn w-fit flex flex-row-reverse gap-2 relative z-1 h-2rem"
-                label="insta"
-                onClick={handleShareInstagramStory}
-                icon="pi pi-send text-xl"
-                pt={{ icon: { style: { color: 'var(--kavim-text)' } } }}
-                style={{ justifySelf: 'start', alignSelf: 'start' }}
+              <SocialShare
+                fallenName={fallenData.name}
+                shareUrl={window.location.href}
               />
             </div>
           </div>
