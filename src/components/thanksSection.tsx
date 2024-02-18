@@ -11,7 +11,7 @@ export function ThanksSection({ volunteerArr }: { volunteerArr: Volunteer[] }) {
         תודות
       </h2>
       <div
-        className="volunteer-grid gap-3 md:gap-5 justify-content-between align-items-center"
+        className="volunteer-grid gap-3 md:gap-5 justify-content-between align-items-start"
         style={{ gridArea: 'centerContent2', justifySelf: 'center' }}
       >
         {volunteerArr &&
@@ -19,7 +19,7 @@ export function ThanksSection({ volunteerArr }: { volunteerArr: Volunteer[] }) {
             .sort((a, b) => {
               const orderA = a.order || 0; // Use 0 if 'order' is undefined or null
               const orderB = b.order || 0; // Use 0 if 'order' is undefined or null
-              return orderB - orderA;
+              return orderA - orderB;
             })
             .map((volunteer, index) => (
               <div

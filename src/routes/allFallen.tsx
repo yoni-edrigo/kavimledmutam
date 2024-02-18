@@ -41,7 +41,7 @@ export default function AllFallen() {
         <InputText
           value={filterText}
           onChange={(e) => setFilterText(e.target.value)}
-          className="fallen-search-box"
+          className="fallen-search-box mt-2"
           type="text"
           name="search"
           placeholder="חיפוש על פי שם / יחידה"

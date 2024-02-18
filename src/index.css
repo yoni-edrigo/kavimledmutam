@@ -10,6 +10,7 @@ body {
   direction: rtl;
 }
 #root {
+  /* --swiper-pagination-top: 0px; */
   --kavim-darkblue: #59a3ff;
   --kavim-blue: #c5dfff;
   --kavim-lightblue: #e7f1fb;
@@ -135,6 +136,7 @@ footer {
     'rightContent centerContent leftContent'
     'centerContent2 centerContent2 centerContent2';
   grid-template-columns: 100px 1fr min-content;
+  grid-template-rows: min-content min-content;
   column-gap: 1rem;
 }
 .volunteer-grid {
@@ -288,4 +290,6 @@ footer {
   grid-template-areas:
     'name phone date hr hr hr'
     'comment comment comment comment comment comment';
+}
+.swiper-pagination {
 }

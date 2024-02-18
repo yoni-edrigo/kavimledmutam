@@ -46,7 +46,7 @@ export default function FallenPage() {
         >
           <h2 className="my-0" style={{ gridArea: 'name' }}>
             {fallenData.name}
-            {' - קווים לדמותו'}
+            {fallenData.isFemale ? ' - קווים לדמותה' : ' - קווים לדמותו'}
           </h2>
           <div
             className="w-full flex flex-column gap-5"

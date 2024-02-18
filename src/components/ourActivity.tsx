@@ -12,17 +12,20 @@ import { prefix } from '../utils';
 export function OurActivity({ fileNameArr }: { fileNameArr: string[] }) {
   return (
     <div
-      className="page-grid"
+      className="page-grid md:py-7 py-6"
       style={{
         backgroundColor: '#EDF5FF',
-        minHeight: '600px',
+        // minHeight: '600px',
       }}
     >
-      <h2 className="mt-5 h-2rem w-fit" style={{ gridArea: 'centerContent' }}>
+      <h2
+        className="h-2rem w-fit אקסא-רקעוךשר"
+        style={{ gridArea: 'centerContent' }}
+      >
         הפעילות שלנו
       </h2>
       <div
-        className="align-items-center h-fit align-self-center ml-8"
+        className="align-items-center h-fit align-self-center ml-8 mt-7"
         style={{ gridArea: 'centerContent', maxWidth: '90vw' }}
       >
         <Swiper

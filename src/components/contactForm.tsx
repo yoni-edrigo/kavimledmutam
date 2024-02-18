@@ -53,7 +53,9 @@ export function ContactForm() {
         <h2 style={{ color: 'var(--kavim-darkblue)' }}>
           אני רוצה להזמין קווים לדמותו של הגיבור\ה שלי
         </h2>
-        <p>אנא השאירו פרטים ואנו נחזור אליכם בהקדם</p>
+        <p style={{ fontSize: '1.1rem' }}>
+          אנא השאירו פרטים ואנו נחזור אליכם בהקדם
+        </p>
       </span>
 
       <div

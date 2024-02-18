@@ -19,6 +19,7 @@ export type Contact = {
     };
   }[];
   story?: string;
+  isFemale: boolean;
 };
 const contactDetails = (
   <div className="gap-5 align-items-center flex flex-column">
@@ -66,7 +67,7 @@ export function Root() {
             className="h-7rem bg-center md:mr-2"
           />
         </NavLink>
-        <span className="flex md:gap-5 gap-3 align-items-center">
+        <span className="flex md:gap-7 gap-4 align-items-center">
           <NavLink to={`/`} className="nav-bar-link white-space-nowrap">
             קווים לדמותם
           </NavLink>
