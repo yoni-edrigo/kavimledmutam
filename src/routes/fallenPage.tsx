@@ -140,6 +140,7 @@ type Comment = {
   phone: string;
   _createdDate: string;
   comment: string;
+  isPinned: boolean;
 };
 function CommentsSection({ fallenId }: { fallenId: string }) {
   const [commentsArr, setCommentsArr] = useState<Comment[]>();
@@ -162,29 +163,48 @@ function CommentsSection({ fallenId }: { fallenId: string }) {
     <>
       <div className="comments-section z-1">
         {commentsArr && commentsArr.length > 0 ? (
-          commentsArr.map((comment, index) => (
-            <div className="comment-wrapper px-2" key={index}>
-              <div className="comment pt-5 px-6 pb-7 gap-3" key={index}>
-                <h3 style={{ gridArea: 'name' }}>
-                  {comment.fName}
-                  {` `}
-                  {comment.lName}
-                </h3>
+          commentsArr
+            .sort((a, b): number => {
+              // Handle the case where myBoolean is undefined
+              const aValue = a.isPinned !== undefined ? a.isPinned : false;
+              const bValue = b.isPinned !== undefined ? b.isPinned : false;
 
-                <h3 style={{ gridArea: 'date' }}>
-                  {new Date(comment._createdDate).toLocaleDateString('he-IL')}
-                </h3>
-                <p style={{ gridArea: 'comment' }}>{comment.comment}</p>
+              // Compare boolean values
+              if (aValue < bValue) {
+                return -1;
+              }
+              if (aValue > bValue) {
+                return 1;
+              }
+              return 0;
+            })
+            .map((comment, index) => (
+              <div className="comment-wrapper px-2" key={index}>
+                <div className="comment pt-5 px-6 pb-7 gap-3" key={index}>
+                  <h3 style={{ gridArea: 'name' }}>
+                    {comment.fName}
+                    {` `}
+                    {comment.lName}
+                  </h3>
+                  {comment.phone && (
+                    <a href={`tel:${comment.phone}`}>
+                      <h3 style={{ gridArea: 'phone' }}>{comment.phone}</h3>
+                    </a>
+                  )}
+                  <h3 style={{ gridArea: 'date' }}>
+                    {new Date(comment._createdDate).toLocaleDateString('he-IL')}
+                  </h3>
+                  <p style={{ gridArea: 'comment' }}>{comment.comment}</p>
+                </div>
+                <div
+                  style={{
+                    gridArea: 'seperator',
+                    height: '2px',
+                    backgroundColor: 'white',
+                  }}
+                ></div>
               </div>
-              <div
-                style={{
-                  gridArea: 'seperator',
-                  height: '2px',
-                  backgroundColor: 'white',
-                }}
-              ></div>
-            </div>
-          ))
+            ))
         ) : (
           <div className="px-7 pt-5">
             <p>היו הראשונים להשאיר סיפור</p>
