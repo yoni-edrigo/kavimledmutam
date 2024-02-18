@@ -45,13 +45,25 @@ export function ContactForm() {
     postRequest(dataToSend);
   };
   return (
-    <div className="p-5 relative overflow-hidden">
-      <h2 style={{ color: 'var(--kavim-darkblue)' }}>
-        אני רוצה להזמין קווים לדמותו של הגיבור\ה שלי
-      </h2>
-      <p className="mb-7">אנא השאירו פרטים ואנו נחזור אליכם בהקדם</p>
+    <div className="page-grid relative mt-5 mb-7">
+      <span
+        className="flex flex-column gap-3 mb-5"
+        style={{ gridArea: 'centerContent' }}
+      >
+        <h2 style={{ color: 'var(--kavim-darkblue)' }}>
+          אני רוצה להזמין קווים לדמותו של הגיבור\ה שלי
+        </h2>
+        <p>אנא השאירו פרטים ואנו נחזור אליכם בהקדם</p>
+      </span>
 
-      <div className="contact-form-wrapper flex p-3 border-round-lg relative">
+      <div
+        className="contact-form-wrapper flex p-3 border-round-lg relative overflow-hidden"
+        style={{
+          gridArea: 'centerContent2',
+          marginRight: '5vw',
+          marginLeft: '5vw',
+        }}
+      >
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="contact-form gap-4 border-1 border-white border-round-lg p-5 w-full z-1"
@@ -114,22 +126,20 @@ export function ContactForm() {
             <label htmlFor="citation">כותרת/ציטוט (אופציונלי)</label>
             <input className="form-input" {...register('citation')} />
           </span>
-          <span
+          <button
+            className="form-button mt-8 cursor-pointer"
+            type="submit"
             style={{ gridArea: 'sendButton', justifySelf: 'center' }}
-            className="flex flex-column align-items-center gap-2"
           >
-            <button className="form-button mt-8 cursor-pointer" type="submit">
-              סיום הזמנה
-            </button>
-            <small>*בסיום ההזמנה צוות המיזם יצור קשר עמכם בהקדם</small>
-          </span>
+            סיום הזמנה
+          </button>
         </form>
+        <img
+          src={landingElement}
+          alt="landing element"
+          className="landing-element z-0"
+        />
       </div>
-      <img
-        src={landingElement}
-        alt="landing element"
-        className="landing-element z-0"
-      />
     </div>
   );
 }

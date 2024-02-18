@@ -15,7 +15,6 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { Navigation, Pagination } from 'swiper/modules';
 import fallenPageTopElement from '../assets/fallenPageTopElement.svg';
-
 export default function FallenPage() {
   //@ts-expect-error wixdata isnt known
   const fallenData: Contact = useLoaderData();
@@ -44,6 +43,23 @@ export default function FallenPage() {
       // Handle the error, e.g., show a fallback UI for sharing
     }
   };
+  const handleShareInstagramStory = () => {
+    const imageUrl =
+      fallenData.mediagallery && fallenData.mediagallery.length > 0
+        ? prefix +
+          fallenData.mediagallery[0].src
+            .slice(0, fallenData.mediagallery[0].src.indexOf('mv2') + 7)
+            .replace('wix:image://v1/', '')
+        : ' ';
+
+    // Use the Facebook SDK to trigger the share dialog
+    //@ts-expect-error TS doesnt recognize FB
+    window.FB.ui({
+      method: 'share',
+      href: 'https://mitkaplim.co.il',
+      picture: imageUrl,
+    });
+  };
   return !fallenData ? (
     <>
       {'קישור לא תקין -> לחצו לחזרה לעמוד כל הנופלים'}
@@ -54,22 +70,28 @@ export default function FallenPage() {
   ) : (
     <>
       {fallenData && getMetaTags(fallenData)}
-      <div
-        className="mt-3 flex flex-column pb-3 px-3 md:px-8 pt-5 mb-8 gap-8"
-        ref={parent}
-      >
-        <div className="flex flex-column-reverse md:flex-row gap-4 justify-content-between mt-5">
+      <div className="page-grid pt-5 mb-8 overflow-hidden">
+        <div
+          className="fallen-hero-section gap-4 my-5 align-items-start"
+          style={{ gridArea: 'centerContent' }}
+        >
+          <h2 className="my-0" style={{ gridArea: 'name' }}>
+            {fallenData.name}
+            {' - קווים לדמותו'}
+          </h2>
           <div
-            className="gap-4"
-            style={{ display: 'grid', gridTemplateRows: 'min-content' }}
+            className="w-full flex flex-column gap-5"
+            style={{ gridArea: 'content' }}
           >
-            <h2 className="my-0">
-              {fallenData.name}
-              {' - קווים לדמותו'}
-            </h2>
-            <p className="text-justify z-1" style={{ maxWidth: '50ch' }}>
-              {fallenData.story}
-            </p>{' '}
+            {fallenData.story ? (
+              <p className="text-justify z-3" style={{ maxWidth: '50ch' }}>
+                {fallenData.story}
+              </p>
+            ) : (
+              <div className="z-3">
+                <CommentsSection fallenId={fallenData._id} />
+              </div>
+            )}
             <div className="flex gap-3 align-items-center">
               <Button
                 className="write-more-btn w-fit flex flex-row-reverse gap-2 relative z-0"
@@ -88,7 +110,7 @@ export default function FallenPage() {
               </Button>
               {window.innerWidth < 768 && (
                 <Button
-                  className="send-page-btn w-fit flex flex-row-reverse gap-2 relative z-0 h-full"
+                  className="send-page-btn w-fit flex flex-row-reverse gap-2 relative z-1 h-full"
                   // size="small"
                   label="שיתוף עמוד"
                   onClick={handleShare}
@@ -97,15 +119,30 @@ export default function FallenPage() {
                   style={{ justifySelf: 'start', alignSelf: 'start' }}
                 />
               )}
+              <Button
+                className="send-page-btn w-fit flex flex-row-reverse gap-2 relative z-1 h-2rem"
+                label="insta"
+                onClick={handleShareInstagramStory}
+                icon="pi pi-send text-xl"
+                pt={{ icon: { style: { color: 'var(--kavim-text)' } } }}
+                style={{ justifySelf: 'start', alignSelf: 'start' }}
+              />
             </div>
           </div>
-          <div className="relative mt-5" style={{ maxWidth: '450px' }}>
+          <div
+            style={{
+              width: window.innerWidth < 900 ? '350px' : '450px',
+              gridArea: 'imageSlider',
+              justifySelf: 'center',
+            }}
+          >
             <Swiper
               pagination={{
                 type: 'fraction',
               }}
               navigation={true}
               modules={[Pagination, Navigation]}
+              autoHeight={true}
             >
               {fallenData.mediagallery &&
                 fallenData.mediagallery.map((media, index) => (
@@ -122,7 +159,7 @@ export default function FallenPage() {
                           .replace('wix:image://v1/', '')
                       }`}
                       style={{
-                        maxWidth: '400px',
+                        width: window.innerWidth < 900 ? '350px' : '450px',
                       }}
                     />
                   </SwiperSlide>
@@ -130,9 +167,14 @@ export default function FallenPage() {
             </Swiper>
           </div>
         </div>
-        {show && <CommentForm fallenId={fallenData._id} />}
-        {/* FIXME: add real data */}
-        <CommentsSection fallenId={fallenData._id} />
+        <div
+          className="flex flex-column gap-5 px-3 md:px-8 md:mb-7"
+          style={{ gridArea: 'centerContent2' }}
+          ref={parent}
+        >
+          {show && <CommentForm fallenId={fallenData._id} />}
+          {fallenData.story && <CommentsSection fallenId={fallenData._id} />}
+        </div>
       </div>
     </>
   );
@@ -168,21 +210,13 @@ function CommentsSection({ fallenId }: { fallenId: string }) {
         {commentsArr && commentsArr.length > 0 ? (
           commentsArr.map((comment, index) => (
             <div className="comment-wrapper px-2" key={index}>
-              <div className="comment pt-5 px-6 pb-7" key={index}>
+              <div className="comment pt-5 px-6 pb-7 gap-3" key={index}>
                 <h3 style={{ gridArea: 'name' }}>
                   {comment.fName}
                   {` `}
                   {comment.lName}
                 </h3>
-                <h3
-                  style={{
-                    gridArea: 'phone',
-                    direction: 'ltr',
-                    textAlign: 'end',
-                  }}
-                >
-                  {comment.phone}
-                </h3>
+
                 <h3 style={{ gridArea: 'date' }}>
                   {new Date(comment._createdDate).toLocaleDateString('he-IL')}
                 </h3>

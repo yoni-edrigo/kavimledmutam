@@ -55,43 +55,44 @@ export function Root() {
   const [selectedDialogContent, setSelectedDialogContent] = useState(0);
   return (
     <div className="relative">
-      <header className="nav-bar flex justify-content-between gap-3 p-3 relative h-3rem">
-        <div className="flex gap-3">
-          <NavLink to={'/'}>
-            <img
-              src={logoWithTitle}
-              alt="logo with title"
-              className="h-7rem bg-center"
-            />
+      <header
+        className="page-grid nav-bar relative py-3"
+        style={{ gridTemplateRows: '60px' }}
+      >
+        <NavLink to={'/'}>
+          <img
+            src={logoWithTitle}
+            alt="logo with title"
+            className="h-7rem bg-center"
+          />
+        </NavLink>
+        <span className="flex gap-5 align-items-center">
+          <NavLink to={`/`} className="nav-bar-link">
+            קווים לדמותם
           </NavLink>
-          <span className="flex gap-5 align-items-center">
-            <NavLink to={`/`} className="nav-bar-link">
-              קווים לדמותם
-            </NavLink>
-            <NavLink
-              to={`allFallen`}
-              className={({ isActive, isPending }) =>
-                isActive ? 'activeLink' : isPending ? 'pendingLink' : ''
-              }
-            >
-              הגיבורים שלנו
-            </NavLink>
-            <h3
-              className="cursor-pointer"
-              onClick={() => {
-                setSelectedDialogContent(0);
-                setDialogVisible(true);
-              }}
-            >
-              צור קשר
-            </h3>
-          </span>
-        </div>
-        <div className="align-self-center flex gap-3">
+          <NavLink
+            to={`allFallen`}
+            className={({ isActive, isPending }) =>
+              isActive ? 'activeLink' : isPending ? 'pendingLink' : ''
+            }
+          >
+            הגיבורים שלנו
+          </NavLink>
+          <h3
+            className="cursor-pointer"
+            onClick={() => {
+              setSelectedDialogContent(0);
+              setDialogVisible(true);
+            }}
+          >
+            צור קשר
+          </h3>
+        </span>
+        <div className="align-self-center flex gap-3 ml-5">
           {window.innerWidth > 768 && <SocialBar />}
         </div>
       </header>
-      <div className="page-content">
+      <div className="page-content" style={{ gridArea: 'centerContent' }}>
         <Dialog visible={dialogVisible} onHide={() => setDialogVisible(false)}>
           {dialogContent[selectedDialogContent]}
         </Dialog>

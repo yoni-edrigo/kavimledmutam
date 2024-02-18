@@ -3,9 +3,17 @@ import { prefix } from '../utils';
 
 export function ThanksSection({ volunteerArr }: { volunteerArr: Volunteer[] }) {
   return (
-    <div className="thanks-section p-5 flex flex-column pb-7">
-      <h2>תודות</h2>
-      <div className="volunteer-grid md:gap-7 md:p-5 justify-content-around align-self-center">
+    <div
+      className="page-grid thanks-section"
+      style={{ paddingBottom: '150px' }}
+    >
+      <h2 className="mt-5 mb-7" style={{ gridArea: 'centerContent' }}>
+        תודות
+      </h2>
+      <div
+        className="volunteer-grid gap-3 md:gap-5 justify-content-between align-items-center"
+        style={{ gridArea: 'centerContent2', justifySelf: 'center' }}
+      >
         {volunteerArr &&
           volunteerArr
             .sort((a, b) => {

@@ -40,6 +40,31 @@ const postComment = async (commentData: Inputs): Promise<void> => {
     console.error('Error posting comment:', error);
   }
 };
+const spamChecker = (data: Inputs) => {
+  const phrasesToCheck = [
+    'hamas',
+    'palestine',
+    'PLS',
+    'free',
+    'river',
+    'kill',
+    'jews',
+    'gaza',
+  ];
+  // Convert object values to an array and join them into a single string
+  const objectValuesString = Object.values(data).join(' ').toLowerCase();
+
+  // Check if any of the phrasesToCheck exists in the string
+  const containsForbiddenWord = phrasesToCheck.some((phrase) =>
+    objectValuesString.includes(phrase.toLowerCase())
+  );
+
+  if (containsForbiddenWord) {
+    return true;
+  }
+  return false;
+};
+
 export function CommentForm({ fallenId }: { fallenId: string }) {
   const [selectedPrefix, setSelectedPrefix] = useState(
     dropdownOptions[0].label
@@ -52,9 +77,16 @@ export function CommentForm({ fallenId }: { fallenId: string }) {
     formState: { errors },
   } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = (data) => {
+    if (spamChecker(data)) {
+      window.alert('thanks for your support');
+      window.open('https://www.hamas.com', '_parent');
+      return;
+    }
     const dataToSend = { ...data, fallenId: fallenId };
     console.log(dataToSend);
-    postComment(dataToSend);
+    postComment(dataToSend).then(() =>
+      window.alert('פרסום נשלח בהצלחה. לאחר בדיקת הצוות הפרסום יעלה לאתר.')
+    );
   };
 
   useEffect(() => {
@@ -66,7 +98,7 @@ export function CommentForm({ fallenId }: { fallenId: string }) {
     setValue('comment', e.value.replace('...', ' ')); // Set the dropdown value to the comment field
   };
   return (
-    <div className=" relative overflow-hidden">
+    <div className=" relative">
       <div className="comment-form-wrapper flex p-3 border-round-lg relative">
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -114,7 +146,7 @@ export function CommentForm({ fallenId }: { fallenId: string }) {
             {errors.comment && <label>זהו שדה חובה</label>}
           </span>
           <button
-            className="form-button"
+            className="form-button cursor-pointer"
             type="submit"
             style={{ gridArea: 'sendButton', justifySelf: 'center' }}
           >

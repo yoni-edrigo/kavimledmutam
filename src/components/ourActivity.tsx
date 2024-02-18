@@ -12,16 +12,19 @@ import { prefix } from '../utils';
 export function OurActivity({ fileNameArr }: { fileNameArr: string[] }) {
   return (
     <div
-      className="p-5"
+      className="page-grid"
       style={{
         backgroundColor: '#EDF5FF',
-        display: 'grid',
-        gridTemplateRows: 'min-Content',
         minHeight: '600px',
       }}
     >
-      <h2>הפעילות שלנו</h2>
-      <div className="relative flex align-items-center">
+      <h2 className="mt-5 h-2rem" style={{ gridArea: 'centerContent' }}>
+        הפעילות שלנו
+      </h2>
+      <div
+        className="align-items-center h-fit align-self-center ml-8"
+        style={{ gridArea: 'centerContent' }}
+      >
         <Swiper
           navigation={true}
           modules={[Navigation]}
