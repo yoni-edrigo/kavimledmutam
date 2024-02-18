@@ -48,7 +48,7 @@ export default function AllFallen() {
         />
       </div>
       <div
-        className="grid grid-nogutter  gap-5 mt-3"
+        className="grid grid-nogutter  gap-5 mt-3 justify-content-between"
         style={{ minHeight: '300px' }}
       >
         {filteredData &&
