@@ -13,6 +13,16 @@ export default function AllFallen() {
   const [first, setFirst] = useState<number>(0);
   const [rows, setRows] = useState<number>(10);
 
+  // Filtered data based on search text
+  const filteredData = wixData.filter((f) =>
+    filterText
+      ? f.name.includes(filterText)
+      : true && f.mediagallery && f.mediagallery.length > 0
+  );
+
+  // Total records for the Paginator should be the length of the filtered data
+  const totalRecords = filteredData.length;
+
   const onPageChange = (event: PaginatorPageChangeEvent) => {
     setFirst(event.first);
     setRows(event.rows);
@@ -41,9 +51,8 @@ export default function AllFallen() {
         className="grid grid-nogutter  gap-5 mt-3"
         style={{ minHeight: '300px' }}
       >
-        {wixData &&
-          wixData
-            .filter((f) => (filterText ? f.name.includes(filterText) : true))
+        {filteredData &&
+          filteredData
             .slice(first, first + rows)
             .map((fallenContact, index) => (
               <Link
@@ -52,21 +61,22 @@ export default function AllFallen() {
                 className="fallen-card min-h-10rem flex flex-column align-items-center"
               >
                 <h3 className="mb-0 ">{fallenContact.name}</h3>
-                {fallenContact.mediagallery && (
-                  <img
-                    alt={`קווים לדמותו של ${fallenContact.name}`}
-                    src={`${
-                      prefix +
-                      fallenContact.mediagallery[0].src
-                        .slice(
-                          0,
-                          fallenContact.mediagallery[0].src.indexOf('mv2') + 7
-                        )
-                        .replace('wix:image://v1/', '')
-                    }`}
-                    style={{ minWidth: '200px', maxHeight: '300px' }}
-                  />
-                )}
+                {fallenContact.mediagallery &&
+                  fallenContact.mediagallery[0] && (
+                    <img
+                      alt={`קווים לדמותו של ${fallenContact.name}`}
+                      src={`${
+                        prefix +
+                        fallenContact.mediagallery[0].src
+                          .slice(
+                            0,
+                            fallenContact.mediagallery[0].src.indexOf('mv2') + 7
+                          )
+                          .replace('wix:image://v1/', '')
+                      }`}
+                      style={{ minWidth: '200px', maxHeight: '300px' }}
+                    />
+                  )}
               </Link>
             ))}
       </div>
@@ -74,7 +84,7 @@ export default function AllFallen() {
         <Paginator
           first={first}
           rows={rows}
-          totalRecords={wixData.length}
+          totalRecords={totalRecords}
           rowsPerPageOptions={[10, 20, 30]}
           onPageChange={onPageChange}
           template="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
