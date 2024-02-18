@@ -115,7 +115,12 @@ export default function FallenPage() {
                   >
                     <img
                       alt={`התמונה של: ${fallenData.name}`}
-                      src={`${prefix + media.slug}`}
+                      src={`${
+                        prefix +
+                        media.src
+                          .slice(0, media.src.indexOf('mv2') + 7)
+                          .replace('wix:image://v1/', '')
+                      }`}
                       style={{
                         maxWidth: '400px',
                       }}

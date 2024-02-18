@@ -55,7 +55,15 @@ export default function AllFallen() {
                 {fallenContact.mediagallery && (
                   <img
                     alt={`קווים לדמותו של ${fallenContact.name}`}
-                    src={`${prefix + fallenContact.mediagallery[0].slug}`}
+                    src={`${
+                      prefix +
+                      fallenContact.mediagallery[0].src
+                        .slice(
+                          0,
+                          fallenContact.mediagallery[0].src.indexOf('mv2') + 7
+                        )
+                        .replace('wix:image://v1/', '')
+                    }`}
                     style={{ minWidth: '200px', maxHeight: '300px' }}
                   />
                 )}
