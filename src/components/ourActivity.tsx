@@ -18,19 +18,19 @@ export function OurActivity({ fileNameArr }: { fileNameArr: string[] }) {
         minHeight: '600px',
       }}
     >
-      <h2 className="mt-5 h-2rem" style={{ gridArea: 'centerContent' }}>
+      <h2 className="mt-5 h-2rem w-fit" style={{ gridArea: 'centerContent' }}>
         הפעילות שלנו
       </h2>
       <div
         className="align-items-center h-fit align-self-center ml-8"
-        style={{ gridArea: 'centerContent' }}
+        style={{ gridArea: 'centerContent', maxWidth: '90vw' }}
       >
         <Swiper
           navigation={true}
           modules={[Navigation]}
           slidesPerView={'auto'}
-          loop={true}
           spaceBetween={25}
+          loop={true}
         >
           {fileNameArr.map((fileName, index) => (
             <SwiperSlide
@@ -45,7 +45,7 @@ export function OurActivity({ fileNameArr }: { fileNameArr: string[] }) {
                 src={`${prefix + fileName}`}
                 style={{
                   height: '280px',
-                  width: '200px',
+                  maxWidth: '200px',
                   objectFit: 'cover',
                 }}
                 alt="תמונה המייצגת את פעילותנו"

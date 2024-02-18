@@ -63,23 +63,18 @@ export function Root() {
           <img
             src={logoWithTitle}
             alt="logo with title"
-            className="h-7rem bg-center"
+            className="h-7rem bg-center md:mr-2"
           />
         </NavLink>
-        <span className="flex gap-5 align-items-center">
-          <NavLink to={`/`} className="nav-bar-link">
+        <span className="flex md:gap-5 gap-3 align-items-center">
+          <NavLink to={`/`} className="nav-bar-link white-space-nowrap">
             קווים לדמותם
           </NavLink>
-          <NavLink
-            to={`allFallen`}
-            className={({ isActive, isPending }) =>
-              isActive ? 'activeLink' : isPending ? 'pendingLink' : ''
-            }
-          >
+          <NavLink to={`allFallen`} className="white-space-nowrap">
             הגיבורים שלנו
           </NavLink>
           <h3
-            className="cursor-pointer"
+            className="nav-bar-link cursor-pointer white-space-nowrap "
             onClick={() => {
               setSelectedDialogContent(0);
               setDialogVisible(true);
@@ -103,7 +98,7 @@ export function Root() {
           <SocialBar />
           <div className="flex gap-3">
             <h3
-              className="m-0 text-sm underline cursor-pointer"
+              className="m-0 text-sm underline cursor-pointer white-space-nowrap"
               onClick={() => {
                 setSelectedDialogContent(0);
                 setDialogVisible(true);
@@ -112,7 +107,7 @@ export function Root() {
               יצירת קשר
             </h3>
             <h3
-              className="m-0 text-sm underline cursor-pointer"
+              className="m-0 text-sm underline cursor-pointer white-space-nowrap"
               onClick={() => {
                 setSelectedDialogContent(1);
                 setDialogVisible(true);
@@ -133,13 +128,17 @@ export function Root() {
         </div>
         <div className="flex relative">
           <img
-            style={{ bottom: '10px', scale: '1.5', left: '-17px' }}
+            style={{
+              bottom: window.innerWidth < 768 ? '35px' : '10px',
+              scale: '1.5',
+              left: window.innerWidth < 768 ? '0px' : '-17px',
+            }}
             src={logoWithTitle}
             alt="logo with title"
             className="h-7rem bg-center absolute"
           />
         </div>
-        <div className="flex h-full align-items-end">
+        <div className="flex h-full align-items-end text-left">
           <h3 className="m-0 text-sm">כל הזכויות שמרות ל"קווים לדמותם"</h3>
         </div>
       </footer>

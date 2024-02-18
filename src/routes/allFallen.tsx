@@ -48,11 +48,11 @@ export default function AllFallen() {
         />
       </div>
       <div
-        className="px-7"
+        className="md:px-7"
         style={{ gridArea: 'centerContent2', justifySelf: 'center' }}
       >
         <div
-          className="grid grid-nogutter  gap-5 mt-3 justify-content-between"
+          className="grid grid-nogutter  md:gap-5 mt-3 md:justify-content-between justify-content-center"
           style={{ minHeight: '300px' }}
         >
           {filteredData &&
@@ -79,7 +79,7 @@ export default function AllFallen() {
                             )
                             .replace('wix:image://v1/', '')
                         }`}
-                        style={{ minWidth: '200px', maxHeight: '300px' }}
+                        style={{ maxWidth: '250px' }}
                       />
                     )}
                 </Link>

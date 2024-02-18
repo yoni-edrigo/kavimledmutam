@@ -168,7 +168,7 @@ export default function FallenPage() {
           </div>
         </div>
         <div
-          className="flex flex-column gap-5 px-3 md:px-8 md:mb-7"
+          className="flex flex-column gap-5 px-3 md:px-8 mb-8"
           style={{ gridArea: 'centerContent2' }}
           ref={parent}
         >

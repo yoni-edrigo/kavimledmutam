@@ -78,7 +78,6 @@ export default function Landing() {
       <OurActivity fileNameArr={wixData.ourActivity} />
       <ContactForm />
       <ThanksSection volunteerArr={wixData.volunteers} />
-      <h3 className="fixed bottom-0 mr-7">האתר בבנייה, תודה על הסבלנות!</h3>
     </div>
   );
 }

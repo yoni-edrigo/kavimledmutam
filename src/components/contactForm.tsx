@@ -45,7 +45,7 @@ export function ContactForm() {
     postRequest(dataToSend);
   };
   return (
-    <div className="page-grid relative mt-5 mb-7">
+    <div className="page-grid relative mt-5 mb-7 overflow-hidden max-w-screen">
       <span
         className="flex flex-column gap-3 mb-5"
         style={{ gridArea: 'centerContent' }}
@@ -57,7 +57,7 @@ export function ContactForm() {
       </span>
 
       <div
-        className="contact-form-wrapper flex p-3 border-round-lg relative overflow-hidden"
+        className="contact-form-wrapper flex p-3 border-round-lg relative"
         style={{
           gridArea: 'centerContent2',
           marginRight: '5vw',
@@ -66,7 +66,7 @@ export function ContactForm() {
       >
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="contact-form gap-4 border-1 border-white border-round-lg p-5 w-full z-1"
+          className="contact-form gap-4 border-1 border-white border-round-lg p-3 md:p-5 w-full z-1"
         >
           <span className="flex flex-column " style={{ gridArea: 'fName' }}>
             <label htmlFor="fName">שם פרטי</label>
