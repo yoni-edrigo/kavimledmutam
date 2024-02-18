@@ -170,10 +170,10 @@ function CommentsSection({ fallenId }: { fallenId: string }) {
               const bValue = b.isPinned !== undefined ? b.isPinned : false;
 
               // Compare boolean values
-              if (aValue < bValue) {
+              if (aValue > bValue) {
                 return -1;
               }
-              if (aValue > bValue) {
+              if (aValue < bValue) {
                 return 1;
               }
               return 0;
