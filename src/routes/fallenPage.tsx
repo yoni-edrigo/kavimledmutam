@@ -126,7 +126,7 @@ export default function FallenPage() {
           style={{ gridArea: 'centerContent2' }}
           ref={parent}
         >
-          {show && <CommentForm fallenId={fallenData._id} />}
+          {show && <CommentForm fallenId={fallenData._id} hide={reveal} />}
           {fallenData.story && <CommentsSection fallenId={fallenData._id} />}
         </div>
       </div>

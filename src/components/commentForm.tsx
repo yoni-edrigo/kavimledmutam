@@ -65,7 +65,13 @@ const spamChecker = (data: Inputs) => {
   return false;
 };
 
-export function CommentForm({ fallenId }: { fallenId: string }) {
+export function CommentForm({
+  fallenId,
+  hide,
+}: {
+  fallenId: string;
+  hide: () => void;
+}) {
   const [selectedPrefix, setSelectedPrefix] = useState(
     dropdownOptions[0].label
   );
@@ -87,6 +93,7 @@ export function CommentForm({ fallenId }: { fallenId: string }) {
     postComment(dataToSend).then(() =>
       window.alert('פרסום נשלח בהצלחה. לאחר בדיקת הצוות הפרסום יעלה לאתר.')
     );
+    hide();
   };
 
   useEffect(() => {
