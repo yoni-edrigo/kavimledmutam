@@ -118,7 +118,7 @@ export default function FallenPage() {
                         }}
                       />
                       {media.painter && (
-                        <figcaption className="text-sm md:text-base text-center font-semibold">{`צויר בידי ${media.painter}`}</figcaption>
+                        <figcaption className="text-sm md:text-base text-center font-semibold">{`מאיירת: ${media.painter}`}</figcaption>
                       )}
                     </figure>
                   </SwiperSlide>
