@@ -18,6 +18,7 @@ export type Contact = {
       focalPoint: [number, number];
     };
   }[];
+  thumbnail: string;
   story?: string;
   isFemale: boolean;
 };

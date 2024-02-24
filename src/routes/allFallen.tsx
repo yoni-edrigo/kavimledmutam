@@ -74,8 +74,7 @@ export default function AllFallen() {
                           fallenContact.mediagallery[0].src
                             .slice(
                               0,
-                              fallenContact.mediagallery[0].src.indexOf('mv2') +
-                                7
+                              fallenContact.thumbnail.indexOf('mv2') + 7
                             )
                             .replace('wix:image://v1/', '')
                         }`}
