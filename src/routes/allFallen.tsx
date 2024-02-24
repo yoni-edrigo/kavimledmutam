@@ -65,22 +65,18 @@ export default function AllFallen() {
                   className="fallen-card min-h-10rem flex flex-column align-items-center"
                 >
                   <h3 className="mb-0 ">{fallenContact.name}</h3>
-                  {fallenContact.mediagallery &&
-                    fallenContact.mediagallery[0] && (
-                      <img
-                        alt={`קווים לדמותו של ${fallenContact.name}`}
-                        src={`${
-                          prefix +
-                          fallenContact.mediagallery[0].src
-                            .slice(
-                              0,
-                              fallenContact.thumbnail.indexOf('mv2') + 7
-                            )
-                            .replace('wix:image://v1/', '')
-                        }`}
-                        style={{ maxWidth: '250px' }}
-                      />
-                    )}
+                  {fallenContact.thumbnail && (
+                    <img
+                      alt={`קווים לדמותו של ${fallenContact.name}`}
+                      src={`${
+                        prefix +
+                        fallenContact.thumbnail
+                          .slice(0, fallenContact.thumbnail.indexOf('mv2') + 7)
+                          .replace('wix:image://v1/', '')
+                      }`}
+                      style={{ maxWidth: '250px' }}
+                    />
+                  )}
                 </Link>
               ))}
         </div>
