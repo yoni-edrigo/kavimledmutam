@@ -104,18 +104,23 @@ export default function FallenPage() {
                     key={index}
                     style={{ display: 'flex', placeContent: 'center' }}
                   >
-                    <img
-                      alt={`התמונה של: ${fallenData.name}`}
-                      src={`${
-                        prefix +
-                        media.src
-                          .slice(0, media.src.indexOf('mv2') + 7)
-                          .replace('wix:image://v1/', '')
-                      }`}
-                      style={{
-                        width: window.innerWidth < 900 ? '350px' : '450px',
-                      }}
-                    />
+                    <figure>
+                      <img
+                        alt={`התמונה של: ${fallenData.name}`}
+                        src={`${
+                          prefix +
+                          media.src
+                            .slice(0, media.src.indexOf('mv2') + 7)
+                            .replace('wix:image://v1/', '')
+                        }`}
+                        style={{
+                          width: window.innerWidth < 900 ? '350px' : '450px',
+                        }}
+                      />
+                      {media.painter && (
+                        <figcaption className="text-sm md:text-base text-center font-semibold">{`צויר בידי ${media.painter}`}</figcaption>
+                      )}
+                    </figure>
                   </SwiperSlide>
                 ))}
             </Swiper>

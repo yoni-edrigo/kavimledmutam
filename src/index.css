@@ -291,5 +291,7 @@ footer {
     'name phone date hr hr hr'
     'comment comment comment comment comment comment';
 }
-.swiper-pagination {
+
+.swiper-autoheight {
+  padding-bottom: 20px !important;
 }

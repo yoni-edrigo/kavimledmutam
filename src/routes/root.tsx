@@ -6,17 +6,8 @@ export type Contact = {
   _id: string;
   name: string;
   mediagallery?: {
-    description: string;
-    slug: string;
-    alt: string;
     src: string;
-    title: string;
-    type: string;
-    settings: {
-      width: number;
-      height: number;
-      focalPoint: [number, number];
-    };
+    painter?: string;
   }[];
   thumbnail: string;
   story?: string;
