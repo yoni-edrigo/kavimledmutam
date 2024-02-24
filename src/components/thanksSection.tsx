@@ -31,7 +31,11 @@ export function ThanksSection({ volunteerArr }: { volunteerArr: Volunteer[] }) {
                     src={
                       prefix +
                       volunteer.image
-                        .slice(0, volunteer.image.indexOf('mv2') + 7)
+                        .slice(
+                          0,
+                          volunteer.image.indexOf('mv2') +
+                            (volunteer.image.includes('jpeg') ? 8 : 7)
+                        )
                         .replace('wix:image://v1/', '')
                     }
                     style={{

@@ -110,7 +110,11 @@ export default function FallenPage() {
                         src={`${
                           prefix +
                           media.src
-                            .slice(0, media.src.indexOf('mv2') + 7)
+                            .slice(
+                              0,
+                              media.src.indexOf('mv2') +
+                                +(media.src.includes('jpeg') ? 8 : 7)
+                            )
                             .replace('wix:image://v1/', '')
                         }`}
                         style={{

@@ -71,7 +71,11 @@ export default function AllFallen() {
                       src={`${
                         prefix +
                         fallenContact.thumbnail
-                          .slice(0, fallenContact.thumbnail.indexOf('mv2') + 7)
+                          .slice(
+                            0,
+                            fallenContact.thumbnail.indexOf('mv2') +
+                              (fallenContact.thumbnail.includes('jpeg') ? 8 : 7)
+                          )
                           .replace('wix:image://v1/', '')
                       }`}
                       style={{ maxWidth: '250px' }}
