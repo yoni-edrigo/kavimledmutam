@@ -48,7 +48,7 @@ export const getMetaTags = (fallenData: Contact) => {
         property="og:image"
         content={
           fallenData.mediagallery
-            ? `${prefix}${fallenData.mediagallery[0].slug}`
+            ? `${prefix}${fallenData.mediagallery[0].src}`
             : '../kavimledmutam_logo.jpeg'
         }
       />
@@ -68,7 +68,7 @@ export const getMetaTags = (fallenData: Contact) => {
         property="twitter:image"
         content={
           fallenData.mediagallery
-            ? `${prefix}${fallenData.mediagallery[0].slug}`
+            ? `${prefix}${fallenData.mediagallery[0].src}`
             : '../kavimledmutam_logo.jpeg'
         }
       />
