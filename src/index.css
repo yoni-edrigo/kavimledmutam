@@ -196,7 +196,7 @@ footer {
     grid-template-columns: repeat(2, 1fr);
   }
   a:-webkit-any-link {
-    font-size: 1rem;
+    font-size: 0.95rem;
   }
   .page-grid {
     grid-template-columns: min-content 1fr min-content;

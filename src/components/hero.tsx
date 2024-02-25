@@ -1,4 +1,5 @@
 import logo from '../assets/logo.png';
+import { ScaledOnScroll } from './animate-wrapper';
 
 const heroText1 = `‘קווים לדמותם׳ הינו מיזם הנצחה  התנדבותי 
 אשר קם במטרה לספר את סיפוריהם של נופלי מלחמת חרבות ברזל, אזרחים וחיילים כאחד, דרך איורים וסיפורים אישיים.
@@ -21,12 +22,15 @@ export function Hero() {
         <p>{heroText2}</p>
       </div>
       {window.innerWidth > 768 && (
-        <img
-          src={logo}
-          alt="kavim ledmutam logo"
-          className="max-w-15rem ml-7"
-          style={{ gridArea: 'leftContent' }}
-        />
+        <span style={{ gridArea: 'leftContent' }}>
+          <ScaledOnScroll scaleValue={0.7}>
+            <img
+              src={logo}
+              alt="kavim ledmutam logo"
+              className="max-w-15rem ml-7"
+            />
+          </ScaledOnScroll>
+        </span>
       )}
     </div>
   );

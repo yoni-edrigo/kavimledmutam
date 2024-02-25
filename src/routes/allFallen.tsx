@@ -5,6 +5,7 @@ import { prefix } from '../utils';
 import { InputText } from 'primereact/inputtext';
 import { Paginator, PaginatorPageChangeEvent } from 'primereact/paginator';
 import { useState } from 'react';
+import { AnimatedGridOnScroll } from '../components/animate-wrapper';
 export default function AllFallen() {
   //@ts-expect-error wixdata isnt known
   const wixData: Contact[] = useLoaderData();
@@ -59,29 +60,33 @@ export default function AllFallen() {
             filteredData
               .slice(first, first + rows)
               .map((fallenContact, index) => (
-                <Link
-                  key={index}
-                  to={`/fallenCard/${fallenContact._id}`}
-                  className="fallen-card min-h-10rem flex flex-column align-items-center"
-                >
-                  <h3 className="mb-0 ">{fallenContact.name}</h3>
-                  {fallenContact.thumbnail && (
-                    <img
-                      alt={`קווים לדמותו של ${fallenContact.name}`}
-                      src={`${
-                        prefix +
-                        fallenContact.thumbnail
-                          .slice(
-                            0,
-                            fallenContact.thumbnail.indexOf('mv2') +
-                              (fallenContact.thumbnail.includes('jpeg') ? 8 : 7)
-                          )
-                          .replace('wix:image://v1/', '')
-                      }`}
-                      style={{ maxWidth: '250px' }}
-                    />
-                  )}
-                </Link>
+                <AnimatedGridOnScroll key={index} index={index}>
+                  <Link
+                    key={index}
+                    to={`/fallenCard/${fallenContact._id}`}
+                    className="fallen-card min-h-10rem flex flex-column align-items-center"
+                  >
+                    <h3 className="mb-0 ">{fallenContact.name}</h3>
+                    {fallenContact.thumbnail && (
+                      <img
+                        alt={`קווים לדמותו של ${fallenContact.name}`}
+                        src={`${
+                          prefix +
+                          fallenContact.thumbnail
+                            .slice(
+                              0,
+                              fallenContact.thumbnail.indexOf('mv2') +
+                                (fallenContact.thumbnail.includes('jpeg')
+                                  ? 8
+                                  : 7)
+                            )
+                            .replace('wix:image://v1/', '')
+                        }`}
+                        style={{ maxWidth: '250px' }}
+                      />
+                    )}
+                  </Link>
+                </AnimatedGridOnScroll>
               ))}
         </div>
         <div className="w-full">

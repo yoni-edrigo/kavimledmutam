@@ -6,7 +6,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 
 // import required modules
-import { Navigation } from 'swiper/modules';
+import { Autoplay, Navigation } from 'swiper/modules';
 import { prefix } from '../utils';
 import AnimatedOnScroll from './animate-wrapper';
 
@@ -33,10 +33,15 @@ export function OurActivity({ fileNameArr }: { fileNameArr: string[] }) {
         <AnimatedOnScroll fromDirection="right">
           <Swiper
             navigation={true}
-            modules={[Navigation]}
+            modules={[Navigation, Autoplay]}
             slidesPerView={'auto'}
             spaceBetween={25}
             loop={true}
+            autoplay={{
+              delay: 2000,
+              disableOnInteraction: false,
+            }}
+            dir="ltr"
           >
             {fileNameArr.map((fileName, index) => (
               <SwiperSlide
