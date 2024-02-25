@@ -8,6 +8,7 @@ import 'swiper/css/navigation';
 // import required modules
 import { Navigation } from 'swiper/modules';
 import { prefix } from '../utils';
+import AnimatedOnScroll from './animate-wrapper';
 
 export function OurActivity({ fileNameArr }: { fileNameArr: string[] }) {
   return (
@@ -24,38 +25,41 @@ export function OurActivity({ fileNameArr }: { fileNameArr: string[] }) {
       >
         הפעילות שלנו
       </h2>
+
       <div
         className="align-items-center h-fit align-self-center ml-8 mt-7"
         style={{ gridArea: 'centerContent', maxWidth: '90vw' }}
       >
-        <Swiper
-          navigation={true}
-          modules={[Navigation]}
-          slidesPerView={'auto'}
-          spaceBetween={25}
-          loop={true}
-        >
-          {fileNameArr.map((fileName, index) => (
-            <SwiperSlide
-              key={index}
-              style={{
-                display: 'flex',
-                placeContent: 'center',
-                width: 'min-content',
-              }}
-            >
-              <img
-                src={`${prefix + fileName}`}
+        <AnimatedOnScroll fromDirection="right">
+          <Swiper
+            navigation={true}
+            modules={[Navigation]}
+            slidesPerView={'auto'}
+            spaceBetween={25}
+            loop={true}
+          >
+            {fileNameArr.map((fileName, index) => (
+              <SwiperSlide
+                key={index}
                 style={{
-                  height: '280px',
-                  maxWidth: '200px',
-                  objectFit: 'cover',
+                  display: 'flex',
+                  placeContent: 'center',
+                  width: 'min-content',
                 }}
-                alt="תמונה המייצגת את פעילותנו"
-              />
-            </SwiperSlide>
-          ))}
-        </Swiper>
+              >
+                <img
+                  src={`${prefix + fileName}`}
+                  style={{
+                    height: '280px',
+                    maxWidth: '200px',
+                    objectFit: 'cover',
+                  }}
+                  alt="תמונה המייצגת את פעילותנו"
+                />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </AnimatedOnScroll>
       </div>
     </div>
   );
