@@ -1,5 +1,8 @@
+import { Toast } from 'primereact/toast';
+
 import { useForm, SubmitHandler } from 'react-hook-form';
 import landingElement from '../assets/landingElement.png';
+import { useRef } from 'react';
 type Inputs = {
   fName: string;
   lName: string;
@@ -33,19 +36,41 @@ const postRequest = async (requestData: Inputs): Promise<void> => {
   }
 };
 export function ContactForm() {
+  const toast = useRef(null);
+
+  const show = (isSuccess: boolean) => {
+    toast.current &&
+      //@ts-expect-error because
+      toast.current.show({
+        severity: isSuccess ? 'success' : 'error',
+        summary: isSuccess ? 'תגובה נשלחה בהצלחה' : 'שגיאה בשליחה',
+        detail: isSuccess
+          ? 'מתנדב מתטעמנו יצור קשר בהקדם'
+          : 'שגיאה בשליחה נסו שוב או פנו לעזרה ביצירת קשר',
+      });
+  };
   const {
     register,
     handleSubmit,
     // watch,
     formState: { errors },
+    reset,
   } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     const dataToSend = { ...data };
-    console.log(dataToSend);
-    postRequest(dataToSend);
+    postRequest(dataToSend)
+      .then(() => {
+        show(true);
+        reset();
+      })
+      .catch((error) => {
+        console.error('Error posting comment:', error);
+        show(false);
+      });
   };
   return (
     <div className="page-grid relative mt-5 mb-7 overflow-hidden max-w-screen">
+      <Toast ref={toast} />
       <span
         className="flex flex-column gap-3 mb-5"
         style={{ gridArea: 'centerContent' }}
