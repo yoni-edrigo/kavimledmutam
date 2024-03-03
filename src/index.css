@@ -115,7 +115,7 @@ footer {
   display: grid;
   grid-template-areas:
     'fName lName phone email'
-    'hero address citation citation'
+    'hero address citation fileUpload'
     'sendButton sendButton sendButton sendButton';
 }
 .comment-form-wrapper {
@@ -155,7 +155,7 @@ footer {
     grid-template-areas:
       'fName lName phone'
       'email hero address'
-      'citation citation citation'
+      'citation citation fileUpload'
       'sendButton sendButton sendButton';
   }
 }
@@ -164,7 +164,7 @@ footer {
     grid-template-areas:
       'fName lName'
       'phone email' 'hero address'
-      'citation citation '
+      'citation fileUpload '
       'sendButton sendButton ';
   }
   .comment-form {
@@ -186,7 +186,7 @@ footer {
 
 @media (max-width: 768px) {
   .contact-form {
-    grid-template-areas: 'fName' 'lName' 'phone' 'email' 'hero' 'address' 'citation' 'sendButton';
+    grid-template-areas: 'fName' 'lName' 'phone' 'email' 'hero' 'address' 'citation' 'fileUpload' 'sendButton';
   }
   .comment-form {
     grid-template-areas: 'fName' 'lName' 'phone' 'prefix' 'comment' 'sendButton';

@@ -1,8 +1,10 @@
 import { Toast } from 'primereact/toast';
 
+import { FileUpload } from 'primereact/fileupload';
+
 import { useForm, SubmitHandler } from 'react-hook-form';
 import landingElement from '../assets/landingElement.png';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 type Inputs = {
   fName: string;
   lName: string;
@@ -11,7 +13,9 @@ type Inputs = {
   hero: string;
   address: string;
   citation: string;
+  fileUpload: File;
 };
+
 const postRequest = async (requestData: Inputs): Promise<void> => {
   try {
     const response = await fetch(
@@ -35,7 +39,8 @@ const postRequest = async (requestData: Inputs): Promise<void> => {
     console.error('Error posting comment:', error);
   }
 };
-export function ContactForm() {
+
+export function ContactForm({ fileUploadURL }: { fileUploadURL: string }) {
   const toast = useRef(null);
 
   const show = (isSuccess: boolean) => {
@@ -49,6 +54,8 @@ export function ContactForm() {
           : 'שגיאה בשליחה נסו שוב או פנו לעזרה ביצירת קשר',
       });
   };
+  const fileOploadRef = useRef<FileUpload>();
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const {
     register,
     handleSubmit,
@@ -57,7 +64,14 @@ export function ContactForm() {
     reset,
   } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    const dataToSend = { ...data };
+    let dataToSend = { ...data };
+    if (selectedFile) {
+      console.log('upload file with', selectedFile);
+      // uploadFile(selectedFile);
+      dataToSend = { ...dataToSend, fileUpload: selectedFile };
+    }
+    console.log('dataToSend', dataToSend);
+
     postRequest(dataToSend)
       .then(() => {
         show(true);
@@ -152,6 +166,27 @@ export function ContactForm() {
           <span className="flex flex-column" style={{ gridArea: 'citation' }}>
             <label htmlFor="citation">כותרת/ציטוט (אופציונלי)</label>
             <input className="form-input" {...register('citation')} />
+          </span>
+          <span className="flex flex-column" style={{ gridArea: 'fileUpload' }}>
+            <label htmlFor="citation">העלאת תמונה</label>
+            <FileUpload
+              //@ts-expect-error dont know the correct type
+              ref={fileOploadRef}
+              pt={{
+                basicButton: {
+                  className:
+                    'form-button border-noround flex flex-row-reverse w-full',
+                },
+              }}
+              accept="image/*"
+              // maxFileSize={150000000}
+              mode="basic"
+              {...register('fileUpload')}
+              customUpload
+              uploadHandler={(e) => {
+                setSelectedFile(e.files[0]);
+              }}
+            />
           </span>
           <button
             className="form-button mt-8 cursor-pointer"
