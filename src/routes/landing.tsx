@@ -16,7 +16,7 @@ export type Volunteer = {
 type WixData = {
   ourActivity: string[];
   volunteers: Volunteer[];
-  uploadFileURL: string;
+  uploadUrl: string;
 };
 export default function Landing() {
   //@ts-expect-error because wix data is unknown
@@ -77,7 +77,7 @@ export default function Landing() {
       </Helmet>
       <Hero />
       <OurActivity fileNameArr={wixData.ourActivity} />
-      <ContactForm fileUploadURL={wixData.uploadFileURL} />
+      <ContactForm fileUploadURL={wixData.uploadUrl} />
       <ThanksSection volunteerArr={wixData.volunteers} />
     </div>
   );

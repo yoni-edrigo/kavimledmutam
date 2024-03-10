@@ -4,7 +4,7 @@ import { FileUpload } from 'primereact/fileupload';
 
 import { useForm, SubmitHandler } from 'react-hook-form';
 import landingElement from '../assets/landingElement.png';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 type Inputs = {
   fName: string;
   lName: string;
@@ -39,7 +39,27 @@ const postRequest = async (requestData: Inputs): Promise<void> => {
     console.error('Error posting comment:', error);
   }
 };
+async function uploadMyFile(uploadUrl: string, fileContent: File) {
+  const urlWithParams = `${uploadUrl}?filename=${fileContent.name}`;
+  const headers = {
+    'Content-Type': 'application/octet-stream',
+  };
 
+  const formData = new FormData();
+  formData.append('file', fileContent);
+
+  const uploadResponse = await fetch(urlWithParams, {
+    method: 'PUT',
+    body: formData,
+    headers: headers,
+  });
+
+  if (!uploadResponse.ok) {
+    throw new Error(`HTTP error! Status: ${uploadResponse.status}`);
+  }
+
+  return uploadResponse;
+}
 export function ContactForm({ fileUploadURL }: { fileUploadURL: string }) {
   const toast = useRef(null);
 
@@ -55,7 +75,7 @@ export function ContactForm({ fileUploadURL }: { fileUploadURL: string }) {
       });
   };
   const fileOploadRef = useRef<FileUpload>();
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  // const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const {
     register,
     handleSubmit,
@@ -64,12 +84,12 @@ export function ContactForm({ fileUploadURL }: { fileUploadURL: string }) {
     reset,
   } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    let dataToSend = { ...data };
-    if (selectedFile) {
-      console.log('upload file with', selectedFile);
-      // uploadFile(selectedFile);
-      dataToSend = { ...dataToSend, fileUpload: selectedFile };
-    }
+    const dataToSend = { ...data };
+    // if (selectedFile) {
+    //   console.log('upload file with', selectedFile);
+    //   // uploadFile(selectedFile);
+    //   dataToSend = { ...dataToSend, fileUpload: selectedFile };
+    // }
     console.log('dataToSend', dataToSend);
 
     postRequest(dataToSend)
@@ -180,11 +200,16 @@ export function ContactForm({ fileUploadURL }: { fileUploadURL: string }) {
               }}
               accept="image/*"
               // maxFileSize={150000000}
-              mode="basic"
+              // mode="basic"
               {...register('fileUpload')}
               customUpload
-              uploadHandler={(e) => {
-                setSelectedFile(e.files[0]);
+              uploadHandler={async (e) => {
+                console.log('started uplaod', fileUploadURL);
+
+                const uploadRes = await uploadMyFile(fileUploadURL, e.files[0]);
+                console.log('uploadRes', uploadRes);
+
+                // setSelectedFile(e.files[0]);
               }}
             />
           </span>

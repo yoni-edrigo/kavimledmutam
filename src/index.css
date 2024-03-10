@@ -1,8 +1,8 @@
 @import '../node_modules/primeflex/primeflex.css';
 @import '../node_modules/primereact/resources/themes/lara-light-blue/theme.css';
 @import './reset.css';
-@import '../node_modules/@ciar4n/izmir/izmir.css';
-@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&family=Suez+One&display=swap');
+/* @import '../node_modules/@ciar4n/izmir/izmir.css'; */
+/* @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&family=Suez+One&display=swap'); */
 
 @import 'primeicons/primeicons.css';
 
