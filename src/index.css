@@ -115,7 +115,7 @@ footer {
   display: grid;
   grid-template-areas:
     'fName lName phone email'
-    'hero address citation fileUpload'
+    'hero address citation citation'
     'sendButton sendButton sendButton sendButton';
 }
 .comment-form-wrapper {
@@ -155,7 +155,7 @@ footer {
     grid-template-areas:
       'fName lName phone'
       'email hero address'
-      'citation citation fileUpload'
+      'citation citation citation'
       'sendButton sendButton sendButton';
   }
 }
@@ -164,7 +164,7 @@ footer {
     grid-template-areas:
       'fName lName'
       'phone email' 'hero address'
-      'citation fileUpload '
+      'citation citation '
       'sendButton sendButton ';
   }
   .comment-form {

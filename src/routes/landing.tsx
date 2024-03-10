@@ -77,7 +77,7 @@ export default function Landing() {
       </Helmet>
       <Hero />
       <OurActivity fileNameArr={wixData.ourActivity} />
-      <ContactForm fileUploadURL={wixData.uploadUrl} />
+      <ContactForm />
       <ThanksSection volunteerArr={wixData.volunteers} />
     </div>
   );

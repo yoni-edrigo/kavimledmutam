@@ -1,7 +1,5 @@
 import { Toast } from 'primereact/toast';
 
-import { FileUpload } from 'primereact/fileupload';
-
 import { useForm, SubmitHandler } from 'react-hook-form';
 import landingElement from '../assets/landingElement.png';
 import { useRef } from 'react';
@@ -13,7 +11,6 @@ type Inputs = {
   hero: string;
   address: string;
   citation: string;
-  fileUpload: File;
 };
 
 const postRequest = async (requestData: Inputs): Promise<void> => {
@@ -39,28 +36,8 @@ const postRequest = async (requestData: Inputs): Promise<void> => {
     console.error('Error posting comment:', error);
   }
 };
-async function uploadMyFile(uploadUrl: string, fileContent: File) {
-  const urlWithParams = `${uploadUrl}?filename=${fileContent.name}`;
-  const headers = {
-    'Content-Type': 'application/octet-stream',
-  };
 
-  const formData = new FormData();
-  formData.append('file', fileContent);
-
-  const uploadResponse = await fetch(urlWithParams, {
-    method: 'PUT',
-    body: formData,
-    headers: headers,
-  });
-
-  if (!uploadResponse.ok) {
-    throw new Error(`HTTP error! Status: ${uploadResponse.status}`);
-  }
-
-  return uploadResponse;
-}
-export function ContactForm({ fileUploadURL }: { fileUploadURL: string }) {
+export function ContactForm() {
   const toast = useRef(null);
 
   const show = (isSuccess: boolean) => {
@@ -74,7 +51,6 @@ export function ContactForm({ fileUploadURL }: { fileUploadURL: string }) {
           : 'שגיאה בשליחה נסו שוב או פנו לעזרה ביצירת קשר',
       });
   };
-  const fileOploadRef = useRef<FileUpload>();
   // const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const {
     register,
@@ -85,11 +61,6 @@ export function ContactForm({ fileUploadURL }: { fileUploadURL: string }) {
   } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     const dataToSend = { ...data };
-    // if (selectedFile) {
-    //   console.log('upload file with', selectedFile);
-    //   // uploadFile(selectedFile);
-    //   dataToSend = { ...dataToSend, fileUpload: selectedFile };
-    // }
     console.log('dataToSend', dataToSend);
 
     postRequest(dataToSend)
@@ -186,32 +157,6 @@ export function ContactForm({ fileUploadURL }: { fileUploadURL: string }) {
           <span className="flex flex-column" style={{ gridArea: 'citation' }}>
             <label htmlFor="citation">כותרת/ציטוט (אופציונלי)</label>
             <input className="form-input" {...register('citation')} />
-          </span>
-          <span className="flex flex-column" style={{ gridArea: 'fileUpload' }}>
-            <label htmlFor="citation">העלאת תמונה</label>
-            <FileUpload
-              //@ts-expect-error dont know the correct type
-              ref={fileOploadRef}
-              pt={{
-                basicButton: {
-                  className:
-                    'form-button border-noround flex flex-row-reverse w-full',
-                },
-              }}
-              accept="image/*"
-              // maxFileSize={150000000}
-              // mode="basic"
-              {...register('fileUpload')}
-              customUpload
-              uploadHandler={async (e) => {
-                console.log('started uplaod', fileUploadURL);
-
-                const uploadRes = await uploadMyFile(fileUploadURL, e.files[0]);
-                console.log('uploadRes', uploadRes);
-
-                // setSelectedFile(e.files[0]);
-              }}
-            />
           </span>
           <button
             className="form-button mt-8 cursor-pointer"
