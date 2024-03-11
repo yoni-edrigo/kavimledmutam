@@ -1,3 +1,5 @@
+import { defer } from 'react-router-dom';
+
 export async function rootLoader() {
   const response = await fetch(
     'https://yonivas0.editorx.io/kavimledmutam/_functions/getLandingPageData'
@@ -9,7 +11,7 @@ export async function rootLoader() {
   // If you expect JSON response, use response.json()
   // If you expect other response types, adjust accordingly
   const data = await response.json();
-  return data.message;
+  return defer({ wixData: data.message });
 }
 export async function allFallenLoader() {
   try {
