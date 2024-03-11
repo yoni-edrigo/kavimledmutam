@@ -63,7 +63,7 @@ export function Root() {
           <NavLink to={`/`} className="nav-bar-link white-space-nowrap">
             קווים לדמותם
           </NavLink>
-          <NavLink to={`allFallen`} className="white-space-nowrap">
+          <NavLink to={`allFallen`} className="white-space-nowrap nav-bar-link">
             הגיבורים שלנו
           </NavLink>
           <h3

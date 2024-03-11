@@ -69,7 +69,6 @@ export function ThanksSection({ volunteerArr }: { volunteerArr: Volunteer[] }) {
                         color: volunteer.isPainter
                           ? 'var(--kavim-darkblue)'
                           : '',
-                        fontFamily: `'Rubik', serif`,
                         fontSize: '16px',
                       }}
                       target="_blank"
@@ -86,7 +85,6 @@ export function ThanksSection({ volunteerArr }: { volunteerArr: Volunteer[] }) {
                         color: volunteer.isPainter
                           ? 'var(--kavim-darkblue)'
                           : '',
-                        fontFamily: `'Rubik', serif`,
                         fontSize: '16px',
                       }}
                     >
