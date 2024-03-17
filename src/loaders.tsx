@@ -11,6 +11,8 @@ export async function rootLoader() {
   // If you expect JSON response, use response.json()
   // If you expect other response types, adjust accordingly
   const data = await response.json();
+  console.log('loaderData', data);
+
   return defer({ wixData: data.message });
 }
 export async function allFallenLoader() {

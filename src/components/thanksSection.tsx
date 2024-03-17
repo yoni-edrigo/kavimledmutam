@@ -5,7 +5,10 @@ export function ThanksSection({ volunteerArr }: { volunteerArr: Volunteer[] }) {
   return (
     <div
       className="page-grid thanks-section"
-      style={{ paddingBottom: '150px' }}
+      style={{
+        paddingBottom: '150px',
+        background: `linear-gradient(180deg, #E7F1FB 0%, rgba(231, 241, 251, 0) 100%)`,
+      }}
     >
       <h2 className="mt-5 mb-7" style={{ gridArea: 'centerContent' }}>
         תודות

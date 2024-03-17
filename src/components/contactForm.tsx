@@ -2,7 +2,14 @@ import { Toast } from 'primereact/toast';
 
 import { useForm, SubmitHandler } from 'react-hook-form';
 import landingElement from '../assets/landingElement.png';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
+import { TransitionWrapper } from '../utils/transition-wrapper';
+import { Button } from 'primereact/button';
+import penIcon from '../assets/penIcon.svg';
+import giftIcom from '../assets/giftIcon.svg';
+import drawingIcon from '../assets/drawingIcon.svg';
+import checkMarkIcon from '../assets/checkMarkIcon.svg';
+import { useWindowSize } from 'usehooks-ts';
 type Inputs = {
   fName: string;
   lName: string;
@@ -39,7 +46,7 @@ const postRequest = async (requestData: Inputs): Promise<void> => {
 
 export function ContactForm() {
   const toast = useRef(null);
-
+  const { width } = useWindowSize();
   const show = (isSuccess: boolean) => {
     toast.current &&
       //@ts-expect-error because
@@ -73,105 +80,211 @@ export function ContactForm() {
         show(false);
       });
   };
+  const [isFormShown, setIsFormShown] = useState(false);
+
   return (
-    <div className="page-grid relative mt-5 mb-7 overflow-hidden max-w-screen">
+    <div
+      className="page-grid relative mt-5 pb-7 overflow-hidden max-w-screen"
+      style={{
+        background: `linear-gradient(180deg, #ffffff 45.26%, #c5dfff 100%)`,
+      }}
+    >
       <Toast ref={toast} />
       <span
-        className="flex flex-column gap-3 mb-5"
+        className="flex flex-column gap-3 mb-5 align-items-center"
         style={{ gridArea: 'centerContent' }}
       >
-        <h2 style={{ color: 'var(--kavim-darkblue)' }}>
-          אני רוצה להזמין קווים לדמותו של הגיבור\ה שלי
-        </h2>
-        <p style={{ fontSize: '1.1rem' }}>
-          אנא השאירו פרטים ואנו נחזור אליכם בהקדם
+        <p style={{ color: 'var(--kavim-darkblue)' }}>
+          אני רוצה להזמין קווים לדמותו\ה של הגיבור\ה שלי
         </p>
-      </span>
+        {!isFormShown && (
+          <h2 style={{ color: 'var(--kavim-darkblue)' }}>אז איך זה עובד?</h2>
+        )}
+        <div className="proccess-wrapper-grid mt-7">
+          <div className="proccess-card-grid">
+            <img src={penIcon} />
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: '1fr 8ch 1fr',
+                placeItems: 'center',
+              }}
+              className="w-full"
+            >
+              <div className="dashedLine-placeholder"></div>
+              <h3>שלב 1</h3>
+              <div className="dashedLine"></div>
+            </div>
+            <p>אתם ממלאים פרטים ואנחנו דואגים ליצור אתכם קשר להתחלת התהליך.</p>
+          </div>
+          <div className="proccess-card-grid">
+            <img src={drawingIcon} />
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: '1fr 8ch 1fr',
+                placeItems: 'center',
+              }}
+              className="w-full"
+            >
+              <div className="dashedLine"></div>
+              <h3>שלב 2</h3>
+              <div
+                className={
+                  width < 768 ? 'dashedLine-placeholder' : 'dashedLine'
+                }
+              ></div>
+            </div>
+            <p>
+              המאיירים שלנו מאיירים את האיור וכותבי התוכן שלנו כותבים את הסיפור.
+            </p>
+          </div>
+          <div className="proccess-card-grid">
+            <img src={checkMarkIcon} />
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: '1fr 8ch 1fr',
+                placeItems: 'center',
+              }}
+              className="w-full"
+            >
+              <div
+                className={
+                  width < 768 ? 'dashedLine-placeholder' : 'dashedLine'
+                }
+              ></div>
+              <h3>שלב 3</h3>
+              <div className="dashedLine"></div>
+            </div>
+            <p>לאחר אישורכם, האיור נשלח להדפסה, מסגור ואריזה.</p>
+          </div>
+          <div className="proccess-card-grid">
+            <img src={giftIcom} />
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: '1fr 8ch 1fr',
+                placeItems: 'center',
+              }}
+              className="w-full"
+            >
+              <div className="dashedLine"></div>
+              <h3>שלב 4</h3>
+              <div className="dashedLine-placeholder"></div>
+            </div>
+            <p>האיור נשלח אליכם ואתם מעניקים אותו למשפחה.</p>
+          </div>
+        </div>
+        <Button
+          className="form-button mt-5"
+          label={isFormShown ? 'הסתר טופס' : 'אני רוצה להזמין'}
+          onClick={() => {
+            setIsFormShown(!isFormShown);
+          }}
+          pt={{
+            label: {
+              style: {
+                fontWeight: '500',
+                fontSize: '1rem',
+                color: 'var(--kavim-darkblue)',
+              },
+            },
+          }}
+        />
 
-      <div
-        className="contact-form-wrapper flex p-3 border-round-lg relative"
+        {isFormShown && (
+          <p style={{ fontSize: '1.1rem' }}>
+            אנא השאירו פרטים ואנו נחזור אליכם בהקדם
+          </p>
+        )}
+      </span>
+      <TransitionWrapper
+        inProp={isFormShown}
         style={{
           gridArea: 'centerContent2',
           marginRight: '5vw',
           marginLeft: '5vw',
         }}
       >
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="contact-form gap-4 border-1 border-white border-round-lg p-3 md:p-5 w-full z-1"
-        >
-          <span className="flex flex-column " style={{ gridArea: 'fName' }}>
-            <label htmlFor="fName">שם פרטי</label>
-            <input
-              className="form-input"
-              {...register('fName', { required: true })}
-            />
-            {errors.fName && (
-              <label className="text-red-500">זהו שדה חובה</label>
-            )}
-          </span>
-          <span className="flex flex-column" style={{ gridArea: 'lName' }}>
-            <label htmlFor="lName">שם משפחה</label>
-            <input
-              className="form-input"
-              {...register('lName', { required: true })}
-            />
-            {errors.lName && (
-              <label className="text-red-500">זהו שדה חובה</label>
-            )}
-          </span>
-          <span className="flex flex-column" style={{ gridArea: 'phone' }}>
-            <label htmlFor="phone">טלפון</label>
-            <input
-              className="form-input"
-              {...register('phone', { required: true })}
-            />
-            {errors.phone && (
-              <label className="text-red-500">זהו שדה חובה</label>
-            )}
-          </span>
-          <span className="flex flex-column" style={{ gridArea: 'email' }}>
-            <label htmlFor="email">כתובת מייל</label>
-            <input
-              className="form-input"
-              {...register('email', { required: true })}
-            />
-            {errors.email && (
-              <label className="text-red-500">זהו שדה חובה</label>
-            )}
-          </span>
-          <span className="flex flex-column" style={{ gridArea: 'hero' }}>
-            <label htmlFor="hero">שם הגיבור/ה שלי</label>
-            <input
-              className="form-input"
-              {...register('hero', { required: true })}
-            />
-            {errors.hero && (
-              <label className="text-red-500">זהו שדה חובה</label>
-            )}
-          </span>
-          <span className="flex flex-column" style={{ gridArea: 'address' }}>
-            <label htmlFor="address">כתובת למשלוח</label>
-            <input className="form-input" {...register('address')} />
-          </span>
-          <span className="flex flex-column" style={{ gridArea: 'citation' }}>
-            <label htmlFor="citation">כותרת/ציטוט (אופציונלי)</label>
-            <input className="form-input" {...register('citation')} />
-          </span>
-          <button
-            className="form-button mt-8 cursor-pointer"
-            type="submit"
-            style={{ gridArea: 'sendButton', justifySelf: 'center' }}
+        <div className="contact-form-wrapper flex p-3 border-round-lg relative">
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="contact-form gap-4 border-1 border-white border-round-lg p-3 md:p-5 w-full z-1"
           >
-            סיום הזמנה
-          </button>
-        </form>
-        <img
-          src={landingElement}
-          alt="landing element"
-          className="landing-element z-0"
-        />
-      </div>
+            <span className="flex flex-column " style={{ gridArea: 'fName' }}>
+              <label htmlFor="fName">שם פרטי</label>
+              <input
+                className="form-input"
+                {...register('fName', { required: true })}
+              />
+              {errors.fName && (
+                <label className="text-red-500">זהו שדה חובה</label>
+              )}
+            </span>
+            <span className="flex flex-column" style={{ gridArea: 'lName' }}>
+              <label htmlFor="lName">שם משפחה</label>
+              <input
+                className="form-input"
+                {...register('lName', { required: true })}
+              />
+              {errors.lName && (
+                <label className="text-red-500">זהו שדה חובה</label>
+              )}
+            </span>
+            <span className="flex flex-column" style={{ gridArea: 'phone' }}>
+              <label htmlFor="phone">טלפון</label>
+              <input
+                className="form-input"
+                {...register('phone', { required: true })}
+              />
+              {errors.phone && (
+                <label className="text-red-500">זהו שדה חובה</label>
+              )}
+            </span>
+            <span className="flex flex-column" style={{ gridArea: 'email' }}>
+              <label htmlFor="email">כתובת מייל</label>
+              <input
+                className="form-input"
+                {...register('email', { required: true })}
+              />
+              {errors.email && (
+                <label className="text-red-500">זהו שדה חובה</label>
+              )}
+            </span>
+            <span className="flex flex-column" style={{ gridArea: 'hero' }}>
+              <label htmlFor="hero">שם הגיבור/ה שלי</label>
+              <input
+                className="form-input"
+                {...register('hero', { required: true })}
+              />
+              {errors.hero && (
+                <label className="text-red-500">זהו שדה חובה</label>
+              )}
+            </span>
+            <span className="flex flex-column" style={{ gridArea: 'address' }}>
+              <label htmlFor="address">כתובת למשלוח</label>
+              <input className="form-input" {...register('address')} />
+            </span>
+            <span className="flex flex-column" style={{ gridArea: 'citation' }}>
+              <label htmlFor="citation">כותרת/ציטוט (אופציונלי)</label>
+              <input className="form-input" {...register('citation')} />
+            </span>
+            <button
+              className="form-button mt-8 cursor-pointer"
+              type="submit"
+              style={{ gridArea: 'sendButton', justifySelf: 'center' }}
+            >
+              סיום הזמנה
+            </button>
+          </form>
+          <img
+            src={landingElement}
+            alt="landing element"
+            className="landing-element z-0"
+          />
+        </div>
+      </TransitionWrapper>
     </div>
   );
 }

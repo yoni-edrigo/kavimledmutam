@@ -1,5 +1,5 @@
-import logo from '../assets/logo.png';
-import { ScaledOnScroll } from './animate-wrapper';
+// import logo from '../assets/logo.png';
+// import { ScaledOnScroll } from './animate-wrapper';
 
 export function Hero() {
   const heroText1 = `‘קווים לדמותם׳ הינו מיזם הנצחה  התנדבותי 
@@ -10,17 +10,21 @@ export function Hero() {
 ובשביל שכמה שיותר יוכלו להכיר, לשאוב השראה, וללמוד,
  על הגיבורים הראשיים שכבר אינם, אך סיפורם יחיה לעד.
 דרך דמותם היפה בקווים ודרך הסיפורים.`;
+
   return (
-    <div className="page-grid mb-7" style={{ marginTop: '6rem' }}>
+    <div
+      className="flex justify-content-center mb-7"
+      style={{ marginTop: '6rem' }}
+    >
       <div
-        className="flex flex-column gap-3"
-        style={{ maxWidth: '50ch', gridArea: 'centerContent' }}
+        className="flex flex-column gap-3 align-items-center text-center px-3 md:px-0"
+        style={{ maxWidth: '60ch', gridArea: 'centerContent' }}
       >
         <h2 style={{ color: 'var(--kavim-darkblue)' }}>מי אנחנו?</h2>
         <p>{heroText1}</p>
         <p>{heroText2}</p>
       </div>
-      {window.innerWidth > 768 && (
+      {/* {window.innerWidth > 768 && (
         <span style={{ gridArea: 'leftContent' }}>
           <ScaledOnScroll scaleValue={0.7}>
             <img
@@ -30,7 +34,7 @@ export function Hero() {
             />
           </ScaledOnScroll>
         </span>
-      )}
+      )} */}
     </div>
   );
 }
