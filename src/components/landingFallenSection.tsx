@@ -47,28 +47,40 @@ export function FallenSection({ fallenArr }: { fallenArr: Contact[] }) {
                   alignItems: 'center',
                 }}
               >
-                {fallenData.thumbnail && (
-                  <img
-                    src={
-                      prefix +
-                      fallenData.thumbnail
-                        .slice(
-                          0,
-                          fallenData.thumbnail.indexOf('mv2') +
-                            (fallenData.thumbnail.includes('jpeg') ? 8 : 7)
-                        )
-                        .replace('wix:image://v1/', '')
-                    }
-                    style={{
-                      maxWidth: '200px',
-                      // height: '100px',
-                      backgroundColor: 'var(--kavim-blue)',
-                      // borderRadius: '50%',
-                    }}
-                    alt={`תמונתו של ${fallenData.name}`}
-                  />
-                )}
-                {fallenData.name}
+                <Link
+                  to={`/fallenCard/${fallenData._id}`}
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    placeContent: 'top',
+                    width: 'min-content',
+                    alignItems: 'center',
+                    rowGap: '10px',
+                  }}
+                >
+                  {fallenData.thumbnail && (
+                    <img
+                      src={
+                        prefix +
+                        fallenData.thumbnail
+                          .slice(
+                            0,
+                            fallenData.thumbnail.indexOf('mv2') +
+                              (fallenData.thumbnail.includes('jpeg') ? 8 : 7)
+                          )
+                          .replace('wix:image://v1/', '')
+                      }
+                      style={{
+                        maxWidth: '200px',
+                        // height: '100px',
+                        backgroundColor: 'var(--kavim-blue)',
+                        // borderRadius: '50%',
+                      }}
+                      alt={`תמונתו של ${fallenData.name}`}
+                    />
+                  )}
+                  {fallenData.name}
+                </Link>
               </SwiperSlide>
             ))}
         </Swiper>

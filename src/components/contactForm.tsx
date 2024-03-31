@@ -17,7 +17,7 @@ type Inputs = {
   email: string;
   hero: string;
   address: string;
-  citation: string;
+  relation: string;
 };
 
 const postRequest = async (requestData: Inputs): Promise<void> => {
@@ -87,14 +87,16 @@ export function ContactForm() {
       className="page-grid relative mt-5 pb-7 overflow-hidden max-w-screen"
       style={{
         background: `linear-gradient(180deg, #ffffff 45.26%, #c5dfff 100%)`,
+        minHeight: '80svh',
+        placeContent: 'center',
       }}
     >
       <Toast ref={toast} />
       <span
-        className="flex flex-column gap-3 mb-5 align-items-center"
+        className="flex flex-column gap-3 mb-5 align-items-center text-center"
         style={{ gridArea: 'centerContent' }}
       >
-        <p style={{ color: 'var(--kavim-darkblue)' }}>
+        <p className="text-center" style={{ color: 'var(--kavim-darkblue)' }}>
           אני רוצה להזמין קווים לדמותו\ה של הגיבור\ה שלי
         </p>
         {!isFormShown && (
@@ -266,9 +268,9 @@ export function ContactForm() {
               <label htmlFor="address">כתובת למשלוח</label>
               <input className="form-input" {...register('address')} />
             </span>
-            <span className="flex flex-column" style={{ gridArea: 'citation' }}>
-              <label htmlFor="citation">כותרת/ציטוט (אופציונלי)</label>
-              <input className="form-input" {...register('citation')} />
+            <span className="flex flex-column" style={{ gridArea: 'relation' }}>
+              <label htmlFor="relation">קשר לגיבור</label>
+              <input className="form-input" {...register('relation')} />
             </span>
             <button
               className="form-button mt-8 cursor-pointer"

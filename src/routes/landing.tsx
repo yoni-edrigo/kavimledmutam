@@ -7,6 +7,7 @@ import { ContactForm } from '../components/contactForm';
 import { ThanksSection } from '../components/thanksSection';
 import React from 'react';
 import { FallenSection } from '../components/landingFallenSection';
+import { Contact } from './root';
 // import { TraceableLine } from '../utils/traceable-line';
 export type Volunteer = {
   name: string;
@@ -20,10 +21,20 @@ export type WixData = {
   ourActivity: string[];
   volunteers: Volunteer[];
   uploadUrl: string;
+  fallenData: Contact[];
 };
 export default function Landing() {
   const data = useLoaderData();
-  // console.log(wixData);
+  // const [wixData, setWixData] = useState<WixData>();
+  // // console.log(wixData);
+  // useEffect(() => {
+  //   //@ts-expect-error abc
+  //   if (data.wixData) {
+  //     //@ts-expect-error abc
+  //     setWixData(data.wixData);
+  //   }
+  //   //@ts-expect-error abc
+  // }, [data.wixData]);
   return (
     <div
       className="min-h-screen relative"
@@ -83,14 +94,18 @@ export default function Landing() {
           resolve={data.wixData}
           errorElement={<p>שגיאה בטעינת נתונים.. צרו קשר עם יוני</p>}
         >
-          {(wixData) => (
-            <>
-              {/* <OurActivity fileNameArr={wixData.ourActivity} /> */}
-              <ContactForm />
-              <FallenSection fallenArr={wixData.fallenData} />
-              <ThanksSection volunteerArr={wixData.volunteers} />
-            </>
-          )}
+          {(wixDataProps) => {
+            return (
+              wixDataProps && (
+                <>
+                  {/* <OurActivity fileNameArr={wixData.ourActivity} /> */}
+                  <ContactForm />
+                  <FallenSection fallenArr={wixDataProps.fallenData} />
+                  <ThanksSection volunteerArr={wixDataProps.volunteers} />
+                </>
+              )
+            );
+          }}
         </Await>
       </React.Suspense>
       {/* <div className="fixed" style={{ left: '0%', bottom: '0svh' }}>

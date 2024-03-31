@@ -162,7 +162,7 @@ footer {
   display: grid;
   grid-template-areas:
     'fName lName phone email'
-    'hero address citation citation'
+    'hero relation address address'
     'sendButton sendButton sendButton sendButton';
 }
 .comment-form-wrapper {
@@ -201,8 +201,8 @@ footer {
   .contact-form {
     grid-template-areas:
       'fName lName phone'
-      'email hero address'
-      'citation citation citation'
+      'email hero relation'
+      'address address address'
       'sendButton sendButton sendButton';
   }
 }
@@ -210,8 +210,8 @@ footer {
   .contact-form {
     grid-template-areas:
       'fName lName'
-      'phone email' 'hero address'
-      'citation citation '
+      'phone email' 'hero relation'
+      'address address '
       'sendButton sendButton ';
   }
   .comment-form {
@@ -239,7 +239,7 @@ footer {
     grid-template-rows: 28px 24px 130px;
   }
   .contact-form {
-    grid-template-areas: 'fName' 'lName' 'phone' 'email' 'hero' 'address' 'citation' 'fileUpload' 'sendButton';
+    grid-template-areas: 'fName' 'lName' 'phone' 'email' 'hero' 'address' 'relation' 'fileUpload' 'sendButton';
   }
   .comment-form {
     grid-template-areas: 'fName' 'lName' 'phone' 'prefix' 'comment' 'sendButton';
