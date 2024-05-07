@@ -16,9 +16,7 @@ export default function AllFallen() {
 
   // Filtered data based on search text
   const filteredData = wixData.filter((f) =>
-    filterText
-      ? f.name.includes(filterText)
-      : true && f.mediagallery && f.mediagallery.length > 0
+    filterText ? f.name.includes(filterText) : f.thumbnail
   );
 
   // Total records for the Paginator should be the length of the filtered data
