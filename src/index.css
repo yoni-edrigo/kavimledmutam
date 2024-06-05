@@ -113,6 +113,7 @@ a:-webkit-any-link {
 footer {
   background-color: var(--kavim-blue);
   min-height: 80px;
+  grid-template-rows: 60px !important;
 }
 .proccess-wrapper-grid {
   display: grid;
@@ -206,7 +207,7 @@ footer {
       'sendButton sendButton sendButton';
   }
 }
-@media (max-width: 1350px) and (min-width: 768px) {
+@media (max-width: 1350px) and (min-width: 901px) {
   .contact-form {
     grid-template-areas:
       'fName lName'
@@ -228,6 +229,13 @@ footer {
   }
   .page-grid {
     grid-template-columns: 7vw 1fr min-content;
+  }
+}
+@media (max-width: 900px) and (min-width: 768px) {
+  .fallen-hero-section {
+    grid-template-areas:
+      'name' 'imageSlider'
+      'content';
   }
 }
 
@@ -252,7 +260,8 @@ footer {
     font-size: 0.95rem;
   }
   .page-grid {
-    grid-template-columns: min-content 1fr min-content;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
   }
   .fallen-hero-section {
     grid-template-areas:

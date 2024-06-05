@@ -48,10 +48,7 @@ export function Root() {
   const [selectedDialogContent, setSelectedDialogContent] = useState(0);
   return (
     <div className="relative">
-      <header
-        className="page-grid nav-bar relative py-3"
-        style={{ gridTemplateRows: '60px' }}
-      >
+      <header className="page-grid nav-bar relative py-3">
         <NavLink to={'/'}>
           <img
             src={logoWithTitle}
@@ -59,7 +56,7 @@ export function Root() {
             className="h-7rem bg-center md:mr-2"
           />
         </NavLink>
-        <span className="flex md:gap-7 gap-4 align-items-center">
+        <span className="flex flex-wrap md:gap-7 gap-4 align-items-center">
           <NavLink to={`/`} className="nav-bar-link white-space-nowrap">
             קווים לדמותם
           </NavLink>
@@ -86,7 +83,7 @@ export function Root() {
         </Dialog>
         <Outlet />
       </div>
-      <footer className="flex px-3 justify-content-between align-items-center gap-3 p-3 relative h-3rem">
+      <footer className="flex flex-wrap px-3 justify-content-between align-items-center gap-3 p-3 relative h-3rem">
         <div className="h-full flex flex-column justify-content-between">
           <SocialBar />
           <div className="flex gap-3">

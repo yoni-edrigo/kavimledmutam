@@ -39,7 +39,11 @@ export default function FallenPage() {
   ) : (
     <>
       {fallenData && getMetaTags(fallenData)}
-      <div className="page-grid pt-5 mb-8 overflow-hidden">
+      <div
+        className={`${
+          window.innerWidth > 768 && 'page-grid'
+        } pt-5 mb-8 overflow-hidden`}
+      >
         <div
           className="fallen-hero-section gap-4 my-5 align-items-start"
           style={{ gridArea: 'centerContent' }}
@@ -49,11 +53,14 @@ export default function FallenPage() {
             {fallenData.isFemale ? ' - קווים לדמותה' : ' - קווים לדמותו'}
           </h2>
           <div
-            className="w-full flex flex-column gap-5"
+            className="w-full flex flex-column gap-5 align-items-center"
             style={{ gridArea: 'content' }}
           >
             {fallenData.story ? (
-              <p className="text-justify z-3" style={{ maxWidth: '50ch' }}>
+              <p
+                className="text-justify z-3"
+                style={{ maxWidth: '50ch', width: '80vw' }}
+              >
                 {fallenData.story}
               </p>
             ) : (
@@ -85,7 +92,12 @@ export default function FallenPage() {
           </div>
           <div
             style={{
-              width: window.innerWidth < 900 ? '350px' : '450px',
+              width:
+                window.innerWidth < 900
+                  ? window.innerWidth < 768
+                    ? '80vw'
+                    : '350px'
+                  : '450px',
               gridArea: 'imageSlider',
               justifySelf: 'center',
             }}
@@ -97,6 +109,7 @@ export default function FallenPage() {
               navigation={true}
               modules={[Pagination, Navigation]}
               autoHeight={true}
+              centeredSlides
             >
               {fallenData.mediagallery &&
                 fallenData.mediagallery.map((media, index) => (
@@ -118,7 +131,12 @@ export default function FallenPage() {
                             .replace('wix:image://v1/', '')
                         }`}
                         style={{
-                          width: window.innerWidth < 900 ? '350px' : '450px',
+                          width:
+                            window.innerWidth < 900
+                              ? window.innerWidth < 768
+                                ? '80vw'
+                                : '350px'
+                              : '450px',
                         }}
                       />
                       {media.painter && (
@@ -189,7 +207,7 @@ function CommentsSection({ fallenId }: { fallenId: string }) {
             })
             .map((comment, index) => (
               <div className="comment-wrapper px-2" key={index}>
-                <div className="comment pt-5 px-6 pb-7 gap-3" key={index}>
+                <div className="comment pt-5 md:px-6 pb-7 gap-3" key={index}>
                   <h3 style={{ gridArea: 'name' }}>
                     {comment.fName}
                     {` `}
