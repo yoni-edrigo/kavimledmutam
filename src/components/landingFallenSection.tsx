@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 export function FallenSection({ fallenArr }: { fallenArr: Contact[] }) {
   return (
     <div
-      className="page-grid align-items-center flex flex-column bg-white"
+      className="align-items-center flex flex-column bg-white"
       style={{
         paddingBottom: '100px',
         // background: `linear-gradient(180deg, #E7F1FB 0%, rgba(231, 241, 251, 0) 100%)`,

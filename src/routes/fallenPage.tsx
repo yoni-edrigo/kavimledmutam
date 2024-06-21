@@ -22,6 +22,16 @@ export default function FallenPage() {
   console.log(fallenData);
 
   const [show, setShow] = useState(false);
+  const [showImages, setShowImages] = useState(true);
+
+  useEffect(() => {
+    if (show) {
+      setShowImages(window.innerWidth > 578);
+    } else {
+      setShowImages(true);
+    }
+  }, [show]);
+
   const parent = useRef(null);
 
   useEffect(() => {
@@ -37,29 +47,22 @@ export default function FallenPage() {
       </Link>
     </>
   ) : (
-    <>
+    <div>
       {fallenData && getMetaTags(fallenData)}
-      <div
-        className={`${
-          window.innerWidth > 768 && 'page-grid'
-        } pt-5 mb-8 overflow-hidden`}
-      >
-        <div
-          className="fallen-hero-section gap-4 my-5 align-items-start"
-          style={{ gridArea: 'centerContent' }}
-        >
-          <h2 className="my-0" style={{ gridArea: 'name' }}>
-            {fallenData.name}
-            {fallenData.isFemale ? ' - קווים לדמותה' : ' - קווים לדמותו'}
-          </h2>
-          <div
-            className="w-full flex flex-column gap-5 align-items-center"
-            style={{ gridArea: 'content' }}
-          >
+      <section id="fallen-data" className="sm:mt-5">
+        <h2 className="my-0 px-3 lg:px-0">
+          {fallenData.name}
+          {fallenData.isFemale ? ' - קווים לדמותה' : ' - קווים לדמותו'}
+        </h2>
+        <article className="flex flex-wrap px-4 gap-4 lg:justify-content-between justify-content-center align-items-start mt-0">
+          <div className="w-fit flex flex-column gap-3 mt-3">
             {fallenData.story ? (
               <p
                 className="text-justify z-3"
-                style={{ maxWidth: '50ch', width: '80vw' }}
+                style={{
+                  maxWidth: window.innerWidth < 1000 ? '' : '50ch',
+                  width: '90vw',
+                }}
               >
                 {fallenData.story}
               </p>
@@ -68,7 +71,7 @@ export default function FallenPage() {
                 <CommentsSection fallenId={fallenData._id} />
               </div>
             )}
-            <div className="flex flex-row gap-5 align-items-center">
+            <div className="flex flex-wrap gap-5 align-items-center">
               <Button
                 className="write-more-btn w-fit flex flex-row-reverse gap-2 relative z-0 white-space-nowrap"
                 // size="small"
@@ -84,80 +87,72 @@ export default function FallenPage() {
                   style={{ top: '-470px', left: '-1120px', scale: '0.9' }}
                 />
               </Button>
-              <SocialShare
-                fallenName={fallenData.name}
-                shareUrl={window.location.href}
-              />
+              <span className="mx-3 sm:m-0">
+                <SocialShare
+                  fallenName={fallenData.name}
+                  shareUrl={window.location.href}
+                />
+              </span>
             </div>
           </div>
-          <div
-            style={{
-              width:
-                window.innerWidth < 900
-                  ? window.innerWidth < 768
-                    ? '80vw'
-                    : '350px'
-                  : '450px',
-              gridArea: 'imageSlider',
-              justifySelf: 'center',
-            }}
-          >
-            <Swiper
-              pagination={{
-                type: 'fraction',
-              }}
-              navigation={true}
-              modules={[Pagination, Navigation]}
-              autoHeight={true}
-              centeredSlides
+          {showImages && (
+            <div
+              className="md:max-w-30rem w-fit relative "
+              style={{ maxWidth: '80vw' }}
             >
-              {fallenData.mediagallery &&
-                fallenData.mediagallery.map((media, index) => (
-                  <SwiperSlide
-                    key={index}
-                    style={{ display: 'flex', placeContent: 'center' }}
-                  >
-                    <figure>
-                      <img
-                        alt={`התמונה של: ${fallenData.name}`}
-                        src={`${
-                          prefix +
-                          media.src
-                            .slice(
-                              0,
-                              media.src.indexOf('mv2') +
-                                +(media.src.includes('jpeg') ? 8 : 7)
-                            )
-                            .replace('wix:image://v1/', '')
-                        }`}
-                        style={{
-                          width:
-                            window.innerWidth < 900
-                              ? window.innerWidth < 768
-                                ? '80vw'
-                                : '350px'
-                              : '450px',
-                        }}
-                      />
-                      {media.painter && (
-                        <figcaption className="text-sm md:text-base text-center font-semibold">{`מאיירת: ${media.painter}`}</figcaption>
-                      )}
-                    </figure>
-                  </SwiperSlide>
-                ))}
-            </Swiper>
-          </div>
-        </div>
-        <div
-          className="flex flex-column gap-5 px-3 md:px-8 mb-8"
-          style={{ gridArea: 'centerContent2' }}
-          ref={parent}
-        >
-          {show && <CommentForm fallenId={fallenData._id} hide={reveal} />}
-          {fallenData.story && <CommentsSection fallenId={fallenData._id} />}
-        </div>
+              <Swiper
+                pagination={{
+                  type: 'fraction',
+                }}
+                navigation={true}
+                modules={[Pagination, Navigation]}
+                autoHeight={true}
+                centeredSlides
+              >
+                {fallenData.mediagallery &&
+                  fallenData.mediagallery.map((media, index) => (
+                    <SwiperSlide
+                      key={index}
+                      style={{ display: 'flex', placeContent: 'center' }}
+                    >
+                      <figure>
+                        <img
+                          alt={`התמונה של: ${fallenData.name}`}
+                          src={`${
+                            prefix +
+                            media.src
+                              .slice(
+                                0,
+                                media.src.indexOf('mv2') +
+                                  +(media.src.includes('jpeg') ? 8 : 7)
+                              )
+                              .replace('wix:image://v1/', '')
+                          }`}
+                          style={{
+                            width:
+                              window.innerWidth < 900
+                                ? window.innerWidth < 768
+                                  ? '80vw'
+                                  : '350px'
+                                : '450px',
+                          }}
+                        />
+                        {media.painter && (
+                          <figcaption className="text-sm md:text-base text-center font-semibold">{`מאיירת: ${media.painter}`}</figcaption>
+                        )}
+                      </figure>
+                    </SwiperSlide>
+                  ))}
+              </Swiper>
+            </div>
+          )}
+        </article>
+      </section>
+      <div className="flex flex-column gap-5 px-3 md:px-8 mb-8" ref={parent}>
+        {show && <CommentForm fallenId={fallenData._id} hide={reveal} />}
+        {fallenData.story && <CommentsSection fallenId={fallenData._id} />}
       </div>
-    </>
+    </div>
   );
 }
 
@@ -188,7 +183,7 @@ function CommentsSection({ fallenId }: { fallenId: string }) {
   };
   return (
     <>
-      <div className="comments-section z-1">
+      <div className="comments-section z-1 mt-5">
         {commentsArr && commentsArr.length > 0 ? (
           commentsArr
             .sort((a, b): number => {
@@ -221,7 +216,16 @@ function CommentsSection({ fallenId }: { fallenId: string }) {
                   <h3 style={{ gridArea: 'date' }}>
                     {new Date(comment._createdDate).toLocaleDateString('he-IL')}
                   </h3>
-                  <p style={{ gridArea: 'comment' }}>{comment.comment}</p>
+                  <p
+                    className="text-right sm:text-start w-full"
+                    style={{
+                      gridArea: 'comment',
+                      maxWidth: window.innerWidth < 300 ? '15ch' : '',
+                      gridColumn: window.innerWidth < 578 ? '1 / -1' : '',
+                    }}
+                  >
+                    {comment.comment}
+                  </p>
                 </div>
                 <div
                   style={{
@@ -239,14 +243,18 @@ function CommentsSection({ fallenId }: { fallenId: string }) {
         )}
       </div>
       {commentsArr && (
-        <div className="w-full">
+        <div className="w-full mb-7">
           <Paginator
             first={first}
             rows={rows}
             totalRecords={commentsArr.length}
             rowsPerPageOptions={[10, 20, 30]}
             onPageChange={onPageChange}
-            template="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
+            template={
+              window.innerWidth < 500
+                ? 'FirstPageLink PrevPageLink NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown'
+                : 'RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink'
+            }
             pt={{ root: { className: 'text-primary', dir: 'ltr' } }}
           />
         </div>

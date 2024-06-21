@@ -2,6 +2,7 @@ import { Outlet, NavLink } from 'react-router-dom';
 import logoWithTitle from '../assets/logoWithTitle.png';
 import { useState } from 'react';
 import { Dialog } from 'primereact/dialog';
+import '../styles/roots.css';
 export type Contact = {
   _id: string;
   name: string;
@@ -42,49 +43,58 @@ const contactDetails = (
   </div>
 );
 const dialogContent = [contactDetails, 'תנאי שימוש', 'נגישות'];
+
+function NavBar() {
+  return (
+    <nav className="justify-content-start">
+      <NavLink to={'/'} className={'z-5'}>
+        <img
+          src={logoWithTitle}
+          alt="logo with title"
+          className="h-5rem sm:h-7rem bg-center md:mr-2"
+        />
+      </NavLink>
+      <div className="flex md:gap-7 gap-3 items-center align-self-center sm:mr-4 mr-2">
+        <NavLink
+          to={`/contactUs`}
+          className="nav-bar-link white-space-nowrap bg-white px-3 sm:px-5 py-2 text-center flex items-center"
+          style={{ borderRadius: '40px' }}
+        >
+          להזמנה
+        </NavLink>
+        <NavLink to={`allFallen`} className="white-space-nowrap nav-bar-link">
+          הגיבורים שלנו
+        </NavLink>
+      </div>
+      <div className="hidden md:flex items-center gap-3 ml-5">
+        {window.innerWidth > 768 && <SocialBar />}
+      </div>
+    </nav>
+  );
+}
 export function Root() {
   //   const wixData: Contact[][] = useLoaderData();
+
+  return (
+    <div className={'mainGrid'}>
+      <NavBar />
+      <section>
+        <Outlet />
+      </section>
+      <Footer />
+    </div>
+  );
+}
+function Footer() {
   const [dialogVisible, setDialogVisible] = useState(false);
   const [selectedDialogContent, setSelectedDialogContent] = useState(0);
   return (
-    <div className="relative">
-      <header className="page-grid nav-bar relative py-3">
-        <NavLink to={'/'}>
-          <img
-            src={logoWithTitle}
-            alt="logo with title"
-            className="h-7rem bg-center md:mr-2"
-          />
-        </NavLink>
-        <span className="flex flex-wrap md:gap-7 gap-4 align-items-center">
-          <NavLink to={`/`} className="nav-bar-link white-space-nowrap">
-            קווים לדמותם
-          </NavLink>
-          <NavLink to={`allFallen`} className="white-space-nowrap nav-bar-link">
-            הגיבורים שלנו
-          </NavLink>
-          <h3
-            className="nav-bar-link cursor-pointer white-space-nowrap "
-            onClick={() => {
-              setSelectedDialogContent(0);
-              setDialogVisible(true);
-            }}
-          >
-            צור קשר
-          </h3>
-        </span>
-        <div className="align-self-center flex gap-3 ml-5">
-          {window.innerWidth > 768 && <SocialBar />}
-        </div>
-      </header>
-      <div className="page-content" style={{ gridArea: 'centerContent' }}>
-        <Dialog visible={dialogVisible} onHide={() => setDialogVisible(false)}>
-          {dialogContent[selectedDialogContent]}
-        </Dialog>
-        <Outlet />
-      </div>
-      <footer className="flex flex-wrap px-3 justify-content-between align-items-center gap-3 p-3 relative h-3rem">
-        <div className="h-full flex flex-column justify-content-between">
+    <footer className="flex-column align-items-center gap-5">
+      <Dialog visible={dialogVisible} onHide={() => setDialogVisible(false)}>
+        {dialogContent[selectedDialogContent]}
+      </Dialog>
+      {window.innerWidth > 578 && (
+        <div className="h-full flex flex-column justify-content-between mr-3">
           <SocialBar />
           <div className="flex gap-3">
             <h3
@@ -116,27 +126,66 @@ export function Root() {
             </h3>
           </div>
         </div>
-        <div className="flex relative">
+      )}
+      <div className="flex justify-content-center">
+        <span className="relative">
           <img
             style={{
-              bottom: window.innerWidth < 768 ? '35px' : '10px',
+              bottom: window.innerWidth < 768 ? '5px' : '30px',
               scale: '1.5',
-              left: window.innerWidth < 768 ? '0px' : '-17px',
+              left: '-17px',
             }}
             src={logoWithTitle}
             alt="logo with title"
             className="h-7rem bg-center absolute"
           />
+        </span>
+      </div>
+      {window.innerWidth <= 578 && (
+        <div className="h-full flex flex-column justify-content-between align-items-center mt-3 mr-3">
+          <SocialBar />
+          <div className="flex gap-3">
+            <h3
+              className="m-0 text-sm underline cursor-pointer white-space-nowrap"
+              onClick={() => {
+                setSelectedDialogContent(0);
+                setDialogVisible(true);
+              }}
+            >
+              יצירת קשר
+            </h3>
+            <h3
+              className="m-0 text-sm underline cursor-pointer white-space-nowrap"
+              onClick={() => {
+                setSelectedDialogContent(1);
+                setDialogVisible(true);
+              }}
+            >
+              תנאי שימוש
+            </h3>
+            <h3
+              className="m-0 text-sm underline cursor-pointer"
+              onClick={() => {
+                setSelectedDialogContent(2);
+                setDialogVisible(true);
+              }}
+            >
+              נגישות
+            </h3>
+          </div>
         </div>
-        <div className="flex h-full align-items-end text-left">
-          <h3 className="m-0 text-sm">כל הזכויות שמרות ל"קווים לדמותם"</h3>
-        </div>
-      </footer>
-    </div>
+      )}
+      <div className="flex h-full align-items-center text-center">
+        <h3 className="m-0 text-sm flex flex-wrap gap-3">
+          <span>{'כל הזכויות שמרות'}</span>
+          <span>{'"קווים לדמותם"'}</span>
+        </h3>
+      </div>
+    </footer>
   );
 }
 const SocialBar = () => (
-  <div className="flex gap-3">
+  <div className="flex gap-3 align-items-center">
     <a
       className="social-link"
       href="https://www.instagram.com/kavim.ledmutam/"

@@ -3,12 +3,16 @@ import { Hero } from '../components/hero';
 // import { OurActivity } from '../components/ourActivity';
 
 import { Helmet } from 'react-helmet-async';
-import { ContactForm } from '../components/contactForm';
+// import { ContactForm } from '../components/contactForm';
 import { ThanksSection } from '../components/thanksSection';
 import React from 'react';
 import { FallenSection } from '../components/landingFallenSection';
 import { Contact } from './root';
 // import { TraceableLine } from '../utils/traceable-line';
+
+// import landindDashedLine from '../assets/landing-horizontal-dashed-line.svg';
+import { LandingVideo } from '../components/landing-video';
+
 export type Volunteer = {
   name: string;
   role: string;
@@ -36,14 +40,7 @@ export default function Landing() {
   //   //@ts-expect-error abc
   // }, [data.wixData]);
   return (
-    <div
-      className="min-h-screen relative"
-      style={{
-        display: 'grid',
-        gridTemplateRows: 'repeat(3,minmax(1svh,min-content))',
-        fontSize: '16pt',
-      }}
-    >
+    <div style={{ padding: window.innerWidth < 1000 ? '0' : '', margin: '0' }}>
       <Helmet prioritizeSeoTags>
         <title>קווים לדמותם | הנצחת נופלי חרבות ברזל</title>
         <meta
@@ -87,6 +84,7 @@ export default function Landing() {
         />
         <meta property="twitter:image" content="/kavimledmutam_logo.jpeg" />
       </Helmet>
+      <LandingVideo />
       <Hero />
       <React.Suspense fallback={<p>טוען נתונים...</p>}>
         <Await
@@ -99,7 +97,14 @@ export default function Landing() {
               wixDataProps && (
                 <>
                   {/* <OurActivity fileNameArr={wixData.ourActivity} /> */}
-                  <ContactForm />
+                  {/* <ContactForm /> */}
+                  {/* <div
+                    style={{
+                      minHeight: window.innerWidth < 768 ? '10rem' : '20rem',
+                      backgroundImage: `url(${landindDashedLine})`,
+                    }}
+                    className="max-w-screen bg-top bg-cover bg-no-repaet mb-7"
+                  ></div> */}
                   <FallenSection fallenArr={wixDataProps.fallenData} />
                   <ThanksSection volunteerArr={wixDataProps.volunteers} />
                 </>

@@ -11,6 +11,7 @@ import FallenPage from './routes/fallenPage';
 import { HelmetProvider } from 'react-helmet-async';
 import { addLocale, locale } from 'primereact/api';
 import { he } from './he.json';
+import { ContactForm } from './routes/contactForm';
 addLocale('he', he);
 locale('he');
 
@@ -26,6 +27,11 @@ const router = createBrowserRouter([
         path: 'allFallen/',
         element: <AllFallen />,
         loader: allFallenLoader,
+      },
+      {
+        path: 'contactUs/',
+        element: <ContactForm />,
+        // loader: allFallenLoader,
       },
       {
         path: 'fallenCard/:contactId',

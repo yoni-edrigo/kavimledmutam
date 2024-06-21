@@ -106,10 +106,10 @@ export function CommentForm({
   };
   return (
     <div className=" relative">
-      <div className="comment-form-wrapper flex p-3 border-round-lg relative">
+      <div className="comment-form-wrapper flex sm:p-3 border-round-lg relative">
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="comment-form gap-4 border-1 border-white border-round-lg p-5 w-full z-1"
+          className="comment-form gap-4 border-1 border-white border-round-lg p-1 sm:p-5 w-full z-1"
         >
           <span className="flex flex-column " style={{ gridArea: 'fName' }}>
             <label htmlFor="fName">שם פרטי</label>

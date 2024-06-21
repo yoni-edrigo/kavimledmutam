@@ -13,7 +13,7 @@ import AnimatedOnScroll from './animate-wrapper';
 export function OurActivity({ fileNameArr }: { fileNameArr: string[] }) {
   return (
     <div
-      className="page-grid md:py-7 py-6"
+      className="md:py-7 py-6"
       style={{
         backgroundColor: '#EDF5FF',
         // minHeight: '600px',
