@@ -54,7 +54,13 @@ export default function FallenPage() {
           {fallenData.name}
           {fallenData.isFemale ? ' - קווים לדמותה' : ' - קווים לדמותו'}
         </h2>
-        <article className="flex flex-wrap px-4 gap-4 lg:justify-content-between justify-content-center align-items-start mt-0">
+        <article
+          className={`flex px-4 gap-4 lg:justify-content-between justify-content-center mt-0 ${
+            fallenData.story
+              ? 'flex-wrap align-items-start'
+              : 'flex-wrap-reverse align-items-end'
+          }`}
+        >
           <div className="w-fit flex flex-column gap-3 mt-3">
             {fallenData.story ? (
               <p

@@ -27,7 +27,7 @@ export default function AllFallen() {
     setRows(event.rows);
   };
   return (
-    <div className="" style={{ marginBottom: '150px' }}>
+    <div>
       <Helmet prioritizeSeoTags>
         <title>קווים לדמותם | רשימת הנופלים</title>
         <meta

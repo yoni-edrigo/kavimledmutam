@@ -81,6 +81,7 @@ export function Root() {
       <section>
         <Outlet />
       </section>
+      {window.innerWidth < 500 && <div className="h-10rem"></div>}
       <Footer />
     </div>
   );
