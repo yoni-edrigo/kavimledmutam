@@ -54,7 +54,7 @@ function NavBar() {
           className="h-5rem sm:h-7rem bg-center md:mr-2"
         />
       </NavLink>
-      <div className="flex md:gap-7 gap-3 items-center align-self-center sm:mr-4 mr-2">
+      <div className="flex md:gap-7 gap-3  align-self-center sm:mr-4 mr-2 justify-content-between w-full pl-3 sm:justify-content-start flex-row-reverse sm:flex-row">
         <NavLink
           to={`/contactUs`}
           className="nav-bar-link white-space-nowrap bg-white px-3 sm:px-5 py-2 text-center flex items-center"
@@ -134,7 +134,7 @@ function Footer() {
             style={{
               bottom: window.innerWidth < 768 ? '5px' : '30px',
               scale: '1.5',
-              left: '-17px',
+              left: window.innerWidth < 768 ? '-25px' : '-17px',
             }}
             src={logoWithTitle}
             alt="logo with title"
