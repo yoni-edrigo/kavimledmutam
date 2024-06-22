@@ -54,7 +54,7 @@ function NavBar() {
           className="h-5rem sm:h-7rem bg-center md:mr-2"
         />
       </NavLink>
-      <div className="flex md:gap-7 gap-3  align-self-center sm:mr-4 mr-2 justify-content-between w-full pl-3 sm:justify-content-start flex-row-reverse sm:flex-row">
+      <div className="flex md:gap-7 gap-3  align-self-center sm:mr-4 mr-2 w-full pl-3 sm:justify-content-start flex-row-reverse sm:flex-row">
         <NavLink
           to={`/contactUs`}
           className="nav-bar-link white-space-nowrap bg-white px-3 sm:px-5 py-2 text-center flex items-center"

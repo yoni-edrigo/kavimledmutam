@@ -12,7 +12,7 @@ export function Hero() {
 דרך דמותם היפה בקווים ודרך הסיפורים.`;
 
   return (
-    <div className="flex justify-content-center py-7 pt-5 md:py-7">
+    <div className="flex justify-content-center pb-7 md:py-7">
       <div
         className="flex flex-column gap-3 align-items-center text-center px-3 md:px-0"
         style={{ maxWidth: '100ch', gridArea: 'centerContent' }}
