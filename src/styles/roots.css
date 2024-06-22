@@ -22,6 +22,6 @@
   }
   .mainGrid section > * {
     grid-column: 1 / -1;
-    margin-top: 4rem;
+    margin-top: 3rem;
   }
 }

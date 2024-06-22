@@ -110,7 +110,7 @@ export function ContactForm() {
           {/* {!isFormShown && (
             <h2 style={{ color: 'var(--kavim-darkblue)' }}>אז איך זה עובד?</h2>
           )} */}
-          <div className="flex flex-wrap mt-7 md:row-gap-7 row-gap-3 column-gap-3 justify-content-center">
+          <div className="flex flex-wrap mt-7 md:row-gap-7 row-gap-5 column-gap-3 justify-content-center">
             <div className="proccess-card-grid max-w-15rem">
               <img src={penIcon} />
 
@@ -169,7 +169,7 @@ export function ContactForm() {
           </div>
         </span>
       </div>
-      <div className="min-h-screen md:p-7" id="form">
+      <div className="min-h-screen md:p-7 w-full" id="form">
         <p style={{ fontSize: '1.1rem' }} className="md:mb-7 mb-5 px-3 md:px-0">
           אנא השאירו פרטים ואנו נחזור אליכם בהקדם
         </p>

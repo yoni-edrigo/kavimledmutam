@@ -51,7 +51,11 @@ export default function AllFallen() {
       </div>
       <div
         className="md:px-7"
-        style={{ gridArea: 'centerContent2', justifySelf: 'center' }}
+        style={{
+          gridArea: 'centerContent2',
+          justifySelf: 'center',
+          marginBottom: window.innerWidth > 768 ? '9rem' : '',
+        }}
       >
         <div
           className="grid grid-nogutter  md:gap-5 mt-3 md:justify-content-between justify-content-center"

@@ -55,7 +55,7 @@ export default function FallenPage() {
           {fallenData.isFemale ? ' - קווים לדמותה' : ' - קווים לדמותו'}
         </h2>
         <article
-          className={`flex px-4 gap-4 lg:justify-content-between justify-content-center mt-0 ${
+          className={`flex px-4 md:px-0 gap-4 lg:justify-content-between justify-content-center mt-0 ${
             fallenData.story
               ? 'flex-wrap align-items-start'
               : 'flex-wrap-reverse align-items-end'
@@ -154,7 +154,10 @@ export default function FallenPage() {
           )}
         </article>
       </section>
-      <div className="flex flex-column gap-5 px-3 md:px-8 mb-8" ref={parent}>
+      <div
+        className="flex flex-column gap-5 px-3 md:px-8 mb-8 mt-5"
+        ref={parent}
+      >
         {show && <CommentForm fallenId={fallenData._id} hide={reveal} />}
         {fallenData.story && <CommentsSection fallenId={fallenData._id} />}
       </div>

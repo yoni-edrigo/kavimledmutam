@@ -317,7 +317,7 @@ footer {
   }
 
   .proccess-card-grid {
-    grid-template-rows: 28px 24px 130px;
+    grid-template-rows: 28px 24px 1fr;
   }
 
   .contact-form {

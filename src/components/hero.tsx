@@ -17,7 +17,9 @@ export function Hero() {
         className="flex flex-column gap-3 align-items-center text-center px-3 md:px-0"
         style={{ maxWidth: '100ch', gridArea: 'centerContent' }}
       >
-        <h2 style={{ color: 'var(--kavim-darkblue)' }}>מי אנחנו?</h2>
+        <h2 style={{ color: 'var(--kavim-darkblue)' }}>
+          קווים לדמותם- מי אנחנו?
+        </h2>
         <p>{heroText1}</p>
         <p>{heroText2}</p>
       </div>

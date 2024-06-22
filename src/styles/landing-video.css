@@ -19,6 +19,8 @@
   .video-section {
     display: flex;
     min-height: 300px;
+    place-items: start;
+    justify-content: center;
   }
   .video-section > video {
     width: 100%;

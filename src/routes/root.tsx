@@ -178,7 +178,7 @@ function Footer() {
       )}
       <div className="flex h-full align-items-center text-center">
         <h3 className="m-0 text-sm flex flex-wrap gap-3">
-          <span>{'כל הזכויות שמרות'}</span>
+          <span>{'כל הזכויות שמורות'}</span>
           <span>{'"קווים לדמותם"'}</span>
         </h3>
       </div>

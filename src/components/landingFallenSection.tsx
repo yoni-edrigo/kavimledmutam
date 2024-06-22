@@ -14,7 +14,7 @@ export function FallenSection({ fallenArr }: { fallenArr: Contact[] }) {
       }}
     >
       <h2
-        className="mt-5 mb-7"
+        className="md:mt-5 md:mb-7 mb-3"
         style={{ gridArea: 'centerContent', color: 'var(--kavim-darkblue)' }}
       >
         הגיבורים שלנו
@@ -30,10 +30,11 @@ export function FallenSection({ fallenArr }: { fallenArr: Contact[] }) {
           spaceBetween={25}
           loop={true}
           autoplay={{
-            delay: 3000,
+            delay: 2000,
             disableOnInteraction: false,
           }}
           dir="ltr"
+          speed={1000}
         >
           {fallenArr &&
             fallenArr.map((fallenData, index) => (
