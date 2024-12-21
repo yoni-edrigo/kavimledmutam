@@ -25,8 +25,8 @@ export function OurActivities() {
 
   return (
     <div
-      className="flex flex-column gap-7"
-      style={{ minHeight: '100svh', marginBottom: '10rem' }}
+      className="flex flex-column gap-7 sm:mb-7 mb-5"
+      style={{ minHeight: '100svh' }}
     >
       <ActivitiesHero />
       <AbroadActivities abroadGallery={data.abroadActivity} />
@@ -39,10 +39,8 @@ export function OurActivities() {
 function ActivitiesHero() {
   return (
     <div
-      className="text-center mx-auto flex flex-column gap-6 "
+      className="text-center mx-auto flex flex-column sm:gap-6 gap-3 my-6 sm:my-8"
       style={{
-        marginTop: '8rem',
-        marginBottom: '6rem',
         maxWidth: '80ch',
       }}
     >
@@ -71,7 +69,7 @@ function ArmyActivities({ armyGallery }: { armyGallery: string[] }) {
       className="max-w-screen"
     >
       <span
-        className="flex flex-column align-items-center text-center mx-auto my-7 px-7 gap-3"
+        className="flex flex-column align-items-center text-center mx-auto sm:my-7 my-3 sm:px-7 px-3 gap-3"
         style={{
           maxWidth: '80ch',
         }}
@@ -112,7 +110,7 @@ function SchoolActivities({ schoolGallery }: { schoolGallery: string[] }) {
         minHeight: '70svh',
         background: `linear-gradient(0deg, #ffffff 45.26%, var(--kavim-lightblue) 100%)`,
       }}
-      className="max-w-screen pt-7"
+      className="max-w-screen sm:pt-7"
     >
       <span
         className="flex flex-column align-items-center text-center mx-auto my-7 px-7 gap-3"
