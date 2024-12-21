@@ -6,12 +6,18 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import './index.css';
 import AllFallen from './routes/allFallen';
 import Landing from './routes/landing';
-import { allFallenLoader, fallenContactLoader, rootLoader } from './loaders';
+import {
+  allFallenLoader,
+  fallenContactLoader,
+  ourActivityLoader,
+  rootLoader,
+} from './loaders';
 import FallenPage from './routes/fallenPage';
 import { HelmetProvider } from 'react-helmet-async';
 import { addLocale, locale } from 'primereact/api';
 import { he } from './he.json';
 import { ContactForm } from './routes/contactForm';
+import { OurActivities } from './routes/ourActivities';
 addLocale('he', he);
 locale('he');
 
@@ -32,6 +38,11 @@ const router = createBrowserRouter([
         path: 'contactUs/',
         element: <ContactForm />,
         // loader: allFallenLoader,
+      },
+      {
+        path: 'ourActivities/',
+        element: <OurActivities />,
+        loader: ourActivityLoader,
       },
       {
         path: 'fallenCard/:contactId',

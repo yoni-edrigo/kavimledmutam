@@ -36,6 +36,27 @@ export async function allFallenLoader() {
     throw error; // Re-throw the error if needed
   }
 }
+export async function ourActivityLoader() {
+  try {
+    const response = await fetch(
+      `https://yonivas0.editorx.io/kavimledmutam/_functions/getOurActivityPageData`
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    // If you expect JSON response, use response.json()
+    // If you expect other response types, adjust accordingly
+    const data = await response.json();
+    console.log(data.message);
+
+    return data.message;
+  } catch (error) {
+    console.error('Error fetching comments:', error);
+    throw error; // Re-throw the error if needed
+  }
+}
 //@ts-expect-error because
 export async function fallenContactLoader({ params }) {
   try {

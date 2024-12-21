@@ -33,16 +33,17 @@ const contactDetails = (
         </a>
         @kavimledmutam
       </span>
-      <span className="flex flex-column align-items-center gap-1">
-        <a href="https://wa.me/+972543911192" target="_blank">
+      <span className="flex flex-column align-items-center gap-1 text-center">
+        <a href="https://wa.me/+972546675682" target="_blank">
           <i className="pi pi-whatsapp text-4xl" />
         </a>
-        מעיין -מנהלת
+        שירה גבסי <br />
+        מנהלת הזמנות
       </span>
     </div>
   </div>
 );
-const dialogContent = [contactDetails, 'תנאי שימוש', 'נגישות'];
+const dialogContent = [contactDetails];
 
 function NavBar() {
   return (
@@ -64,6 +65,12 @@ function NavBar() {
         </NavLink>
         <NavLink to={`allFallen`} className="white-space-nowrap nav-bar-link">
           הגיבורים שלנו
+        </NavLink>
+        <NavLink
+          to={`ourActivities`}
+          className="white-space-nowrap nav-bar-link"
+        >
+          הפעילות שלנו
         </NavLink>
       </div>
       <div className="hidden md:flex items-center gap-3 ml-5">
@@ -137,24 +144,6 @@ function Footer() {
               }}
             >
               יצירת קשר
-            </h3>
-            <h3
-              className="m-0 text-sm underline cursor-pointer white-space-nowrap"
-              onClick={() => {
-                setSelectedDialogContent(1);
-                setDialogVisible(true);
-              }}
-            >
-              תנאי שימוש
-            </h3>
-            <h3
-              className="m-0 text-sm underline cursor-pointer"
-              onClick={() => {
-                setSelectedDialogContent(2);
-                setDialogVisible(true);
-              }}
-            >
-              נגישות
             </h3>
           </div>
         </div>
