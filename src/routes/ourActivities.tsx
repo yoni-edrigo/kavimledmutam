@@ -7,12 +7,14 @@ import { SwiperSlide, Swiper } from 'swiper/react';
 import { prefix } from '../utils';
 import { Autoplay, Navigation } from 'swiper/modules';
 import { useLoaderData } from 'react-router-dom';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { MediaPlayer, MediaProvider } from '@vidstack/react';
 import {
   defaultLayoutIcons,
   DefaultVideoLayout,
 } from '@vidstack/react/player/layouts/default';
+import { AnimatePresence, motion } from 'motion/react';
+import { createPortal } from 'react-dom';
 
 interface ActivitiesData {
   schoolActivity: string[];
@@ -25,8 +27,8 @@ export function OurActivities() {
 
   return (
     <div
-      className="flex flex-column gap-7 sm:mb-7 mb-5"
-      style={{ minHeight: '100svh' }}
+      className="flex flex-column gap-7"
+      style={{ minHeight: '100svh', marginBottom: '200px' }}
     >
       <ActivitiesHero />
       <AbroadActivities abroadGallery={data.abroadActivity} />
@@ -41,7 +43,8 @@ function ActivitiesHero() {
     <div
       className="text-center mx-auto flex flex-column sm:gap-6 gap-3 my-6 sm:my-8"
       style={{
-        maxWidth: '80ch',
+        maxWidth: '100ch',
+        width: '90svw',
       }}
     >
       <h2
@@ -65,13 +68,15 @@ function ArmyActivities({ armyGallery }: { armyGallery: string[] }) {
     <div
       style={{
         minHeight: '80svh',
+        placeItems: 'center',
       }}
       className="max-w-screen"
     >
       <span
         className="flex flex-column align-items-center text-center mx-auto sm:my-7 my-3 sm:px-7 px-3 gap-3"
         style={{
-          maxWidth: '80ch',
+          maxWidth: '100ch',
+          width: '90svw',
         }}
       >
         <img
@@ -88,15 +93,25 @@ function ArmyActivities({ armyGallery }: { armyGallery: string[] }) {
         >
           פעילות עם צה"ל
         </h2>
-        <p>פעילויות משותפות עם צהל ואירועי הנצחה</p>
+        <p>פעילויות משותפות עם צהל, גופים ממשלתיים ואירועי הנצחה.</p>
       </span>
-      <img src={armyBanner} className="w-full mb-7" />
-      <div className="max-w-screen mx-8">
+      <img
+        src={armyBanner}
+        className="mb-7"
+        style={{
+          maxWidth: '100ch',
+          width: '90svw',
+        }}
+      />
+      <div
+        className="mx-8"
+        style={{
+          maxWidth: '100ch',
+          width: '90svw',
+        }}
+      >
         <SwiperGallery
           imageSrcArr={armyGallery.filter((f) => f.includes('wix:image://v1/'))}
-          aspectRatio="1"
-          width="450px"
-          height="450px"
         />
       </div>
     </div>
@@ -106,48 +121,63 @@ function ArmyActivities({ armyGallery }: { armyGallery: string[] }) {
 function SchoolActivities({ schoolGallery }: { schoolGallery: string[] }) {
   return (
     <div
+      className="w-screen"
       style={{
         minHeight: '70svh',
+
         background: `linear-gradient(0deg, #ffffff 45.26%, var(--kavim-lightblue) 100%)`,
       }}
-      className="max-w-screen sm:pt-7"
     >
-      <span
-        className="flex flex-column align-items-center text-center mx-auto my-7 px-7 gap-3"
+      <div
         style={{
-          maxWidth: '80ch',
+          placeItems: 'center',
         }}
+        className="max-w-screen sm:pt-7"
       >
-        <img
-          src={schoolCapIcon}
-          className="w-3rem h-3rem"
+        <span
+          className="flex flex-column align-items-center text-center mx-auto my-7 px-7 gap-3"
           style={{
-            color: 'var(--kavim-darkblue)',
-          }}
-        />
-        <h2
-          style={{
-            color: 'var(--kavim-darkblue)',
+            maxWidth: '100ch',
+            width: '90svw',
           }}
         >
-          פעילות בבתי ספר
-        </h2>
-        <p>
-          המדבקות שלנו מופצות לצעירים מסביב לעולם שמעבירים את הסיפורים הלאה,
-          מחזקים את המשפחות ומנציחים את הגיבורים. *כל הסרטונים שנשלחים אלינו
-          מועברים למשפחות.
-        </p>
-      </span>
-      <img src={schoolBanner} className="w-full mb-7" />
-      <div className="max-w-screen mx-8">
-        <SwiperGallery
-          imageSrcArr={schoolGallery.filter((f) =>
-            f.includes('wix:image://v1/')
-          )}
-          aspectRatio="1"
-          width="450px"
-          height="450px"
+          <img
+            src={schoolCapIcon}
+            className="w-3rem h-3rem"
+            style={{
+              color: 'var(--kavim-darkblue)',
+            }}
+          />
+          <h2
+            style={{
+              color: 'var(--kavim-darkblue)',
+            }}
+          >
+            פעילות בבתי ספר
+          </h2>
+          <p>פעילויות משותפות עם בתי ספר, מוסדות חינוך וארגונים חברתיים.</p>
+        </span>
+        <img
+          src={schoolBanner}
+          className="mb-7"
+          style={{
+            maxWidth: '100ch',
+            width: '90svw',
+          }}
         />
+        <div
+          className="mx-8"
+          style={{
+            maxWidth: '100ch',
+            width: '90svw',
+          }}
+        >
+          <SwiperGallery
+            imageSrcArr={schoolGallery.filter((f) =>
+              f.includes('wix:image://v1/')
+            )}
+          />
+        </div>
       </div>
     </div>
   );
@@ -185,7 +215,7 @@ function AbroadActivities({ abroadGallery }: { abroadGallery: string[] }) {
       <span
         className="flex flex-column align-items-center text-center mx-auto mb-7 gap-3"
         style={{
-          maxWidth: '80ch',
+          maxWidth: '100ch',
         }}
       >
         <i
@@ -201,10 +231,17 @@ function AbroadActivities({ abroadGallery }: { abroadGallery: string[] }) {
         >
           ברחבי העולם
         </h2>
-        <p>
-          המדבקות שלנו מופצות לצעירים מסביב לעולם שמעבירים את הסיפורים הלאה,
-          מחזקים את המשפחות ומנציחים את הגיבורים. *כל הסרטונים שנשלחים אלינו
-          מועברים למשפחות.
+        <p
+          style={{
+            maxWidth: '100ch',
+            width: '90svw',
+          }}
+        >
+          מדבקות לדמותם של הנופלים מחולקות לצעירים מסביב לעולם - שמעבירים את
+          הסיפורים הלאה, מחזקים את המשפחות ומשאירים זכרונות בדמותם במקומות הכי
+          יפים.
+          <br />
+          <br /> *כל הסרטונים שנשלחים אלינו מועברים למשפחות.
         </p>
       </span>
 
@@ -310,7 +347,6 @@ const SwiperGallery: React.FC<SwiperGalleryProps> = ({
           delay: 2000,
           disableOnInteraction: false,
         }}
-        dir="ltr"
         speed={1000}
       >
         {imageSrcArr.map((imageSrc, index) => (
@@ -336,19 +372,87 @@ const SwiperGallery: React.FC<SwiperGalleryProps> = ({
                 width,
               }}
             >
-              <img
-                src={processImageSrc(imageSrc)}
-                style={{
-                  maxWidth: '200px',
-                  backgroundColor: 'var(--kavim-blue)',
-                }}
+              <ImageModal
+                imageSrc={imageSrc}
+                processImageSrc={processImageSrc}
                 alt={`תמונתו של ${imageSrc}`}
-                loading="lazy"
               />
             </div>
           </SwiperSlide>
         ))}
       </Swiper>
     </div>
+  );
+};
+
+interface ImageModalProps {
+  imageSrc: string;
+  processImageSrc: (src: string) => string;
+  alt: string;
+}
+
+const ImageModal = ({ imageSrc, processImageSrc, alt }: ImageModalProps) => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  return (
+    <>
+      <div className="cursor-pointer" onClick={() => setIsOpen(true)}>
+        <img
+          src={processImageSrc(imageSrc)}
+          style={{
+            width: '200px',
+            height: '200px',
+            objectFit: 'cover',
+            backgroundColor: 'var(--kavim-blue)',
+          }}
+          alt={alt}
+          loading="lazy"
+        />
+      </div>
+
+      {isOpen &&
+        createPortal(
+          <AnimatePresence>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed top-0 left-0 w-full h-full flex align-items-center justify-content-center z-5"
+              style={{ backgroundColor: 'rgba(0,0,0,0.8)' }}
+              onClick={() => setIsOpen(false)}
+            >
+              <motion.div
+                initial={{ scale: 0.5 }}
+                animate={{ scale: 1 }}
+                exit={{ scale: 0.5 }}
+                className="relative"
+                onClick={(e) => e.stopPropagation()}
+                style={{ maxWidth: '90vw', maxHeight: '90vh' }}
+              >
+                <button
+                  onClick={() => setIsOpen(false)}
+                  className="absolute top-0 right-0 m-2 p-2 cursor-pointer"
+                  type="button"
+                  style={{ border: 'none', background: 'transparent' }}
+                >
+                  <i className="pi pi-times text-2xl text-white" />
+                </button>
+                <img
+                  src={processImageSrc(imageSrc)}
+                  alt={alt}
+                  style={{
+                    maxWidth: '90vw',
+                    maxHeight: '90vh',
+                    objectFit: 'contain',
+                    width: 'auto',
+                    height: 'auto',
+                  }}
+                />
+              </motion.div>
+            </motion.div>
+          </AnimatePresence>,
+          document.body
+        )}
+    </>
   );
 };

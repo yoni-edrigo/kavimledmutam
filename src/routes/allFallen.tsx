@@ -12,7 +12,7 @@ export default function AllFallen() {
   console.log(wixData);
   const [filterText, setFilterText] = useState<string | undefined>();
   const [first, setFirst] = useState<number>(0);
-  const [rows, setRows] = useState<number>(10);
+  const [rows, setRows] = useState<number>(30);
 
   // Filtered data based on search text
   const filteredData = wixData.filter((f) =>
@@ -37,7 +37,7 @@ export default function AllFallen() {
       </Helmet>
       <div
         className="mt-7 mb-7 px-3 lg:px-0"
-        style={{ gridArea: 'centerContent' }}
+        style={{ gridArea: 'centerContent', justifySelf: 'start' }}
       >
         <h3>הגיבורים שלנו</h3>
         <InputText
@@ -99,7 +99,7 @@ export default function AllFallen() {
             first={first}
             rows={rows}
             totalRecords={totalRecords}
-            rowsPerPageOptions={[10, 20, 30]}
+            rowsPerPageOptions={[30, 50, 80]}
             onPageChange={onPageChange}
             template="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
             pt={{ root: { className: 'text-primary', dir: 'ltr' } }}
