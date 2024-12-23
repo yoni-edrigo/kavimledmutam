@@ -55,9 +55,8 @@ function ActivitiesHero() {
         הפעילות שלנו
       </h2>
       <p>
-        צוות קווים לדמותם מקדם הנצחה בדרכים שונות ופועל להנצחת הנופלים בכל מקום
-        צורה וזמן. על מנת שכמה שיותר יוכלו להכיר, לזכור וללמוד על הגיבורים שכבר
-        אינם, אך סיפורם יחיה לעד.
+        קווים לדמותם פועלים להנצחת הנופלים בכל מקום צורה וזמן, על מנת כמה שיותר
+        יוכלו להכיר, ללמוד, ולזכור - את הגיבורים שכבר אינם, אך סיפורם יחיה לעד.
       </p>
       <img src={activityBanner} className="w-full mt-3" />
     </div>
@@ -284,7 +283,7 @@ function AbroadActivities({ abroadGallery }: { abroadGallery: string[] }) {
                     style: {
                       width: '100%',
                       height: '100%',
-                      objectFit: 'cover',
+                      objectFit: 'contain',
                     },
                   }}
                 />
