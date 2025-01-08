@@ -62,8 +62,25 @@ export function ContactForm() {
     formState: { errors },
     reset,
   } = useForm<Inputs>();
+
+  const formatPhoneNumber = (phone: string): string => {
+    // Remove any non-digit characters
+    const cleanPhone = phone.replace(/\D/g, '');
+
+    // Remove leading zero if present
+    const withoutLeadingZero = cleanPhone.startsWith('0')
+      ? cleanPhone.substring(1)
+      : cleanPhone;
+
+    // Add country code
+    return `972${withoutLeadingZero}`;
+  };
+
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    const dataToSend = { ...data };
+    const dataToSend = {
+      ...data,
+      phone: formatPhoneNumber(data.phone),
+    };
     console.log('dataToSend', dataToSend);
 
     postRequest(dataToSend)
@@ -76,6 +93,7 @@ export function ContactForm() {
         show(false);
       });
   };
+
   // const [isFormShown, setIsFormShown] = useState(false);
 
   return (
