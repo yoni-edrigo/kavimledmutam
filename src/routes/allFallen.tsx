@@ -67,7 +67,7 @@ export default function AllFallen() {
               .map((fallenContact, index) => (
                 <AnimatedGridOnScroll key={index} index={index}>
                   <Link
-                    key={index}
+                    key={fallenContact._id}
                     to={`/fallenCard/${fallenContact._id}`}
                     className="fallen-card min-h-10rem flex flex-column align-items-center"
                   >
