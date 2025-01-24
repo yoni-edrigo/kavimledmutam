@@ -271,14 +271,6 @@ footer {
   border-radius: 12px;
 }
 
-.comment {
-  min-height: 200px !important;
-  display: grid;
-  grid-template-areas:
-    'name phone date hr hr hr'
-    'comment comment comment comment comment comment';
-}
-
 .swiper-autoheight {
   padding-bottom: 20px !important;
 }

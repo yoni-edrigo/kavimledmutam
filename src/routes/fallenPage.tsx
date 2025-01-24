@@ -73,7 +73,7 @@ export default function FallenPage() {
                 {fallenData.story}
               </p>
             ) : (
-              <div className="z-3">
+              <div className="z-3 lg:max-w-30rem">
                 <CommentsSection fallenId={fallenData._id} />
               </div>
             )}
@@ -211,26 +211,43 @@ function CommentsSection({ fallenId }: { fallenId: string }) {
             })
             .map((comment, index) => (
               <div className="comment-wrapper px-2" key={index}>
-                <div className="comment pt-5 md:px-6 pb-7 gap-3" key={index}>
-                  <h3 style={{ gridArea: 'name' }}>
-                    {comment.fName}
-                    {` `}
-                    {comment.lName}
-                  </h3>
-                  {comment.phone && (
-                    <a href={`tel:${comment.phone}`}>
-                      <h3 style={{ gridArea: 'phone' }}>{comment.phone}</h3>
-                    </a>
-                  )}
-                  <h3 style={{ gridArea: 'date' }}>
-                    {new Date(comment._createdDate).toLocaleDateString('he-IL')}
-                  </h3>
+                <div
+                  className="comment pt-5 md:px-6 pb-7 gap-3"
+                  key={index}
+                  style={{
+                    minHeight: '200px',
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(3,1fr)',
+                  }}
+                >
+                  <div
+                    style={{
+                      display: 'grid',
+                      gridTemplateColumns: 'subgrid',
+                      gridColumn: '1/-1',
+                    }}
+                  >
+                    <h3>
+                      {comment.fName}
+                      {` `}
+                      {comment.lName}
+                    </h3>
+                    <span>
+                      <a href={`tel:${comment.phone}`}>
+                        <h3>{comment.phone}</h3>
+                      </a>
+                    </span>
+                    <h3>
+                      {new Date(comment._createdDate).toLocaleDateString(
+                        'he-IL'
+                      )}
+                    </h3>
+                  </div>
                   <p
                     className="text-right sm:text-start w-full"
                     style={{
-                      gridArea: 'comment',
                       maxWidth: window.innerWidth < 300 ? '15ch' : '',
-                      gridColumn: window.innerWidth < 578 ? '1 / -1' : '',
+                      gridColumn: '1/-1',
                     }}
                   >
                     {comment.comment}

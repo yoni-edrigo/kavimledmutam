@@ -79,7 +79,18 @@ export async function fallenContactLoader({ params }) {
     throw error; // Re-throw the error if needed
   }
 }
-export async function getCommentsByFallenId(fallenId: string) {
+export type Comment = {
+  fName: string;
+  lName: string;
+  phone: string;
+  _createdDate: string;
+  comment: string;
+  isPinned: boolean;
+};
+
+export async function getCommentsByFallenId(
+  fallenId: string
+): Promise<Comment[]> {
   try {
     const response = await fetch(
       `https://yonivas0.editorx.io/kavimledmutam/_functions/getComments/${fallenId}`
