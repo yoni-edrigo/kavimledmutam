@@ -14,8 +14,8 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { Navigation, Pagination } from 'swiper/modules';
-import fallenPageTopElement from '../assets/fallenPageTopElement.svg';
 import { SocialShare } from '../components/socialShare/socialShare';
+import { ReadMore } from '../components/expandable-text';
 export default function FallenPage() {
   //@ts-expect-error wixdata isnt known
   const fallenData: Contact = useLoaderData();
@@ -61,38 +61,33 @@ export default function FallenPage() {
               : 'flex-wrap-reverse align-items-end'
           }`}
         >
-          <div className="w-fit flex flex-column gap-3 mt-3">
+          <div className="w-fit flex flex-column gap-3 mt-3 justify-content-between">
             {fallenData.story ? (
-              <p
-                className="text-justify z-3"
-                style={{
-                  maxWidth: window.innerWidth < 1000 ? '' : '50ch',
-                  width: '90vw',
-                }}
-              >
-                {fallenData.story}
-              </p>
+              <ReadMore text={fallenData.story} />
             ) : (
               <div className="z-3 lg:max-w-30rem">
                 <CommentsSection fallenId={fallenData._id} />
               </div>
             )}
             <div className="flex flex-wrap gap-5 align-items-center">
-              <Button
-                className="write-more-btn w-fit flex flex-row-reverse gap-2 relative z-0 white-space-nowrap"
-                // size="small"
-                label="לכתיבה נוספת"
-                onClick={reveal}
-                icon={() => <img src={plusIcon} />}
-                pt={{ icon: { style: { color: 'var(--kavim-text)' } } }}
-                style={{ justifySelf: 'start', alignSelf: 'start' }}
-              >
-                <img
-                  src={fallenPageTopElement}
-                  className="absolute"
-                  style={{ top: '-470px', left: '-1120px', scale: '0.9' }}
+              <div className="relative">
+                <Button
+                  className="write-more-btn w-fit flex flex-row-reverse gap-2 relative z-2 white-space-nowrap"
+                  label="השארת תגובה"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    reveal();
+                  }}
+                  icon={() => (
+                    <img src={plusIcon} onClick={(e) => e.stopPropagation()} />
+                  )}
+                  pt={{
+                    icon: { style: { color: 'var(--kavim-text)' } },
+                    root: { style: { position: 'relative', zIndex: 2 } },
+                  }}
+                  style={{ justifySelf: 'start', alignSelf: 'start' }}
                 />
-              </Button>
+              </div>
               <span className="mx-3 sm:m-0">
                 <SocialShare
                   fallenName={fallenData.name}
