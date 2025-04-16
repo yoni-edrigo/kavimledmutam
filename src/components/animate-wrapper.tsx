@@ -44,10 +44,10 @@ export const AnimatedGridOnScroll: React.FC<AnimatedGridOnScrollProps> = ({
   });
 
   const springProps = useSpring({
-    opacity: inView ? 1 : 0,
+    opacity: inView ? 1 : 0.3,
     transform: inView ? 'translate3d(0, 0, 0)' : 'translate3d(0, 30%, 0)', // Fade in from bottom
-    config: { duration: 1000 },
-    delay: inView ? index * 80 : 0, // Stagger the delay based on the index
+    config: { duration: 600 },
+    delay: inView ? index * 40 : 0, // Stagger the delay based on the index
   });
 
   return (
