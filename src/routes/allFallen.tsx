@@ -60,7 +60,7 @@ export default function AllFallen() {
           <Checkbox
             type="checkbox"
             id="showWithStory"
-            checked={showWithStory}
+            checked={!!showWithStory}
             onChange={(e) => setShowWithStory(!!e.checked)}
           />
           <label htmlFor="showWithStory" className="ml-2">
