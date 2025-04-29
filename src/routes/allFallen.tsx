@@ -6,6 +6,8 @@ import { InputText } from 'primereact/inputtext';
 import { Paginator, PaginatorPageChangeEvent } from 'primereact/paginator';
 import { useState } from 'react';
 import { AnimatedGridOnScroll } from '../components/animate-wrapper';
+import { Checkbox } from 'primereact/checkbox';
+
 export default function AllFallen() {
   //@ts-expect-error wixdata isnt known
   const wixData: Contact[] = useLoaderData();
@@ -13,11 +15,14 @@ export default function AllFallen() {
   const [filterText, setFilterText] = useState<string | undefined>();
   const [first, setFirst] = useState<number>(0);
   const [rows, setRows] = useState<number>(30);
+  const [showWithStory, setShowWithStory] = useState<boolean>(); // New state for checkbox
 
-  // Filtered data based on search text
-  const filteredData = wixData.filter((f) =>
-    filterText ? f.name.includes(filterText) : f.thumbnail
-  );
+  // Filtered data based on search text and checkbox
+  const filteredData = wixData.filter((f) => {
+    const matchesFilterText = filterText ? f.name.includes(filterText) : true;
+    const matchesStoryFilter = showWithStory ? !!f.story : true;
+    return matchesFilterText && matchesStoryFilter;
+  });
 
   // Total records for the Paginator should be the length of the filtered data
   const totalRecords = filteredData.length;
@@ -26,6 +31,7 @@ export default function AllFallen() {
     setFirst(event.first);
     setRows(event.rows);
   };
+
   return (
     <div>
       <Helmet prioritizeSeoTags>
@@ -35,19 +41,32 @@ export default function AllFallen() {
           content="קווים לדמותם״ הינו מיזם הנצחה התנדבותי אשר קם במטרה לספר את סיפוריהם של נופלי מלחמת חרבות ברזל, אזרחים וחיילים כאחד, דרך איורים ומילים. כל האיורים נעשים בעבודת יד ונשלחים כתרומה למשפחות וכן המילים נכתבות בשיתוף המשפחה. האתר הוקם כמקום בו תוכלו להכיר, ללמוד ולשאוב השראה, מהגיבורים הראשיים שכבר אינם אך סיפורם יחיה לעד. אנו מזמינים אתכם ללמוד ולהכיר את טובי בנינו ובנותינו, קצת על מי שהיו וקצת על מה שהשאירו אחריהם - דרך דמותם היפה בקווים ודרך הסיפורים."
         />
       </Helmet>
-      <div
-        className="mt-7 mb-7 px-3 lg:px-0"
-        style={{ gridArea: 'centerContent', justifySelf: 'start' }}
-      >
-        <h3>הגיבורים שלנו</h3>
-        <InputText
-          value={filterText}
-          onChange={(e) => setFilterText(e.target.value)}
-          className="fallen-search-box mt-2"
-          type="text"
-          name="search"
-          placeholder="חיפוש על פי שם / יחידה"
-        />
+      <div className="flex flex-wrap align-items-end w-full gap-3 my-7">
+        <div
+          className="px-3 lg:px-0"
+          style={{ gridArea: 'centerContent', justifySelf: 'start' }}
+        >
+          <h3>הגיבורים שלנו</h3>
+          <InputText
+            value={filterText}
+            onChange={(e) => setFilterText(e.target.value)}
+            className="fallen-search-box mt-2"
+            type="text"
+            name="search"
+            placeholder="חיפוש על פי שם / יחידה"
+          />
+        </div>
+        <div className="flex align-items-center justify-content-center gap-2 px-3 lg:px-0">
+          <Checkbox
+            type="checkbox"
+            id="showWithStory"
+            checked={showWithStory}
+            onChange={(e) => setShowWithStory(!!e.checked)}
+          />
+          <label htmlFor="showWithStory" className="ml-2">
+            סינון נופלים ללא סיפור
+          </label>
+        </div>
       </div>
       <div
         className="md:px-7"
