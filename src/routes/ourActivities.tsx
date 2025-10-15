@@ -1,8 +1,10 @@
 import schoolCapIcon from '../assets/school-cap-icon.svg';
 import helmetIcon from '../assets/helmet-icon.svg';
+import familyIcon from '../assets/family-icon.svg';
 import schoolBanner from '../assets/school-activity-banner.jpg';
 import armyBanner from '../assets/army-activity-banner.jpg';
 import activityBanner from '../assets/activity-hero-banner.jpg';
+import familyStoriesBanner from '../assets/family-stories-activity-banner.jpg';
 import { SwiperSlide, Swiper } from 'swiper/react';
 import { prefix } from '../utils';
 import { Autoplay, Navigation } from 'swiper/modules';
@@ -20,6 +22,7 @@ interface ActivitiesData {
   schoolActivity: string[];
   armyActivity: string[];
   abroadActivity: string[];
+  familySAtoriesActivity: string[];
 }
 
 export function OurActivities() {
@@ -31,6 +34,9 @@ export function OurActivities() {
       style={{ minHeight: '100svh', marginBottom: '200px' }}
     >
       <ActivitiesHero />
+      <FamilyStoriesActivities
+        familyStoriesGallery={data.familySAtoriesActivity}
+      />
       <AbroadActivities abroadGallery={data.abroadActivity} />
       <SchoolActivities schoolGallery={data.schoolActivity} />
       <ArmyActivities armyGallery={data.armyActivity} />
@@ -131,7 +137,7 @@ function SchoolActivities({ schoolGallery }: { schoolGallery: string[] }) {
         style={{
           placeItems: 'center',
         }}
-        className="max-w-screen sm:pt-7"
+        className="max-w-screen sm:pt-7 flex flex-column align-items-center"
       >
         <span
           className="flex flex-column align-items-center text-center mx-auto my-7 px-7 gap-3"
@@ -181,7 +187,74 @@ function SchoolActivities({ schoolGallery }: { schoolGallery: string[] }) {
     </div>
   );
 }
+function FamilyStoriesActivities({
+  familyStoriesGallery,
+}: {
+  familyStoriesGallery: string[];
+}) {
+  return (
+    <div
+      className="w-screen "
+      style={{
+        minHeight: '70svh',
 
+        background: `linear-gradient(0deg, #ffffff 45.26%, var(--kavim-lightblue) 100%)`,
+      }}
+    >
+      <div
+        style={{
+          placeItems: 'center',
+        }}
+        className="max-w-screen sm:pt-7  flex flex-column align-items-center"
+      >
+        <span
+          className="flex flex-column align-items-center text-center mx-auto my-7 px-7 gap-3"
+          style={{
+            maxWidth: '100ch',
+            width: '90svw',
+          }}
+        >
+          <img
+            src={familyIcon}
+            className="w-3rem h-3rem"
+            style={{
+              color: 'var(--kavim-darkblue)',
+            }}
+          />
+          <h2
+            style={{
+              color: 'var(--kavim-darkblue)',
+            }}
+          >
+            משפחה מספרת
+          </h2>
+          <p>פעילויות משותפות עם משפחות הנופלים.</p>
+        </span>
+        <img
+          src={familyStoriesBanner}
+          className="mb-7"
+          style={{
+            maxWidth: '100ch',
+            width: '90svw',
+          }}
+        />
+        <div
+          className="mx-8"
+          style={{
+            maxWidth: '100ch',
+            width: '90svw',
+          }}
+        >
+          <SwiperGallery
+            imageSrcArr={familyStoriesGallery.filter((f) =>
+              f.includes('wix:image://v1/')
+            )}
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
 function AbroadActivities({ abroadGallery }: { abroadGallery: string[] }) {
   const { videoStories } = useMemo(() => {
     const videos = abroadGallery
