@@ -13,6 +13,7 @@ export type Contact = {
   thumbnail: string;
   story?: string;
   isFemale: boolean;
+  fontUrl?: string;
 };
 const contactDetails = (
   <div className="gap-5 align-items-center flex flex-column">

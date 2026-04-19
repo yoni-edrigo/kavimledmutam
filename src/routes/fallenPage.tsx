@@ -1,6 +1,8 @@
 import { Link, useLoaderData } from 'react-router-dom';
 import { Contact } from './root';
 import { getMetaTags, prefix } from '../utils';
+import { InputSwitch } from 'primereact/inputswitch';
+import { injectFont, getFontFamily } from '../fontUtils';
 import { Button } from 'primereact/button';
 import { useEffect, useRef, useState } from 'react';
 import plusIcon from '../assets/plusIcon.svg';
@@ -23,6 +25,7 @@ export default function FallenPage() {
 
   const [show, setShow] = useState(false);
   const [showImages, setShowImages] = useState(true);
+  const [useCustomFont, setUseCustomFont] = useState(true);
 
   useEffect(() => {
     if (show) {
@@ -37,6 +40,15 @@ export default function FallenPage() {
   useEffect(() => {
     parent.current && autoAnimate(parent.current);
   }, [parent]);
+  useEffect(() => {
+    if (fallenData?.fontUrl) injectFont(fallenData.fontUrl);
+  }, [fallenData?.fontUrl]);
+
+  const customFontFamily =
+    fallenData?.fontUrl && useCustomFont
+      ? getFontFamily(fallenData.fontUrl)
+      : undefined;
+
   const reveal = () => setShow(!show);
 
   return !fallenData ? (
@@ -50,7 +62,10 @@ export default function FallenPage() {
     <div>
       {fallenData && getMetaTags(fallenData)}
       <section id="fallen-data" className="sm:mt-5">
-        <h2 className="my-0 px-3 lg:px-0">
+        <h2
+          className="my-0 px-3 lg:px-0"
+          style={customFontFamily ? { fontFamily: customFontFamily } : undefined}
+        >
           {fallenData.name}
           {fallenData.isFemale ? ' - קווים לדמותה' : ' - קווים לדמותו'}
         </h2>
@@ -61,7 +76,42 @@ export default function FallenPage() {
               : 'flex-wrap-reverse align-items-end'
           }`}
         >
-          <div className="w-fit flex flex-column gap-3 mt-3 justify-content-between">
+          <div
+            className="w-fit flex flex-column gap-3 mt-3 justify-content-between"
+            style={customFontFamily ? { fontFamily: customFontFamily } : undefined}
+          >
+            {fallenData.fontUrl && (
+              <div className="flex align-items-center gap-3 flex-wrap">
+                <div className="flex align-items-center gap-2">
+                  <InputSwitch
+                    checked={useCustomFont}
+                    onChange={(e) => setUseCustomFont(!!e.value)}
+                    inputId="fontToggle"
+                  />
+                  <label
+                    htmlFor="fontToggle"
+                    className="text-sm cursor-pointer"
+                    style={{ fontFamily: "'Assistant', sans-serif" }}
+                  >
+                    {useCustomFont ? 'הצגה בגופן האישי' : 'הצגה בגופן רגיל'}
+                  </label>
+                </div>
+                {useCustomFont && (
+                  <a
+                    href="https://www.ot-hayim.co.il"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm"
+                    style={{
+                      fontFamily: "'Assistant', sans-serif",
+                      color: 'var(--kavim-darkblue)',
+                    }}
+                  >
+                    גופן בעיצוב: אות חיים ↗
+                  </a>
+                )}
+              </div>
+            )}
             {fallenData.story ? (
               <ReadMore text={fallenData.story} />
             ) : (

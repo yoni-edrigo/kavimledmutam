@@ -1,7 +1,7 @@
-import { Link, useLoaderData } from 'react-router-dom';
+import { useLoaderData } from 'react-router-dom';
 import { Contact } from './root';
 import { Helmet } from 'react-helmet-async';
-import { prefix } from '../utils';
+import { FallenCard } from '../components/FallenCard';
 import { InputText } from 'primereact/inputtext';
 import { Paginator, PaginatorPageChangeEvent } from 'primereact/paginator';
 import { useState } from 'react';
@@ -85,31 +85,7 @@ export default function AllFallen() {
               .slice(first, first + rows)
               .map((fallenContact, index) => (
                 <AnimatedGridOnScroll key={index} index={index}>
-                  <Link
-                    key={fallenContact._id}
-                    to={`/fallenCard/${fallenContact._id}`}
-                    className="fallen-card min-h-10rem flex flex-column align-items-center"
-                  >
-                    <h3 className="mb-0 ">{fallenContact.name}</h3>
-                    {fallenContact.thumbnail && (
-                      <img
-                        alt={`קווים לדמותו של ${fallenContact.name}`}
-                        src={`${
-                          prefix +
-                          fallenContact.thumbnail
-                            .slice(
-                              0,
-                              fallenContact.thumbnail.indexOf('mv2') +
-                                (fallenContact.thumbnail.includes('jpeg')
-                                  ? 8
-                                  : 7)
-                            )
-                            .replace('wix:image://v1/', '')
-                        }`}
-                        style={{ maxWidth: '250px' }}
-                      />
-                    )}
-                  </Link>
+                  <FallenCard fallenContact={fallenContact} />
                 </AnimatedGridOnScroll>
               ))}
         </div>
