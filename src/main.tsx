@@ -18,6 +18,8 @@ import { addLocale, locale } from 'primereact/api';
 import { he } from './he.json';
 import { ContactForm } from './routes/contactForm';
 import { OurActivities } from './routes/ourActivities';
+import { ErrorBoundary } from './components/ErrorBoundary';
+
 addLocale('he', he);
 locale('he');
 
@@ -26,7 +28,6 @@ const router = createBrowserRouter([
     path: '/',
     element: <Root />,
     errorElement: <ErrorPage />,
-    // loader: rootLoader,
     children: [
       { index: true, element: <Landing />, loader: rootLoader },
       {
@@ -37,7 +38,6 @@ const router = createBrowserRouter([
       {
         path: 'contactUs/',
         element: <ContactForm />,
-        // loader: allFallenLoader,
       },
       {
         path: 'ourActivities/',
@@ -52,10 +52,13 @@ const router = createBrowserRouter([
     ],
   },
 ]);
+
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <HelmetProvider>
-      <RouterProvider router={router} />
+      <ErrorBoundary>
+        <RouterProvider router={router} />
+      </ErrorBoundary>
     </HelmetProvider>
   </React.StrictMode>
 );

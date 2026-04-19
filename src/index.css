@@ -3,7 +3,7 @@
 @import 'primeicons/primeicons.css';
 @import './reset.css';
 
-htnl,
+html,
 body {
   direction: rtl;
   height: 100svh;
@@ -271,8 +271,135 @@ footer {
   border-radius: 12px;
 }
 
-.swiper-autoheight {
-  padding-bottom: 20px !important;
+/* ── FallenPage layout ── */
+.fallen-page__header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.fallen-page__body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 450px);
+  gap: 2rem;
+  align-items: start;
+  margin-top: 1rem;
+}
+
+@media (max-width: 768px) {
+  .fallen-page__body {
+    grid-template-columns: 1fr;
+  }
+  .fallen-page__gallery {
+    order: -1;
+  }
+}
+
+/* ── ImageCarousel ── */
+.img-carousel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.img-carousel__track {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  border-radius: 8px;
+}
+
+.img-carousel__track::-webkit-scrollbar {
+  display: none;
+}
+
+.img-carousel__slide {
+  scroll-snap-align: start;
+  flex: 0 0 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.img-carousel__slide img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+}
+
+.img-carousel__controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.img-carousel__btn {
+  background: var(--kavim-blue);
+  border: 1px solid var(--kavim-darkblue);
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.img-carousel__btn:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.img-carousel__counter {
+  font-size: 0.9rem;
+  color: var(--kavim-darkgrey);
+  min-width: 3ch;
+  text-align: center;
+}
+
+/* ── ImageStrip ── */
+.img-strip {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: 12px;
+  padding-bottom: 8px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--kavim-darkblue) var(--kavim-lightblue);
+}
+
+.img-strip__item {
+  scroll-snap-align: start;
+  flex: 0 0 auto;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.img-strip__item img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  background-color: var(--kavim-blue);
+  display: block;
+}
+
+.img-strip--video {
+  align-items: center;
+}
+
+.img-strip__item--video {
+  flex: 0 0 auto;
 }
 
 /* Media queries for responsiveness */
