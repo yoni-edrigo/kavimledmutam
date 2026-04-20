@@ -1,5 +1,5 @@
 import { useLoaderData } from 'react-router-dom';
-import { Contact } from '../types';
+import { Contact } from './root';
 import { Helmet } from 'react-helmet-async';
 import { FallenCard } from '../components/FallenCard';
 import { InputText } from 'primereact/inputtext';
@@ -9,7 +9,9 @@ import { AnimatedGridOnScroll } from '../components/animate-wrapper';
 import { Checkbox } from 'primereact/checkbox';
 
 export default function AllFallen() {
-  const wixData = useLoaderData() as Contact[];
+  //@ts-expect-error wixdata isnt known
+  const wixData: Contact[] = useLoaderData();
+  console.log(wixData);
   const [filterText, setFilterText] = useState<string | undefined>();
   const [first, setFirst] = useState<number>(0);
   const [rows, setRows] = useState<number>(30);
@@ -71,7 +73,7 @@ export default function AllFallen() {
         style={{
           gridArea: 'centerContent2',
           justifySelf: 'center',
-          marginBottom: '9rem',
+          marginBottom: window.innerWidth > 768 ? '9rem' : '',
         }}
       >
         <div

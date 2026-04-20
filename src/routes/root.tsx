@@ -3,8 +3,18 @@ import logoWithTitle from '../assets/logoWithTitle.png';
 import { useState } from 'react';
 import { Dialog } from 'primereact/dialog';
 import '../styles/roots.css';
-import { useBreakpoint } from '../hooks/useBreakpoint';
-export type { Contact } from '../types';
+export type Contact = {
+  _id: string;
+  name: string;
+  mediagallery?: {
+    src: string;
+    painter?: string;
+  }[];
+  thumbnail: string;
+  story?: string;
+  isFemale: boolean;
+  fontUrl?: string;
+};
 const contactDetails = (
   <div className="gap-5 align-items-center flex flex-column">
     <h3>ניתן ליצור איתנו קשר בדרכים הבאות:</h3>
@@ -102,20 +112,20 @@ function NavBar() {
   );
 }
 export function Root() {
-  const { isMobile } = useBreakpoint();
+  //   const wixData: Contact[][] = useLoaderData();
+
   return (
     <div className={'mainGrid'}>
       <NavBar />
       <section>
         <Outlet />
       </section>
-      {isMobile && <div className="h-10rem"></div>}
+      {window.innerWidth < 500 && <div className="h-10rem"></div>}
       <Footer />
     </div>
   );
 }
 function Footer() {
-  const { isMobile, isTablet } = useBreakpoint();
   const [dialogVisible, setDialogVisible] = useState(false);
   const [selectedDialogContent, setSelectedDialogContent] = useState(0);
   return (
@@ -123,7 +133,7 @@ function Footer() {
       <Dialog visible={dialogVisible} onHide={() => setDialogVisible(false)}>
         {dialogContent[selectedDialogContent]}
       </Dialog>
-      {!isMobile && (
+      {window.innerWidth > 578 && (
         <div className="h-full flex flex-column justify-content-between mr-3">
           <SocialBar />
           <div className="flex gap-3">
@@ -143,9 +153,9 @@ function Footer() {
         <span className="relative">
           <img
             style={{
-              bottom: isTablet ? '5px' : '30px',
+              bottom: window.innerWidth < 768 ? '5px' : '30px',
               scale: '1.5',
-              left: isTablet ? '-25px' : '-17px',
+              left: window.innerWidth < 768 ? '-25px' : '-17px',
             }}
             src={logoWithTitle}
             alt="logo with title"
@@ -153,7 +163,7 @@ function Footer() {
           />
         </span>
       </div>
-      {isMobile && (
+      {window.innerWidth <= 578 && (
         <div className="h-full flex flex-column justify-content-between align-items-center mt-3 mr-3">
           <SocialBar />
           <div className="flex gap-3">

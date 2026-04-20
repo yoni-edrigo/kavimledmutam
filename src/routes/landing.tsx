@@ -7,13 +7,40 @@ import { Helmet } from 'react-helmet-async';
 import { ThanksSection } from '../components/thanksSection';
 import React from 'react';
 import { FallenSection } from '../components/landingFallenSection';
-import { WixData } from '../types';
+import { Contact } from './root';
+// import { TraceableLine } from '../utils/traceable-line';
+
+// import landindDashedLine from '../assets/landing-horizontal-dashed-line.svg';
 import { LandingVideo } from '../components/landing-video';
 
+export type Volunteer = {
+  name: string;
+  role: string;
+  image: string;
+  link: string;
+  isPainter: boolean;
+  order: number;
+};
+export type WixData = {
+  ourActivity: string[];
+  volunteers: Volunteer[];
+  uploadUrl: string;
+  fallenData: Contact[];
+};
 export default function Landing() {
   const data = useLoaderData();
+  // const [wixData, setWixData] = useState<WixData>();
+  // // console.log(wixData);
+  // useEffect(() => {
+  //   //@ts-expect-error abc
+  //   if (data.wixData) {
+  //     //@ts-expect-error abc
+  //     setWixData(data.wixData);
+  //   }
+  //   //@ts-expect-error abc
+  // }, [data.wixData]);
   return (
-    <div style={{ margin: '0' }}>
+    <div style={{ padding: window.innerWidth < 1000 ? '0' : '', margin: '0' }}>
       <Helmet prioritizeSeoTags>
         <title>קווים לדמותם | הנצחת נופלי חרבות ברזל</title>
         <meta

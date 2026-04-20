@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
-import { Contact } from '../types';
-import { wixImageUrl } from '../utils';
+import { Contact } from '../routes/root';
+import { prefix } from '../utils';
 import { injectFont, getFontFamily } from '../fontUtils';
 
 export function FallenCard({ fallenContact }: { fallenContact: Contact }) {
@@ -24,8 +24,16 @@ export function FallenCard({ fallenContact }: { fallenContact: Contact }) {
       {fallenContact.thumbnail && (
         <img
           alt={`קווים לדמותו של ${fallenContact.name}`}
-          src={wixImageUrl(fallenContact.thumbnail)}
-          loading="lazy"
+          src={`${
+            prefix +
+            fallenContact.thumbnail
+              .slice(
+                0,
+                fallenContact.thumbnail.indexOf('mv2') +
+                  (fallenContact.thumbnail.includes('jpeg') ? 8 : 7)
+              )
+              .replace('wix:image://v1/', '')
+          }`}
           style={{ maxWidth: '250px' }}
         />
       )}
