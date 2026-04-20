@@ -1,7 +1,6 @@
 import { Link, useLoaderData } from 'react-router-dom';
 import { Contact } from './root';
 import { getMetaTags, prefix } from '../utils';
-import { InputSwitch } from 'primereact/inputswitch';
 import { injectFont, getFontFamily } from '../fontUtils';
 import { Button } from 'primereact/button';
 import { useEffect, useRef, useState } from 'react';
@@ -81,20 +80,50 @@ export default function FallenPage() {
             style={customFontFamily ? { fontFamily: customFontFamily } : undefined}
           >
             {fallenData.fontUrl && (
-              <div className="flex align-items-center gap-3 flex-wrap">
-                <div className="flex align-items-center gap-2">
-                  <InputSwitch
-                    checked={useCustomFont}
-                    onChange={(e) => setUseCustomFont(!!e.value)}
-                    inputId="fontToggle"
-                  />
-                  <label
-                    htmlFor="fontToggle"
-                    className="text-sm cursor-pointer"
-                    style={{ fontFamily: "'Assistant', sans-serif" }}
+              <div
+                className="flex align-items-center gap-3 flex-wrap"
+                style={{ fontFamily: "'Assistant', sans-serif" }}
+              >
+                <div
+                  className="flex"
+                  style={{
+                    border: '1px solid var(--kavim-darkblue)',
+                    borderRadius: '50px',
+                    overflow: 'hidden',
+                    fontSize: '0.8rem',
+                  }}
+                >
+                  <button
+                    onClick={() => setUseCustomFont(true)}
+                    style={{
+                      padding: '4px 14px',
+                      background: useCustomFont ? 'var(--kavim-blue)' : 'transparent',
+                      border: 'none',
+                      cursor: 'pointer',
+                      fontFamily: "'Assistant', sans-serif",
+                      fontWeight: useCustomFont ? 600 : 400,
+                      color: 'var(--kavim-text)',
+                      transition: 'background 0.2s',
+                    }}
                   >
-                    {useCustomFont ? 'הצגה בגופן האישי' : 'הצגה בגופן רגיל'}
-                  </label>
+                    גופן אישי
+                  </button>
+                  <button
+                    onClick={() => setUseCustomFont(false)}
+                    style={{
+                      padding: '4px 14px',
+                      background: !useCustomFont ? 'var(--kavim-blue)' : 'transparent',
+                      border: 'none',
+                      borderRight: '1px solid var(--kavim-darkblue)',
+                      cursor: 'pointer',
+                      fontFamily: "'Assistant', sans-serif",
+                      fontWeight: !useCustomFont ? 600 : 400,
+                      color: 'var(--kavim-text)',
+                      transition: 'background 0.2s',
+                    }}
+                  >
+                    גופן רגיל
+                  </button>
                 </div>
                 {useCustomFont && (
                   <a
@@ -102,10 +131,7 @@ export default function FallenPage() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-sm"
-                    style={{
-                      fontFamily: "'Assistant', sans-serif",
-                      color: 'var(--kavim-darkblue)',
-                    }}
+                    style={{ color: 'var(--kavim-darkblue)' }}
                   >
                     גופן בעיצוב: אות חיים ↗
                   </a>
